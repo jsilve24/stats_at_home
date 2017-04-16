@@ -9,20 +9,27 @@
     <managingEditor>jsilve24@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>jsilve24@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 16 Apr 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
       <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this: \(x\).
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/about/</guid>
+      <description>This is a &amp;laquo;hello world&amp;raquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
+      <title>Compositional Time Series Analysis with PhILR and Dynamic Linear Models</title>
+      <link>/2017/04/16/philr_dlm_demo/</link>
+      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
+      <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/04/16/philr_dlm_demo/</guid>
+      <description>We are going to simulate a compositional time-series of a 3 species population and we will view the dynamics in terms of the phylogenetic tree using the PhILR coordinates system. Specifically we are going to model a community that is undergoing a mean-reverting stochastic process and being acted on by an external force which itself is undergoing a random walk. On top of this we will simulate observational noise which obscures our measurements of the true community state at any given time.</description>
     </item>
     
   </channel>

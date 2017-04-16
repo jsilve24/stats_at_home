@@ -1,0 +1,407 @@
+---
+title: Compositional Time Series Analysis with PhILR and Dynamic Linear Models
+author: Justin Silverman
+date: '2017-04-16'
+slug: philr_dlm_demo
+categories:
+  - R
+tags:
+  - Dynamic Linear Models
+  - PhILR
+  - Compositional Data
+  - Time Series Analysis
+bibliography: 2017-04-16_philr_dlm_demo_extra/philr.bib
+---
+
+
+<p>We are going to simulate a compositional time-series of a 3 species population and we will view the dynamics in terms of the phylogenetic tree using the PhILR coordinates system. Specifically we are going to model a community that is undergoing a mean-reverting stochastic process and being acted on by an external force which itself is undergoing a random walk. On top of this we will simulate observational noise which obscures our measurements of the true community state at any given time.</p>
+<p>To analyze this dataset we are going to use a Dynamic Linear Model with a simple first-order polynomial trend and an added dynamic regression component.</p>
+<p>First we load a few packages we are going to use.</p>
+<pre class="r"><code>library(philr)
+library(compositions)
+library(MASS) # For mvrnorm
+library(dlm) 
+library(tidyverse)
+library(ggtree)
+library(gridExtra)
+set.seed(4)
+
+# These functions are shown at the bottom of this report
+source(&quot;2017-04-16_philr_dlm_demo_extra/utils.R&quot;) </code></pre>
+<div id="overview-of-philr-analysis" class="section level1">
+<h1>Overview of PhILR Analysis</h1>
+<p>The goal of PhILR is to transform compositional data into an unconstrained space with an orthonormal basis with phylogenetic / evolutionary interpretation while preserving all information contained in the original composition. Unlike in the original compositional space, in the transformed real space, standard statistical tools may be applied. For a given set of samples consisting of measurements of taxa, we transform data into a new space of samples and orthonormal coordinates termed ‘balances’. Each balance is associated with a single internal node of a phylogenetic tree with the taxa as leaves. The balance represents the log-ratio of the geometric mean abundance of the two groups of taxa that descend from the given internal node. More details on this method can be found in <span class="citation">Silverman et al. (2017)</span> (<a href="https://elifesciences.org/content/6/e21887">Link</a>). The package <code>philr</code> can be downloaded from <a href="https://bioconductor.org/packages/release/bioc/html/philr.html">bioconductor</a>.</p>
+</div>
+<div id="simulating-the-data" class="section level1">
+<h1>Simulating the Data</h1>
+<p>First we will simulate a phylogenetic tree connecting these three species. Our new transformed coordinates end up being associated with the internal nodes of the phylogenetic tree (which we prefix with an “n”). We use the function <code>philr::annotate_balance()</code> which allows us to easily annotate which clade is in the numerator (+) and which is in the denominator (-) of each balance. We also rotate one of the internal nodes so that the clades in the numerator correspond to the clade that is towards the bottom of the tree in this layout.</p>
+<pre class="r"><code>tr &lt;- read.tree(text=&quot;((t2:0.268,t1:0.958)n2:0.734,t3:0.257)n1;&quot;)
+
+# Now we visualize the tree and the Blances
+p &lt;- ggtree(tr) +
+  geom_label(aes(label=label))
+p &lt;- rotate(p, 4) %&gt;% 
+  rotate(5)
+p &lt;- annotate_balance(tr, &quot;n2&quot;, labels=c(&quot;n2+&quot;,&quot;n2-&quot;), p, offset=.2, barsize = .05, offset.text = .1)
+p &lt;- annotate_balance(tr, &quot;n1&quot;,labels=c(&quot;n1+&quot;,&quot;n1-&quot;), p, offset = .5, barsize=0.05, offset.text = .1)
+p</code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Next we are going to come up with a hypothetical intervention/exogenous time-series increases species t3 relative to species t1 and t2. For example, this could be a dietary food-source in the environment that we are interested in exploring.</p>
+<pre class="r"><code>t &lt;- 150 # length of time-series
+x &lt;- cumsum(sample(c(-.5, .5), t, TRUE)) # simulate an arbitrary random walk
+x &lt;- x + abs(min(x)) # make sure all the values are positive for this example
+plot(ts(x))</code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Next we are going to simulate our time-series using the compositional operations of perturbation and powering. We simulate a community with three simulataneous processes. First we simulate that the community is undergoing a mean-reverting stochastic process.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_t &amp;= \phi\otimes \mu_{t-1} \oplus w_t \\
+w_t &amp; \sim LN(0,\Sigma_{\text{state}})
+\end{aligned}
+\]</span></p>
+<p>Where <span class="math inline">\(\mu_t\)</span> denotes the state of the community attributable to this mean-reverting process at time <span class="math inline">\(t\)</span>, <span class="math inline">\(LN\)</span> denotes the Logsitic Normal distribution and <span class="math inline">\(\Sigma_{\text{state}}\)</span> denotes the covariance of this state noise. In addition we simulate that exogenous variable <span class="math inline">\(x\)</span> influences the immediate state of the system in a compositionally additive way and that the influence is given by the compositional vector <span class="math inline">\(\beta\)</span> which encodes how the exogenous variable influences the relative abundances of each taxa</p>
+<p><span class="math display">\[\theta_t = \mu_t \oplus \beta \otimes x_t.\]</span> Here we call <span class="math inline">\(\theta_t\)</span> the true state of the system at time <span class="math inline">\(t\)</span>. Specifically we are goint to simulate that <span class="math inline">\(x\)</span> increases t3 over t1 and t2. We also simulate that we do not measure this true state of the system but only obtain noisy measurements of this true state given by</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_t &amp;= \theta_t \oplus v_t \\
+v_t &amp; \sim LN(0,\Sigma_{\text{obs}}). 
+\end{aligned}
+\]</span></p>
+<pre class="r"><code>y &lt;- matrix(0, nrow=t, ncol=3)
+y[1,] &lt;- clo(c(1,1,1)) # Equally abundant starting point
+phi &lt;- .9  # Autoregressive coefficient 
+beta &lt;- acomp(c(1,1,2))
+names(beta) &lt;- tr$tip.label
+
+# Parameters for the noise
+m &lt;- c(0,0)
+Sigma.State &lt;- matrix(c(1,0,0,1), nrow=2)
+Sigma.Noise &lt;- matrix(c(1,0,0,1), nrow=2)
+
+# Autoregressive Structure
+for (i in 2:t){
+  y[i,] &lt;- acomp(y[i-1,])*phi + acomp(rlogisticnormal(1, m, Sigma.State, tr))
+}
+
+# Added Exogenous Regression Component and Added Logistic Normal Noise
+for (i in 1:t){
+  y[i,] &lt;-  acomp(y[i,]) + beta*x[i] +  acomp(rlogisticnormal(1, m, Sigma.Noise, tr))
+}
+
+colnames(y) &lt;- tr$tip.label</code></pre>
+<p>Now we will look at the simulated data in terms of relative abundances</p>
+<pre class="r"><code>plot(ts(y))</code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Now we will visualize the data in the PhILR basis</p>
+<pre class="r"><code>y.ilr &lt;- philr(y, tr)
+plot(ts(y.ilr))</code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="modeling-the-simulated-data" class="section level1">
+<h1>Modeling the Simulated Data</h1>
+<p>We are going to model the data using the following state-space model that makes use of the PhILR transform</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_t &amp; = \text{PhILR}^{-1}(\eta_t) &amp;\\
+\eta_t &amp;= \mu_t + \beta x_t+v_t &amp; v_t \sim N(0, \Sigma_\text{obs}) \\
+\mu_t &amp; = \mu_{t-1} + w_t &amp; w_t \sim N(0, \Sigma_\text{state})
+\end{aligned}
+\]</span> where <span class="math inline">\(\text{PhILR}^{-1}\)</span> denotes the inverse PhILR transform. Note that here we have made use of the very convenient properties of the ILR transform, where perturbation and powering are transformed to addition and multiplication and the logistic normal distribution is transformed to the multivariate normal distribution.</p>
+<p>For this example, we are going to assume that we know <span class="math inline">\(\Sigma_\text{obs}\)</span> but need to estimate <span class="math inline">\(\Sigma_\text{state}\)</span>. We will estimate <span class="math inline">\(\Sigma_\text{state}\)</span> by using the Maximum Likelihood estimate.</p>
+<pre class="r"><code># Write a function to build our model based on parameter values
+build &lt;- function(param){
+  
+  mod &lt;- dlmModPoly(order=1, dV = 1, dW = param[1]) + dlmModReg(x, addInt=F, dV = 1e-7, dW = 1e-7)
+
+  # Now expand to Multivariate
+  mod$FF &lt;- mod$FF %x% diag(2)
+  mod$JFF &lt;- mod$JFF %x% diag(2)
+  mod$GG &lt;- mod$GG %x% diag(2)
+  mod$V &lt;- mod$V %x% diag(2) # Here we assume no observation noise
+  mod$W &lt;-mod$W %x% diag(2)
+  mod$m0 &lt;- c(mod$m0, mod$m0)
+  mod$C0 &lt;- mod$C0 %x% diag(2)
+  return(mod)
+}
+
+# Now Find MLE for State Covariance
+fit &lt;- dlmMLE(y.ilr, rep(1,1), build, lower=c(1e-6))
+
+# Build the model with the fitted parameter
+mod &lt;- build(fit$par)
+
+# Run Forward Filtering Backwards Sampling Algorithm to Obtain Samples from Posterior of states
+filt &lt;- dlmFilter(y.ilr, mod) # Forward Filtering
+
+sm.samples &lt;- array(0, dim=c(151, 4, 300))
+for (i in 1:300){
+  sm.samples[,,i] &lt;- dlmBSample(filt) # Backwards Sampling
+}</code></pre>
+<p>Now we are going to investigate these posterior estimates. First we are going to look at the posterior estimates for <span class="math inline">\(\theta_t\)</span> (recall we defined <span class="math inline">\(\theta_t=mu_t+\beta x\)</span>.</p>
+<pre class="r"><code>sm.mean.sample &lt;- array(0, dim=c(150, 2, 300))
+for (i in 1:300){
+  sm.mean.sample[,,i] &lt;- ftheta(mod, sm.samples[,,i])
+}
+
+tidy_y_ilr &lt;- tidy_array(y.ilr) %&gt;% 
+  rename(mean=var) %&gt;% 
+  mutate(dim_2 = factor(dim_2, labels=c(&quot;n1&quot;, &quot;n2&quot;)))
+
+p.smooth &lt;- tidy_array(sm.mean.sample) %&gt;% 
+  group_by(dim_1, dim_2) %&gt;% 
+  summarize(mean=mean(var), 
+            p25 = quantile(var, prob=0.25), 
+            p75 = quantile(var, prob=0.75)) %&gt;% 
+  mutate(dim_2 = factor(dim_2, labels=c(&quot;n1&quot;, &quot;n2&quot;))) %&gt;% 
+  ggplot(aes(x=dim_1, y=mean)) +
+  geom_line(data=tidy_y_ilr, color=&quot;red&quot;) +
+  geom_point(data=tidy_y_ilr, color=&quot;red&quot;) +
+  geom_ribbon(aes(ymin=p25, ymax=p75), fill=&quot;darkgrey&quot;, alpha=0.5) +
+  geom_line() +
+  facet_grid(dim_2~.) +
+  theme_bw() +
+  ggtitle(&quot;Posterior Smoothing Estimates and 50% Probability Limits for System State&quot;) +
+  xlab(&quot;Time&quot;) +
+  ylab(&quot;Balance Value&quot;)
+
+grid.arrange(p, p.smooth, ncol=2, widths=c(3,5))  </code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p>We have plotted the PhILR transformed time-series in Red and our mean smoothing estimates in black. The grey ribbon represents the 95% probability limits for our posterior estimate of the state. We can see that there appears to be a fair bit of dynamics occuring in all the species and we don’t see any particular phylogenetic signal from <span class="math inline">\(\theta_t\)</span>. So next we are going to decompose this time-series and look at each of the processes we modeled sepearately. That is we are going to look at <span class="math inline">\(\mu_t\)</span> and <span class="math inline">\(\beta x_t\)</span> separately.</p>
+<pre class="r"><code>p.decomp &lt;- sm.samples %&gt;% 
+  .[2:151,,] %&gt;% # Same thing as dropFirst but for 3D array
+  tidy_array() %&gt;% 
+  group_by(dim_1, dim_2) %&gt;% 
+  mutate(var = ifelse(dim_2 %in% c(3,4), var*x[dim_1], var)) %&gt;% 
+  summarize(mean=mean(var), 
+            p25 = quantile(var, prob=0.25), 
+            p75 = quantile(var, prob=0.75)) %&gt;% 
+  mutate(coord = ifelse(dim_2 %in% c(1,3), 1,2), 
+         Parameter = ifelse(dim_2 %in% c(1,2), &quot;Mu&quot;, &quot;BetaX&quot;)) %&gt;% 
+  mutate(coord = factor(coord, labels=c(&quot;n1&quot;, &quot;n2&quot;))) %&gt;% 
+  ggplot(aes(x=dim_1, y=mean, group=Parameter)) +
+  geom_ribbon(aes(ymin=p25, ymax=p75), fill=&quot;darkgrey&quot;, alpha=0.5) +
+  geom_line(aes(color=Parameter)) +
+  facet_grid(coord~.) +
+  theme_bw() +
+  ggtitle(&quot;Decomposition of Smoothing Estimates with 50% Probability Limits&quot;) +
+  xlab(&quot;Time&quot;) +
+  ylab(&quot;Balance Value&quot;)
+
+grid.arrange(p, p.decomp, ncol=2, widths=c(3,5))  </code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
+<p>The first thing to notice is that our posterior estimates for these two processes are quite large compared to our posterior estimates for <span class="math inline">\(\theta_t\)</span>. This indicates that while the model is fairly certain about the sum of these two processes, it is less certain about the relative contributions of each. Yet despite this uncertainty we still a assymetry in the <span class="math inline">\(\beta x_t\)</span> series. It looks as though the model is fairly certain that the external covariate <span class="math inline">\(x_t\)</span> is decreasing t1 relative to t2 (negative in n1) and the model believes that it is most likely that <span class="math inline">\(x_t\)</span> is not having much effect on the t3 to (t1,t2) ratio (n2).</p>
+<p>Now we are going to look at the estimates for <span class="math inline">\(\beta\)</span> and compare these to the true values. Since we assumed that <span class="math inline">\(w_\beta\)</span> was relatively constant we only need to look at <span class="math inline">\(\beta\)</span> for a single time-point. We will just take time-point 74.</p>
+<pre class="r"><code>beta_ilr &lt;- philr(unclass(beta), tr)
+tidy_beta_ilr &lt;- data.frame(dim_2=factor(c(&quot;n1&quot;,&quot;n2&quot;), levels=c(&quot;n2&quot;, &quot;n1&quot;)), mean=c(beta_ilr[,1], beta_ilr[,2]))
+
+p.bal &lt;- sm.samples %&gt;% 
+  tidy_array() %&gt;% 
+  filter(dim_1 == 75,   # Recall first time-point is t=0
+         dim_2 %in% c(3,4)) %&gt;% 
+  group_by(dim_2) %&gt;% 
+  summarize(mean=mean(var), 
+            p2.5 = quantile(var, prob=0.025), 
+            p97.5 = quantile(var, prob=0.975)) %&gt;% 
+  mutate(dim_2= factor(dim_2, labels=c(&quot;n1&quot;,&quot;n2&quot;))) %&gt;%
+  mutate(dim_2 = relevel(dim_2, c(&quot;n2&quot;))) %&gt;% 
+  ggplot(aes(x=dim_2, y=mean)) +
+  geom_errorbar(aes(ymin=p2.5, ymax=p97.5))+
+  geom_point() +
+  geom_point(data=tidy_beta_ilr, color=&quot;red&quot;)+
+  theme_bw()+
+  ggtitle(&quot;Smoothing Estimate for Beta with 95% probability Limit&quot;) +
+  ylab(&quot;Balance Value&quot;) +
+  xlab(&quot;Balance&quot;) +
+  coord_flip()
+
+grid.arrange(p, p.bal, ncol=2, widths=c(2,1))  </code></pre>
+<p><img src="/post/2017-04-16-philr_dlm_demo_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p>We have plotted the true value for beta in red. First, note that our mean posterior estiamte is quite close to the true value of <span class="math inline">\(\beta\)</span>. That is, our model has done quite well learning how the <span class="math inline">\(x_t\)</span> series influences the community we are studying. Secondly we see that the effect of <span class="math inline">\(x_t\)</span> is primarily on the ratio of t1 to t2 and is not involving t3 vs (t1, t2).</p>
+<p>Finally, if desired we can view the effects of <span class="math inline">\(x_t\)</span> in terms of relative abundances by simply taking the inverse PhILR transpose of <span class="math inline">\(\beta\)</span></p>
+<pre class="r"><code>sm.samples %&gt;% 
+  .[75,3:4,] %&gt;% 
+  t %&gt;% 
+  `colnames&lt;-`(c(&#39;n1&#39;,&#39;n2&#39;)) %&gt;% # Need to set column names
+  philrInv(tr) %&gt;% 
+  as.data.frame() %&gt;% 
+  select(t1, t2, t3) %&gt;% 
+  summary()</code></pre>
+<pre><code>##        t1               t2               t3        
+##  Min.   :0.1354   Min.   :0.1479   Min.   :0.2233  
+##  1st Qu.:0.2271   1st Qu.:0.2402   1st Qu.:0.3935  
+##  Median :0.2672   Median :0.2852   Median :0.4483  
+##  Mean   :0.2699   Mean   :0.2869   Mean   :0.4432  
+##  3rd Qu.:0.3085   3rd Qu.:0.3294   3rd Qu.:0.4931  
+##  Max.   :0.5562   Max.   :0.4783   Max.   :0.6556</code></pre>
+<p>Now we will compare to the true value</p>
+<pre class="r"><code>(philrInv(beta_ilr, tr)) # The true value</code></pre>
+<pre><code>##        t2   t1  t3
+## [1,] 0.25 0.25 0.5</code></pre>
+<p>While there is some uncertainty, we see that our estimates are close to the true values.</p>
+</div>
+<div id="helper-functions" class="section level1">
+<h1>Helper Functions</h1>
+<pre class="r"><code>writeLines(readLines(&quot;2017-04-16_philr_dlm_demo_extra/utils.R&quot;))</code></pre>
+<pre><code>## # Calculate with FTheta and GTheta with (optional) Time Varying Matricies -----
+## 
+## # Given a model this function calculates G_t*Theta_t-1, note that 
+## # G_t can have a time-varying matrix, also ignores last entry of theta assuming
+## # this will have 1 more row than mod$X
+## # model is dlm model object (just a list) with the following components
+## #     GG, (Optional: JGG, X)
+## # theta is a matrix with 1 more row than observations in the time-series (first
+## #     row corresponds to unobserbved initial state)
+## gtheta &lt;- function(mod, theta){
+##   if (is.null(mod$JGG)) gt &lt;- theta[-(nrow(theta)), ] %*% t(mod$GG)
+##   else {
+##     nz &lt;- mod$JGG != 0
+##     JGG &lt;- cbind(row(mod$JGG)[nz], col(mod$JGG)[nz], mod$JGG[nz])
+##     gt &lt;- array(0, dim=c(nrow(theta)-1, ncol(theta))) # this is the result
+##     GG &lt;- mod$GG
+##     for (i in 1:(nrow(theta)-1)){
+##       GG[JGG[,-3, drop=FALSE]] &lt;- mod$X[i, JGG[,3]]
+##       gt[i,] &lt;- theta[i,] %*% t(GG)
+##     }
+##   }
+##   return(gt) 
+## }
+## 
+## # Given a model this function calculates F_t*Theta_t, note that 
+## # F_t can have a time-varying matrix, also ignores the first entry of theta 
+## # assuming this will have 1 more row than mod$X
+## # model is dlm model object (just a list) with the following components
+## #     FF, (Optional: JFF, X)
+## # theta is a matrix with 1 more row than observations in the time-series (first
+## #     row corresponds to unobserbved initial state)
+## ftheta &lt;- function(mod, theta){
+##   if (is.null(mod$JFF)) ft &lt;- theta[-1, ] %*% t(mod$FF)
+##   else {
+##     nz &lt;- mod$JFF != 0
+##     JFF &lt;- cbind(row(mod$JFF)[nz], col(mod$JFF)[nz], mod$JFF[nz])
+##     ft &lt;- array(0, dim=c(nrow(theta)-1, nrow(mod$FF))) # this is the result
+##     FF &lt;- mod$FF
+##     for (i in 1:(nrow(theta)-1)){
+##       FF[JFF[,-3, drop=FALSE]] &lt;- mod$X[i, JFF[,3]]
+##       ft[i,] &lt;- theta[i+1,] %*% t(FF)
+##     }
+##   }
+##   return(ft) 
+## }
+## 
+## # function to tidy a multi-dimentional array
+## tidy_array &lt;- function(a){
+##   d &lt;- dim(a)
+##   l &lt;- list()
+##   for (i in 1:length(d)){
+##     l[[paste0(&#39;dim_&#39;,i)]] &lt;- 1:d[i]
+##   }
+##   tidy &lt;- expand.grid(l)
+##   tidy[[&quot;var&quot;]] &lt;- a[as.matrix(tidy)]
+##   tidy[[&quot;parameter&quot;]] &lt;- lazyeval::expr_text(a)
+##   
+##   return(tidy)
+## }
+## 
+## # Random draws from Logistic Normal distribution 
+## # with parameters given in PhILR/ILR space. 
+## # m is the mean
+## # Sigma is the covariance matrix
+## # Tr is an object of class phylo
+## rlogisticnormal &lt;- function(n, m, Sigma, tr){
+##   sbp &lt;- phylo2sbp(tr)
+##   V &lt;- buildilrBasep(sbp, p=c(1,1,1)) # Build contrast matrix witout tayon-weights
+##   
+##   r &lt;- MASS::mvrnorm(n, m, Sigma)
+##   r &lt;- ilrInv(r, V)
+##   return(unclass(r))
+## }</code></pre>
+</div>
+<div id="original-computing-environment" class="section level1">
+<h1>Original Computing Environment</h1>
+<pre class="r"><code>devtools::session_info()</code></pre>
+<pre><code>## Session info --------------------------------------------------------------</code></pre>
+<pre><code>##  setting  value                       
+##  version  R version 3.3.1 (2016-06-21)
+##  system   x86_64, darwin13.4.0        
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  tz       America/New_York            
+##  date     2017-04-16</code></pre>
+<pre><code>## Packages ------------------------------------------------------------------</code></pre>
+<pre><code>##  package      * version  date       source                           
+##  ape            4.1      2017-02-14 cran (@4.1)                      
+##  assertthat     0.1      2013-12-06 CRAN (R 3.3.0)                   
+##  backports      1.0.5    2017-01-18 CRAN (R 3.3.2)                   
+##  bayesm       * 3.0-2    2015-06-20 CRAN (R 3.3.0)                   
+##  blogdown       0.0.26   2017-04-16 Github (rstudio/blogdown@eabe137)
+##  bookdown       0.3.18   2017-04-16 Github (rstudio/bookdown@1cbf81b)
+##  boot           1.3-18   2016-02-23 CRAN (R 3.3.1)                   
+##  broom          0.4.2    2017-02-13 CRAN (R 3.3.2)                   
+##  colorspace     1.3-2    2016-12-14 CRAN (R 3.3.2)                   
+##  compositions * 1.40-1   2014-06-07 CRAN (R 3.3.0)                   
+##  DBI            0.6-1    2017-04-01 CRAN (R 3.3.2)                   
+##  DEoptimR       1.0-8    2016-11-19 CRAN (R 3.3.2)                   
+##  devtools       1.12.0   2016-06-24 CRAN (R 3.3.0)                   
+##  digest         0.6.12   2017-01-27 cran (@0.6.12)                   
+##  dlm          * 1.1-4    2014-09-16 CRAN (R 3.3.0)                   
+##  dplyr        * 0.5.0    2016-06-24 CRAN (R 3.3.0)                   
+##  energy       * 1.7-0    2016-08-26 CRAN (R 3.3.0)                   
+##  evaluate       0.10     2016-10-11 CRAN (R 3.3.1)                   
+##  fastmatch      1.1-0    2017-01-28 CRAN (R 3.3.2)                   
+##  forcats        0.2.0    2017-01-23 CRAN (R 3.3.2)                   
+##  foreign        0.8-67   2016-09-13 CRAN (R 3.3.0)                   
+##  ggplot2      * 2.2.1    2016-12-30 cran (@2.2.1)                    
+##  ggtree       * 1.6.11   2017-03-15 Bioconductor                     
+##  gridExtra    * 2.2.1    2016-02-29 CRAN (R 3.3.0)                   
+##  gtable         0.2.0    2016-02-26 CRAN (R 3.3.0)                   
+##  haven          1.0.0    2016-09-23 CRAN (R 3.3.0)                   
+##  hms            0.3      2016-11-22 CRAN (R 3.3.2)                   
+##  htmltools      0.3.5    2016-03-21 CRAN (R 3.3.0)                   
+##  httr           1.2.1    2016-07-03 CRAN (R 3.3.0)                   
+##  igraph         1.0.1    2015-06-26 CRAN (R 3.3.0)                   
+##  jsonlite       1.4      2017-04-08 cran (@1.4)                      
+##  knitr          1.15.19  2017-04-16 Github (yihui/knitr@0c2abf8)     
+##  labeling       0.3      2014-08-23 CRAN (R 3.3.0)                   
+##  lattice        0.20-35  2017-03-25 CRAN (R 3.3.2)                   
+##  lazyeval       0.2.0    2016-06-12 CRAN (R 3.3.0)                   
+##  lubridate      1.6.0    2016-09-13 CRAN (R 3.3.0)                   
+##  magrittr       1.5      2014-11-22 CRAN (R 3.3.0)                   
+##  MASS         * 7.3-45   2016-04-21 CRAN (R 3.3.1)                   
+##  Matrix         1.2-8    2017-01-20 CRAN (R 3.3.2)                   
+##  memoise        1.0.0    2016-01-29 CRAN (R 3.3.0)                   
+##  mnormt         1.5-5    2016-10-15 CRAN (R 3.3.0)                   
+##  modelr         0.1.0    2016-08-31 CRAN (R 3.3.0)                   
+##  munsell        0.4.3    2016-02-13 CRAN (R 3.3.0)                   
+##  nlme           3.1-131  2017-02-06 CRAN (R 3.3.2)                   
+##  phangorn       2.2.0    2017-04-03 CRAN (R 3.3.2)                   
+##  philr        * 1.1.1    2017-04-15 local (jsilve24/philr@NA)        
+##  plyr           1.8.4    2016-06-08 CRAN (R 3.3.0)                   
+##  psych          1.7.3.21 2017-03-22 CRAN (R 3.3.2)                   
+##  purrr        * 0.2.2    2016-06-18 CRAN (R 3.3.0)                   
+##  quadprog       1.5-5    2013-04-17 CRAN (R 3.3.0)                   
+##  R6             2.2.0    2016-10-05 CRAN (R 3.3.0)                   
+##  Rcpp           0.12.10  2017-03-31 Github (RcppCore/Rcpp@886f5df)   
+##  readr        * 1.1.0    2017-03-22 CRAN (R 3.3.2)                   
+##  readxl         0.1.1    2016-03-28 CRAN (R 3.3.0)                   
+##  reshape2       1.4.2    2016-10-22 CRAN (R 3.3.0)                   
+##  rmarkdown      1.4      2017-03-24 CRAN (R 3.3.2)                   
+##  robustbase   * 0.92-7   2016-12-09 CRAN (R 3.3.2)                   
+##  rprojroot      1.2      2017-01-16 CRAN (R 3.3.2)                   
+##  rvest          0.3.2    2016-06-17 CRAN (R 3.3.0)                   
+##  scales         0.4.1    2016-11-09 CRAN (R 3.3.2)                   
+##  stringi        1.1.3    2017-03-21 CRAN (R 3.3.2)                   
+##  stringr        1.2.0    2017-02-18 cran (@1.2.0)                    
+##  tensorA      * 0.36     2010-12-01 CRAN (R 3.3.0)                   
+##  tibble       * 1.3.0    2017-04-01 CRAN (R 3.3.2)                   
+##  tidyr        * 0.6.1    2017-01-10 cran (@0.6.1)                    
+##  tidyverse    * 1.1.1    2017-01-27 CRAN (R 3.3.2)                   
+##  withr          1.0.2    2016-06-20 CRAN (R 3.3.0)                   
+##  xml2           1.1.1    2017-01-24 CRAN (R 3.3.2)                   
+##  yaml           2.1.14   2016-11-12 CRAN (R 3.3.2)</code></pre>
+<div id="refs" class="references">
+<div id="ref-silverman2017">
+<p>Silverman, Justin D, Alex D Washburne, Sayan Mukherjee, and Lawrence A David. 2017. “A Phylogenetic Transform Enhances Analysis of Compositional Microbiota Data.” <em>ELife</em> 6. doi:<a href="https://doi.org/10.7554/eLife.21887">10.7554/eLife.21887</a>.</p>
+</div>
+</div>
+</div>

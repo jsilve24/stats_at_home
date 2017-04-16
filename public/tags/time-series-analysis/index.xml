@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Statistics @ Home</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Statistics @ Home</description>
+    <title>Time Series Analysis on Statistics @ Home</title>
+    <link>/tags/time-series-analysis/</link>
+    <description>Recent content in Time Series Analysis on Statistics @ Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <managingEditor>jsilve24@gmail.com (Justin and Rachel Silverman)</managingEditor>
@@ -11,7 +11,7 @@
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
     <lastBuildDate>Sun, 16 Apr 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/time-series-analysis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
