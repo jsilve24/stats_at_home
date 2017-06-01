@@ -9,44 +9,17 @@
     <managingEditor>jsilve24@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>jsilve24@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sun, 16 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Compositional Data</title>
-      <link>/tags/compositional-data/</link>
-      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
+      <title>Stan</title>
+      <link>/tags/stan/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/tags/compositional-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dynamic Linear Models</title>
-      <link>/tags/dynamic-linear-models/</link>
-      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
-      <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/tags/dynamic-linear-models/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Philr</title>
-      <link>/tags/philr/</link>
-      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
-      <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/tags/philr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Time Series Analysis</title>
-      <link>/tags/time-series-analysis/</link>
-      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
-      <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/tags/time-series-analysis/</guid>
+      <guid>/tags/stan/</guid>
       <description></description>
     </item>
     

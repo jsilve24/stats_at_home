@@ -1,6 +1,12 @@
 ---
-title: "About"
-date: "2017-04-16"
+title: "About Us"
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium-theme).
+
+Hello! And welcome to *Stats@Home*. We are **Justin and Rachel Silverman, PhD** students in Statistics and Biostatistics. This blog came out of some creative and statistical musing, side projects, and dissertation tangents. Our goal in writing this blog is to explore some questions or puzzles that we find interesting with a statistical flare. 
+
+Some of our statistical interests include machine learning, clinical trials, compositional data, combinatorial analysis, probability theory, but we enjoy all kinds of statistical and probabilistic puzzles. Our recreational interests mostly involve the outdoors and our dog, Gauss, who may end up being the subject of some of our posts. 
+
+We encourage you to contribute thoughts, ideas, and suggestions if you find any of the posts interesting or useful. We hope you enjoy the posts as much as we enjoyed writing. 
+
+[Question, suggestions, general feedback are welcome](mailto:stats.at.home@gmail.com). 

@@ -1,0 +1,143 @@
+---
+title: Sampling Covariance Matricies with Fixed Total Variance
+author: Justin Silverman
+date: '2017-06-01'
+slug: sampling-covariance-matricies-with-fixed-total-variance
+categories: []
+tags:
+  - Stan
+description: A few thoughts on how to sample covariance matricies with fixed total variance using hyperspheres!
+draft: no
+keywords:
+  - key
+  - words
+topics: topic 1
+type: post
+---
+
+# Introduction
+
+I have been thinking a lot about the concept of Total Variance recently.
+**Total variance (which can be defined as the trace of a covariance matrix)** 
+is a measure of global dispersion that has been particularly useful 
+for me when building multivariate models. However, for some reason, I have yet 
+to see this concept discussed much outside of 
+compositional data analysis ([see pg. 35 of Lecture Notes on Compositional Data Analysis](http://www.sediment.uni-goettingen.de/staff/tolosana/extra/CoDa.pdf)) or
+Principle Component Analysis. 
+
+The other day I was faced with a situation where I had to figure out a way to sample
+from a covariance matrix with fixed total variance. I decided that I would write 
+up the approach I came up with in case anyone else found themselves needing to do this. 
+
+# Overview of My Approach
+
+To start out I will note that a $q\times q$ covariance matrix $\Sigma$ can be decomposed
+into a correlation matrix $\Psi$ and a vector of scale parameters $\sigma : \{\sigma_i \geq 0, i\in (1, \dots, q)\}$ as follows
+$$ \Sigma = diag(\sigma) \Psi  diag(\sigma)$$
+
+Since total variance is given by the trace of the covariance matrix we have
+$$ 
+\begin{align}
+\text{Total Variance} &=  \text{Tr}(\Sigma) \\
+& = \sum_i \Sigma^2_{ii} \\
+& = \sum_i\sigma_i\Psi_{ii}  \sigma_i \\
+&= \sum_i\sigma_i^2
+\end{align}
+$$
+where the last line follows from the fact that the correlation matrix $\Psi$ has 
+unit diagonals ($\Psi_{ii} = 1$). Also notice that in this form we see that 
+*requiring that a covariance matrix has a fixed total variance is equivalent to requiring
+that the scale parameters of the decomposed covariance matrix exist on the 
+shell of the positive orthant of a $q$ dimentional hypersphere with a radius of $\text{Tr}(\Sigma)$.*
+
+Thus I decided to sample fixed-total variance covariance matricies by seperately 
+sampling a covariance matrix $\Psi$ and the scale parameters $\sigma$. The advantage
+of this scheme is that there are good methods for sampling each of these things individualy. 
+
+# Sampling Correlation Matricies ($\Psi$)
+There are a number of ways of sampling positive semi-definite correlation matricies. Perhaps the easiest
+would be to sample a covariance matrix $\Lambda$ (for example from an 
+inverse wishart distribution) and then normalize it to a correlation matrix $\Psi$
+$$ \Psi = diag(\Lambda)^{-\frac{1}{2}}\Lambda diag(\Lambda)^{-\frac{1}{2}}  $$
+although this is likely slow. Since I was working in Stan,
+I choose to simulate correlation matricies using the lkj distribution[^1] as is 
+often recommended by the Stan developers for numerical stability and speed (below
+I give a snippet of code for use in Stan). 
+
+# Sampling $\sigma$ on the Surface of a Sphere
+Just like there are many ways of sampling correlation matricies, there are many
+ways of sampling points from the surface of a $q$ dimentional hypersphere. 
+While this could be done using the [von Mises distirbution](https://en.wikipedia.org/wiki/Von_Mises_distribution)
+(which is provided in Stan as well), I followed [this method](http://mathworld.wolfram.com/SpherePointPicking.html) to simulate a series of univariate zero-mean truncated normal random variates $(x_1, \dots, x_q)$ such that  $x_i > 0$ for all 
+$i \in (1, \dots, q)$. I can generate a uniform distribution over the surface of the 
+positive orthant of the hypersphere by transforming these parameters as
+$$ \sigma = \left( \frac{\sqrt{c}x_1}{\sqrt{\sum_i x_i^2}}, \dots,  \frac{\sqrt{c}x_q}{\sqrt{\sum_i x_i^2}}   \right).  $$
+where $c$ is the target total variance. 
+
+
+# Stan Code
+Below I have written some Stan code to sample from a Covariance Matrix of fixed 
+total variance making use of Choleksy forms for improved numerical stability.  
+
+```{r, engine="stan", eval=FALSE,output.var="foo"}
+data {
+  int q; // dimentions
+  real<lower=0> c;
+  real<lower=0.0000001> lkj_param; // Note this has to be strickly greater than 0
+}
+parameters {
+  cholesky_factor_corr[q] L_psi;
+  vector<lower=0>[q] x;
+}
+transformed parameters {
+  vector<lower=0>[q] sigma;
+  real norm = sqrt(sum(square(x)));
+  sigma = sqrt(c)*x/norm;
+}
+model{
+  L_psi ~ lkj_corr_cholesky(lkj_param);
+  for (i in 1:q)
+    x[i] ~ normal(0, 1) T[0.0000001, ];
+}
+generated quantities {
+  cov_matrix[q] Sigma;
+  Sigma = diag_pre_multiply(sigma, L_psi); // Cholesky Factor of Sigma
+  Sigma = tcrossprod(Sigma); // Sigma
+}
+```
+
+In retrospect I believe that an alternative method of generating uniform random point 
+on the positive orthant of a hypersphere would be to use the built in `unit_vector`
+data type in Stan as follows
+
+```{r, engine="stan", eval=FALSE, output.var="foo"}
+data {
+  int q; // dimentions
+  real<lower=0> c;
+  real<lower=0.0000001> lkj_param; // Note this has to be strickly greater than 0
+}
+parameters {
+  cholesky_factor_corr[q] L_psi;
+  unit_vector<lower=0>[q] x;
+}
+transformed parameters {
+  vector<lower=0>[q] sigma;
+  sigma = sqrt(c)*x;
+}
+model{
+  L_psi ~ lkj_corr_cholesky(lkj_param);
+}
+generated quantities {
+  cov_matrix[q] Sigma;
+  Sigma = diag_pre_multiply(sigma, L_psi); // Cholesky Factor of Sigma
+  Sigma = tcrossprod(Sigma); // Sigma
+}
+
+```
+Here we have taken advantage of the fact that Stan imposes a uniform prior 
+for parameters with an unspecified prior. 
+
+
+[^1]: From the paper  [Generating random correlation matrices based on vines and extended onion method](http://www.sciencedirect.com/science/article/pii/S0047259X09000876) by Lewandowski, Kurowicka, and Joe (LKJ), 2009. 
+I also found a good post on visualizing the LKJ distribution at <http://www.psychstatistics.com/2014/12/27/d-lkj-priors/> as well 
+as some Matlab code for simulating from this distribution on [Stack Exchange](https://stats.stackexchange.com/questions/2746/how-to-efficiently-generate-random-positive-semidefinite-correlation-matrices). 
