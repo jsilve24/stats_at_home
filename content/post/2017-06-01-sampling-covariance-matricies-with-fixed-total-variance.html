@@ -72,8 +72,9 @@ generated quantities {
   cov_matrix[q] Sigma;
   Sigma = diag_pre_multiply(sigma, L_psi); // Cholesky Factor of Sigma
   Sigma = tcrossprod(Sigma); // Sigma
-}</code></pre>
-<p>In retrospect I believe that an alternative method of generating uniform random point on the positive orthant of a hypersphere would be to use the built in <code>unit_vector</code> data type in Stan as follows</p>
+}
+</code></pre>
+<p><strong>EDITED (Thanks to Benjamin Goodrich for helpful comments):</strong> An alternative is to use the built in <code>simplex</code> data type in Stan to decompose the total variance into the sum of squared variances as follows</p>
 <pre class="stan"><code>data {
   int q; // dimentions
   real&lt;lower=0&gt; c;
@@ -81,11 +82,11 @@ generated quantities {
 }
 parameters {
   cholesky_factor_corr[q] L_psi;
-  unit_vector&lt;lower=0&gt;[q] x;
+  simplex[q] variances;
 }
 transformed parameters {
   vector&lt;lower=0&gt;[q] sigma;
-  sigma = sqrt(c)*x;
+  sigma = sqrt(c*variances);
 }
 model{
   L_psi ~ lkj_corr_cholesky(lkj_param);
@@ -96,7 +97,7 @@ generated quantities {
   Sigma = tcrossprod(Sigma); // Sigma
 }
 </code></pre>
-<p>Here we have taken advantage of the fact that Stan imposes a uniform prior for parameters with an unspecified prior.</p>
+<p>Here we have taken advantage of the fact that Stan imposes a uniform prior for parameters with an unspecified prior, however a number of distributions over the simplex (e.g., Dirichlet or Logistic-Normal) could also add to the representational power of this approach.</p>
 </div>
 <div class="footnotes">
 <hr />
