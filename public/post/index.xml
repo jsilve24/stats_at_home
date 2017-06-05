@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2017 Matzah Hunt Potions Puzzle</title>
+      <link>/2017/06/04/2017-matzah-hunt-potions-puzzle/</link>
+      <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/06/04/2017-matzah-hunt-potions-puzzle/</guid>
+      <description>For the past 3 years we have put together an event for our friends and family that we have named Matzah Hunt. We put on this event in place of/in addition to a Passover Seder and it is an afternoon and evening full of a series of math/logic puzzles which ultimately lead to a hunt for the Missing Matzah, hence the name, Matzah Hunt. Over the years, the puzzles have become more involved and creative, the decorations have become more elaborate, and luckily, the attendance has grown.</description>
+    </item>
     
     <item>
       <title>Sampling Covariance Matricies with Fixed Total Variance</title>
