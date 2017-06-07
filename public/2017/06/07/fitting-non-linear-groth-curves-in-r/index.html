@@ -242,7 +242,7 @@ set.seed(4)</code></pre>
 
 d &lt;- gompertz(1:100, 10, 2, 30)
 plot(d)</code></pre>
-<p><img src="/post/2017-06-07-fitting-non-linear-groth-curves-in-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-fitting-non-linear-growth-curves-in-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>This is just the deterministic gompertz function. Now lets add some measurement noise</p>
 <pre class="r"><code># Add some normal(0,0.5) noise centered around the deterministic signal
 for(i in 1:nrow(d)) d[i,2] &lt;- rnorm(1, d[i,2], 1)</code></pre>
@@ -262,7 +262,7 @@ for(i in 1:nrow(d)) d[i,2] &lt;- rnorm(1, d[i,2], 1)</code></pre>
 ## Achieved convergence tolerance: 2.223e-06</code></pre>
 <pre class="r"><code>plot(d, ylab=&quot;microbial abundance&quot;)
 lines(d$time, predict(fit))</code></pre>
-<p><img src="/post/2017-06-07-fitting-non-linear-groth-curves-in-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-fitting-non-linear-growth-curves-in-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>One thing to note, if you find that the fit.gompertz function gives an error warning about a singular gradient: the problem is almost certanly that the starting values are far from the optimal and you should plot the data and estimate better values.</p>
 <p>I also would suggest using the <code>purrr::safely</code> function to fit many curves at once. This is because the <code>nls</code> function often returns errors for poorly fit models and its a pain to have to keep excluding data-points/curves manually (easier to just collect the errors).</p>
 <p>Below I create a “safe” version of the <code>fit.gompertz</code> function that collects errors rather than stopping evaluation.</p>
