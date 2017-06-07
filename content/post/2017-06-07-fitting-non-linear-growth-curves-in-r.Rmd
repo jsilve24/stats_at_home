@@ -2,11 +2,11 @@
 title: Fitting Non-Linear Growth Curves in R
 author: Justin Silverman
 date: '2017-06-07'
-slug: fitting-non-linear-groth-curves-in-r
-categories: []
 tags:
   - R
-description: A few notes on non-linear least squares in R with code. Example relates to fitting Gompertz models for microbial growth curves. 
+slug: fitting-non-linear-groth-curves-in-r
+description: A few notes on non-linear least squares in R with code. Example relates
+  to fitting Gompertz models for microbial growth curves.
 draft: no
 keywords:
   - key
