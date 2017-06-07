@@ -1,0 +1,86 @@
+---
+title: Fitting Non-Linear Groth Curves in R
+author: Justin Silverman
+date: '2017-06-07'
+slug: fitting-non-linear-groth-curves-in-r
+categories: []
+tags:
+  - R
+description: A few notes on non-linear least squares in R with code. Example relates to fitting Gompertz models for microbial growth curves. 
+draft: no
+keywords:
+  - key
+  - words
+topics: topic 1
+type: post
+---
+
+
+<p>A few months ago I offered to help a friend fit a bunch of microbial growth curves using R. When I was looking over possible solutions I was quite supprised by how little information was available online. Apart from the R package <code>grofit</code> (which after playing around with I decided seemed a little over-designed for my uses) I found very limited recources or code available. As a result of this I wanted to share a few functions I wrote to quickly fit non-linear growth models. I was specifically asked to help fit growth curves using the gompertz function and this is what I demonstrate below. I hope that this example gives some insight into how to fit non-linear models in R, beyond simply gompertz gorwth curves.</p>
+<pre class="r"><code>library(tidyverse)
+set.seed(4)</code></pre>
+<p>To fit the gompertz model I use the <code>nls</code> (nonlinear least squares) function built into R. Its pretty straight forward however picking the correct starting values for the optimization was somewhat non-trivial. After a few attempts I found a way of defining the starting values that seemed to work for all the data I was given. The key idea is to use some simple and easy to compute approximation for each of the parameters of the model and use this as the starting value for the optimization.</p>
+<p>The main function is <code>fit.gompertz</code>. This function returns the result of the <code>nls</code> function call. The function takes two arguments <code>data</code> and <code>time</code> which should be vectors of equal length giving the abundance and the times respectively for a given growth curve. The gompertz function I am fitting is the same one used by the package <code>grofit</code>, that is <span class="math display">\[\text{data}\sim A e^{-e^{µ e/A(\lambda-\text{time}+1)}}\]</span> where <span class="math inline">\(A\)</span> defines the maximum of the curve, <span class="math inline">\(\mu\)</span> defines the maximum slope, and <span class="math inline">\(\lambda\)</span> is related to the lag-phase (e.g., the location of the maximum slope along the time axis). <strong>Note:</strong> this function assumes that the data/time vectors are ordered with respect to time (this is because of the way I use the <code>diff</code> function to pick starting values. )</p>
+<pre class="r"><code>fit.gompertz &lt;- function(data, time){
+  d &lt;- data.frame(y=data, t=time)
+  
+  # Must have at least 3 datapoints at different times
+  if (length(unique(d$t)) &lt; 3) stop(&quot;too few data points to fit curve&quot;)
+  
+  # Pick starting values ###
+  i &lt;- which.max(diff(d$y))
+  starting.values &lt;- c(a=max(d$y), 
+                       mu=max(diff(d$y))/(d[i+1,&quot;t&quot;]-d[i, &quot;t&quot;]), 
+                       lambda=i)
+  print(&quot;Starting Values for Optimization: &quot;)
+  print(starting.values)
+  ##########################
+  
+  formula.gompertz &lt;- &quot;y~a*exp(-exp(mu*exp(1)/a*(lambda-t)+1))&quot;
+  nls(formula.gompertz, d, starting.values)
+}</code></pre>
+<p>Now we are going to create some simulated data to test this on.</p>
+<pre class="r"><code>gompertz &lt;- function(time, a, mu, lambda){
+  y &lt;- a*exp(-exp(mu*exp(1)/a*(lambda-time)+1))
+  return(data.frame(time=time, y=y))
+}
+
+d &lt;- gompertz(1:100, 10, 2, 30)
+plot(d)</code></pre>
+<p><img src="/post/2017-06-07-fitting-non-linear-groth-curves-in-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>This is just the deterministic gompertz function. Now lets add some measurement noise</p>
+<pre class="r"><code># Add some normal(0,0.5) noise centered around the deterministic signal
+for(i in 1:nrow(d)) d[i,2] &lt;- rnorm(1, d[i,2], 1)</code></pre>
+<p>Now fit the noisy data and and plot the resulting fitted model.</p>
+<pre class="r"><code>(fit &lt;- fit.gompertz(d$y, d$time))</code></pre>
+<pre><code>## [1] &quot;Starting Values for Optimization: &quot;
+##         a        mu    lambda 
+## 12.330322  3.376417 63.000000</code></pre>
+<pre><code>## Nonlinear regression model
+##   model: y ~ a * exp(-exp(mu * exp(1)/a * (lambda - t) + 1))
+##    data: d
+##      a     mu lambda 
+##  9.937  1.735 29.564 
+##  residual sum-of-squares: 82.44
+## 
+## Number of iterations to convergence: 17 
+## Achieved convergence tolerance: 2.223e-06</code></pre>
+<pre class="r"><code>plot(d, ylab=&quot;microbial abundance&quot;)
+lines(d$time, predict(fit))</code></pre>
+<p><img src="/post/2017-06-07-fitting-non-linear-groth-curves-in-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>One thing to note, if you find that the fit.gompertz function gives an error warning about a singular gradient: the problem is almost certanly that the starting values are far from the optimal and you should plot the data and estimate better values.</p>
+<p>I also would suggest using the <code>purrr::safely</code> function to fit many curves at once. This is because the <code>nls</code> function often returns errors for poorly fit models and its a pain to have to keep excluding data-points/curves manually (easier to just collect the errors).</p>
+<p>Below I create a “safe” version of the <code>fit.gompertz</code> function that collects errors rather than stopping evaluation.</p>
+<pre class="r"><code>safe.fit.gompertz &lt;- safely(fit.gompertz)</code></pre>
+<p>To demonstrate how this works lets try it out on a growth curve with only 2 datapoints (something we know) will throw an error.</p>
+<pre class="r"><code>safe.fit.gompertz(c(1,2), c(19, 19))</code></pre>
+<pre><code>## $result
+## NULL
+## 
+## $error
+## &lt;simpleError in .f(...): too few data points to fit curve&gt;</code></pre>
+<p>The new <code>safe.fit.gompertz</code> function returns a list with errors and results separated. This is particularly useful when used with <code>purrr::map</code>.</p>
+<p>The other feature I found particularly useful was the AIC value for the fitted model. A low AIC is suggestive of poor model fit. In practice I found it useful to fit each growth curve and report the AIC value; then I would sort the fitted models by AIC and visually inspect the fitted models with the lowest AIC. This allowed me to quickly choose which growth curves were likely problematic so my friend could go back and collect those measurements again. This approached saved us a lot of time as there were hundreds-thousands of growth curves to analyze. Usefully, in R the AIC can be calculated by calling the function <code>AIC</code> directly on the fitted model object.</p>
+<pre class="r"><code>AIC(fit)</code></pre>
+<pre><code>## [1] 272.4798</code></pre>
+<p>I hope this helps those that are trying to fit some non-linear models in R.</p>

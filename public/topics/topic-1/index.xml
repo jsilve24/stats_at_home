@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sun, 04 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/topics/topic-1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fitting Non-Linear Groth Curves in R</title>
+      <link>/2017/06/07/fitting-non-linear-groth-curves-in-r/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/06/07/fitting-non-linear-groth-curves-in-r/</guid>
+      <description>A few months ago I offered to help a friend fit a bunch of microbial growth curves using R. When I was looking over possible solutions I was quite supprised by how little information was available online. Apart from the R package grofit (which after playing around with I decided seemed a little over-designed for my uses) I found very limited recources or code available. As a result of this I wanted to share a few functions I wrote to quickly fit non-linear growth models.</description>
+    </item>
     
     <item>
       <title>2017 Matzah Hunt Potions Puzzle</title>

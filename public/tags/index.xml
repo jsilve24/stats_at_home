@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Stan</title>
