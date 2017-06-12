@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Eternal Sunshine of the Endless Flight</title>
+      <link>/2017/06/12/eternal-sunshine-of-the-endless-flight/</link>
+      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/06/12/eternal-sunshine-of-the-endless-flight/</guid>
+      <description>I am sitting on a plane from Rome to Philadelphia, marveling at how quickly we can move around the globe. There is a 6 hour time-zone difference between Rome and Philadelphia. My flight took off at 11am in Rome and was set to arrive 9 hours and 45 minutes later at 3:45pm in Philadelphia. This got me thinking, what would your daily schedule look like if you continuously flew west?</description>
+    </item>
     
     <item>
       <title>Fitting Non-Linear Growth Curves in R</title>
