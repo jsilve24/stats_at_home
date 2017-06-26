@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Mon, 12 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Measure Theory Made Rediculously Simple</title>
+      <link>/2017/06/26/measure-theory-made-rediculously-simple/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/06/26/measure-theory-made-rediculously-simple/</guid>
+      <description>During my first few years of medical school I became a big fan of the [Subject] Made Rediculously Simple book series (as in Clinical Microbiology Made Rediculously Simple). I found that the authors did a great job of simplifying the subject matter, sometimes to the point of absurdity, while getting the core concepts across in a memorable way. For some time now I have wished that similar tools were available for mathematics.</description>
+    </item>
     
     <item>
       <title>Eternal Sunshine of the Endless Flight</title>
