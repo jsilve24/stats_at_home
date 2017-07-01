@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Post on Tournament Designs</title>
+      <link>/2017/07/01/a-post-on-tournament-designs/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/07/01/a-post-on-tournament-designs/</guid>
+      <description>The Problem When hosting our annual Matzah Hunt event, we wanted to come up with a cool and unusual way of picking teams. We decided that we wanted each participant to complete each puzzle only once and to complete each puzzle with a different partner. Here are the precise details of the problem:
+There are 12 participants, 6 puzzles and 6 (20-minute) rounds. Teams of 2 will attempt to solve each puzzle each round.</description>
+    </item>
     
     <item>
       <title>Measure Theory Made Rediculously Simple</title>
