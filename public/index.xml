@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stochastic Loading of Microfluidic Droplets</title>
+      <link>/2017/07/08/stochastic-loading-of-microfluidic-droplets/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/07/08/stochastic-loading-of-microfluidic-droplets/</guid>
+      <description>The Basic Model The First Step - Multinomial Focusing on our Question - Binomial Approximating the Binomial - Poisson  When is the Poisson approximation to the Binomial valid? Looking at Real Parameters Values Calculating the distribution of quantities in light of uncertainty in lab measurements Bivariate Distributions    Droplet-based microfluidics are emerging as a useful technology in various fields of biomedicine. Both droplet digital PCR and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet.</description>
+    </item>
     
     <item>
       <title>A Post on Tournament Designs</title>

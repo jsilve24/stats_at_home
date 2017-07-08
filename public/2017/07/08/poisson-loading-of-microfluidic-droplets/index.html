@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Poisson Loading of Microfluidic Droplets  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Droplet-based microfluidics are emerging as a useful technology in various fields of biomedicine. Both droplet digital PCR and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet. Obviously it is difficult to individually place DNA molecules or cells into droplets, instead people turn to stochastic models to estimate the distribution of cells per droplet, tuning the experimental parameters to achieve an acceptable distribution. In this post I derive a Poisson approximation to this process and demonstrate how to calculate quantities of interest under uncertainty in the measured quantities." />
+
+<meta name="keywords" content="key, words, ">
+
+
+<meta property="og:title" content="Poisson Loading of Microfluidic Droplets  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/07/08/poisson-loading-of-microfluidic-droplets/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Droplet-based microfluidics are emerging as a useful technology in various fields of biomedicine. Both droplet digital PCR and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet. Obviously it is difficult to individually place DNA molecules or cells into droplets, instead people turn to stochastic models to estimate the distribution of cells per droplet, tuning the experimental parameters to achieve an acceptable distribution. In this post I derive a Poisson approximation to this process and demonstrate how to calculate quantities of interest under uncertainty in the measured quantities."/>
+<meta property="og:article:published_time" content="2017-07-08T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-07-08T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="Poisson Loading of Microfluidic Droplets" />
+<meta name="twitter:description" content="Droplet-based microfluidics are emerging as a useful technology in various fields of biomedicine. Both droplet digital PCR and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet. Obviously it is difficult to individually place DNA molecules or cells into droplets, instead people turn to stochastic models to estimate the distribution of cells per droplet, tuning the experimental parameters to achieve an acceptable distribution. In this post I derive a Poisson approximation to this process and demonstrate how to calculate quantities of interest under uncertainty in the measured quantities." />
+<meta name="twitter:url" content="/2017/07/08/poisson-loading-of-microfluidic-droplets/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Poisson Loading of Microfluidic Droplets",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-07-08",
+    "description": "Droplet-based microfluidics are emerging as a useful technology in various fields of biomedicine. Both droplet digital PCR and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet. Obviously it is difficult to individually place DNA molecules or cells into droplets, instead people turn to stochastic models to estimate the distribution of cells per droplet, tuning the experimental parameters to achieve an acceptable distribution. In this post I derive a Poisson approximation to this process and demonstrate how to calculate quantities of interest under uncertainty in the measured quantities.",
+    "wordCount": 1643
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/07/08/poisson-loading-of-microfluidic-droplets/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>DRAFT :: Poisson Loading of Microfluidic Droplets
+</h1>
+
+  <div class="metas">
+<time datetime="2017-07-08">8 Jul, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 8 min
+  &middot; (1643 Words)
+  <br>
+  
+<a class="label" href="/tags/r">R</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p><a href="https://en.wikipedia.org/wiki/Microfluidics#Droplet-based_microfluidics">Droplet-based microfluidics</a> are emerging as a useful technology in various fields of biomedicine. Both <a href="https://en.wikipedia.org/wiki/Digital_polymerase_chain_reaction#Droplet_Digital_PCR">droplet digital PCR</a> and droplet based culture methods require that droplets are created with either a single DNA molecule or a single cell per droplet. Obviously it is difficult to individually place DNA molecules or cells into droplets, instead people turn to stochastic models to estimate the distribution of cells per droplet, tuning the experimental parameters to achieve an acceptable distribution.</p>
+<p>I felt uncomfortable by the Poisson approximation that I heard some people talk about and I wanted to derive a model myself. In full disclosure, I think that I was wrong, the Poisson is a good approximation for this setting but I needed to convince myself and derive the approximation. In this post I derive a Poisson approximation to this process and demonstrate how to calculate quantities of interest under uncertainty in the measured quantities.</p>
+<div id="the-basic-model" class="section level1">
+<h1>The Basic Model</h1>
+<div id="the-first-step---multinomial" class="section level2">
+<h2>The First Step - Multinomial</h2>
+<p>What made the most sense to me was to look at this as a Multinomial process with <span class="math inline">\(n\)</span> total “units” (cells, DNA molecules, etc… ) and <span class="math inline">\(k\)</span> categories (droplets). In using the multinomial in this way, I am assuming that each unit gets assigned to a droplet independent of the other units. In addition, I will assume a given unit has an equal probability of ending up in any given droplet.</p>
+<p>Let <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_k)\)</span> represent the number of units assigned to each of <span class="math inline">\(k\)</span> droplets. Note we know that <span class="math inline">\(\sum_i x_i = n\)</span>. We say that <span class="math display">\[ \mathbf{x} \sim \text{Multinomial}(n, \mathbf{p}) \]</span> where <span class="math inline">\(\mathbf{p} = (p_1, \dots, p_k)\)</span> and <span class="math inline">\(p_i\)</span> represents the probability that a unit will end up in droplet <span class="math inline">\(i\)</span>. We therefore also know that <span class="math inline">\(\sum_i p_i = 1\)</span>.</p>
+</div>
+<div id="focusing-on-our-question---binomial" class="section level2">
+<h2>Focusing on our Question - Binomial</h2>
+<p>We are primarily interested in the distribution of the number of units that end up in given droplet. That is, we are interested in the marginal probability <span class="math inline">\(p(x_i = j)\)</span> for <span class="math inline">\(j\in\{0, 1, \dots, n\}\)</span>. The marginal distribution turns out to be a Binomial Distribution with density</p>
+<p><span class="math display">\[ p(x_i = j) = {n \choose j}p_i^j(1-p_i)^{n-j}, \quad j\in\{0, 1, \dots, n\}\]</span>.</p>
+<p>This result comes from <a href="http://www.math.uah.edu/stat/bernoulli/Multinomial.html">the helpful people at the University of Alabama in Huntsville Statistics Department</a> (I love their site). However, as they point out, its actually really intuitive to derive (see their proof under section 2.). Essentially for a given droplet there is a certain probability that a given unit will end up in that droplet <span class="math inline">\(p_i\)</span> and a certain probability that it will end up in any other droplet <span class="math inline">\(1-p_i\)</span>.</p>
+</div>
+<div id="approximating-the-binomial---poisson" class="section level2">
+<h2>Approximating the Binomial - Poisson</h2>
+<p><a href="https://en.wikipedia.org/wiki/Poisson_limit_theorem">The Binomial can be approximated by the Poisson</a> when <span class="math inline">\(n \rightarrow \infty\)</span> and <span class="math inline">\(p_i \rightarrow 0\)</span> . In this case the Poisson approximation is given by <span class="math inline">\(np = \lambda\)</span> where <span class="math inline">\(\lambda\)</span> is the Poisson rate parameter.</p>
+</div>
+</div>
+<div id="when-is-the-poisson-approximation-to-the-binomial-valid" class="section level1">
+<h1>When is the Poisson approximation to the Binomial valid?</h1>
+<p>This approximation really rests on <span class="math inline">\(n\)</span> being “very large” and <span class="math inline">\(p\)</span> being “very small”. So lets look at some values of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> and see how the approximation fares.</p>
+<pre class="r"><code>library(tidyverse)
+
+k &lt;- c(2, 5, 10, 20, 200, 2000) # Various numbers of droplets
+n &lt;-  c(100, 500, 1000)         # Various numbers of units or cells to place in droplets
+params &lt;- expand.grid(n = n, k = k, j = 1:50) # look at combinations of these parameters
+
+# The next two lines are just to make the labels in the plot look nice
+n.labels &lt;- paste(&quot;n =&quot;, n)     
+p.labels &lt;- paste(&quot;p =&quot;, signif(1/k, 1))
+
+params %&gt;% 
+  mutate(p = 1/k, 
+         lambda.approx = n*p, 
+         j = j + floor(lambda.approx) - floor(mean(j)), # Explore near the mean of the distribution
+         n.label = paste(&quot;n =&quot;, n),                        # Make plot look nice
+         p.label = paste(&quot;p =&quot;, signif(p,1))) %&gt;%          # Make plot look nice
+  mutate(n.label = factor(n.label, levels = n.labels),     # Make plot look nice
+         p.label = factor(p.label, levels = p.labels)) %&gt;% # Make plot look nice
+  filter(j &gt;= 0) %&gt;%                               # Only keep positive counts
+  mutate(Binomial = choose(n, j)*p^j*(1-p)^(n-j),  # **The Distributions**
+         Poisson = dpois(j, n*p)) %&gt;%              # **The Distributions**
+  ggplot(aes(x = j)) +                             # Everything else is just plotting
+  geom_line(aes(y = Poisson)) +
+  geom_point(aes(y = Binomial), shape = &quot;o&quot;) +
+  facet_wrap(n.label ~p.label , scales=&quot;free&quot;, nrow=3, ncol=6)+
+  theme_bw() +
+  ggtitle(&quot;Poisson Approximation vs. Binomial Distribution&quot;, 
+          &quot;Poisson given by Black Line, Binomial by Open Circles&quot;)+
+  ylab(&quot;Density&quot;)</code></pre>
+<p><img src="/post/2017-07-08-poisson-loading-of-microfluidic-droplets_files/figure-html/unnamed-chunk-1-1.png" width="960" /></p>
+<p>We see that for small <span class="math inline">\(n\)</span> and large <span class="math inline">\(p\)</span> (for example with <span class="math inline">\(n=100\)</span> and <span class="math inline">\(p=0.5\)</span>) the approximation is not great. However really for all parameters settings to the right of the second column in the above plot, the approximation seems appropriate.</p>
+</div>
+<div id="looking-at-real-parameters" class="section level1">
+<h1>Looking at Real Parameters</h1>
+<p>From the above results we know that for large <span class="math inline">\(n\)</span> and small <span class="math inline">\(p\)</span> we can approximate the binomial distribution with the Poisson as <span class="math inline">\(\lambda = np\)</span> where <span class="math inline">\(\lambda\)</span> is the Poisson rate parameter.</p>
+<p>However, a few of my colleagues that are doing work with microfluidic droplets don’t measure the number of droplets directly, instead they measure the droplet diameter. With some dimensional analysis we can still calculate <span class="math inline">\(\lambda\)</span>. Note that the dimension of <span class="math inline">\(n\)</span> was <em>cells</em> and the dimension of <em>p</em> was <span class="math inline">\(1/\)</span><em>droplets</em>; therefore we can write</p>
+<p><span class="math display">\[lambda = np = \frac{cells}{droplets} = \frac{cells}{volume}\frac{volume}{droplets}.\]</span> Thus we can calculate <span class="math inline">\(\lambda = np\)</span> if we know the concentration of cells and the volume of each droplet. My colleague gave me the diameter of each droplet and we will assume that they are perfect spheres.</p>
+<pre class="r"><code>cells.per.ml &lt;- 1e+06 # cells / mL
+droplet.diameter &lt;- 80 # microns
+droplet.volume &lt;- (4/3)*pi*((droplet.diameter/2)^3)*1e-12 # mL/droplet
+lambda = cells.per.ml * droplet.volume</code></pre>
+<p>To figure out if we are in the big <span class="math inline">\(n\)</span> small <span class="math inline">\(p\)</span> regime lets assume we make 5mL of droplets.</p>
+<pre class="r"><code>ml &lt;- 5
+(n &lt;- cells.per.ml * ml)</code></pre>
+<pre><code>## [1] 5e+06</code></pre>
+<pre class="r"><code>droplets &lt;- ml/droplet.volume
+(p &lt;- 1/droplets)</code></pre>
+<pre><code>## [1] 5.361651e-08</code></pre>
+<p>So it does look like we are in the range where the Poisson approximation is valid. Lets now plot the Poisson approximation.</p>
+<pre class="r"><code>j &lt;- 0:20
+d &lt;- data.frame(j = j, Poisson = dpois(j, lambda)) 
+d %&gt;% 
+  ggplot(aes(x=j, y = Poisson)) +
+  geom_line() +
+  theme_bw() +
+  ylab(&quot;Density&quot;)</code></pre>
+<p><img src="/post/2017-07-08-poisson-loading-of-microfluidic-droplets_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Now lets look at the ratio <span class="math inline">\(p(x_i=1)/p(x_i&lt;1)\)</span> which (for a large number of droplets) represents the ratio of droplets with only 1 cell each to the number of droplets with more than 1 cell each.</p>
+<pre class="r"><code>ratio &lt;- d$Poisson[2]/(1-sum(d$Poisson[c(1,2)]))</code></pre>
+<p>This ratio tells us that for every droplet with more than 1 cell in it there are approximately 6.8 droplets with only 1 cell in them.</p>
+</div>
+<div id="calculating-distribution-with-uncertainty-in-starting-concentration" class="section level1">
+<h1>Calculating distribution with uncertainty in starting concentration</h1>
+<p>It turns out that it is actually quite difficult to calculate the concentration of certain cellular mixtures (especially with mixed microbial communities) and often there is some uncertainty with respect to the <em>cells.per.ml</em> parameter we set in the last section. Now I am just going to briefly demonstrate how we can simulate the distribution with the addition of this uncertainty.</p>
+<p>I am going to assume that our uncertainty in the quantity <em>cells.per.ml</em> follows a normal distribution but almost any univariate distribution could be substituted here. A log normal distribution may be a better assumption if you think that the uncertainty exists on a log-scale (i.e., if you want the uncertainty to be in terms of fold-changes on a mean value). Note that I am actually using a truncated normal because I throw away the few samples where <em>cells.per.ml</em> is negative.</p>
+<pre class="r"><code>cells.per.ml &lt;-  rnorm(1000, 1.6e6, sd = 5e5) # Concentration of cells
+cells.per.ml &lt;- cells.per.ml[cells.per.ml &gt; 0] # truncation
+droplet.diameter &lt;- 80 # microns
+droplet.volume &lt;- (4/3)*pi*((droplet.diameter/2)^3)*1e-12 # mL/droplet
+lambda = cells.per.ml * droplet.volume
+
+j &lt;- 0:20
+d &lt;- rep(0, length(lambda))  # Container to store results of for loop
+for (i in 1:length(lambda)){ # For each of our sampled values 
+  x &lt;- dpois(j, lambda[i])
+  d[i] &lt;- x[2]/(1-sum(x[c(1,2)]))
+}</code></pre>
+<p>Before looking at the distribution of this ratio. Lets first look at our chosen distribution over possible values of <em>cells.per.ml</em>.</p>
+<pre class="r"><code>qplot(cells.per.ml, geom=&quot;density&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/post/2017-07-08-poisson-loading-of-microfluidic-droplets_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Now we can plot the distribution of the ratio of droplets with only 1 cell in them to the droplets with more than 1 cell in them.</p>
+<pre class="r"><code>ggplot(enframe(d, &quot;iter&quot;, &quot;Ratio&quot;), aes(x=Ratio)) +
+  geom_density() +
+  theme_bw() +
+  xlim(c(0, 10)) +
+  xlab(&quot;Ratio of droplets with 1 cell / more than 1 cell&quot;)</code></pre>
+<p><img src="/post/2017-07-08-poisson-loading-of-microfluidic-droplets_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>One thing to notice is that this distribution is not normally distributed. This is important and implies that the relation between the <em>cells.per.ml</em> and this ratio is non-linear.</p>
+<p>We can also calculate some summary statistics for the distribution of this ratio, particularly it is useful to calculate the median and 95% probability region.</p>
+<pre class="r"><code>quantile(d, probs = c(0.025, 0.5, 0.975), na.rm = TRUE)</code></pre>
+<pre><code>##      2.5%       50%     97.5% 
+##  2.263589  4.105186 12.198891</code></pre>
+</div>
+<div id="bivariate-relationships" class="section level1">
+<h1>Bivariate Relationships</h1>
+<p>As a final point, my colleagues are also interested in the ratio of the fraction of droplets with only 1 cell in them to the fraction of droplets with zero cells in them as this ratio represents a measure of the efficiency of their method. If this ratio is too low then they are wasting space and energy making lots of empty droplets. We can actually visualize the uncertainty in both of these ratios as a bivariate distribution.</p>
+<pre class="r"><code>d &lt;- data.frame(matrix(0, length(lambda), 2))
+colnames(d) &lt;- c(&quot;r1&quot;, &quot;r2&quot;)
+for (i in 1:length(lambda)){
+  x &lt;- dpois(j, lambda[i])
+  d[i,&quot;r1&quot;] &lt;- x[2]/(1-sum(x[c(1,2)]))
+  d[i,&quot;r2&quot;] &lt;- x[2]/x[1]
+}
+d %&gt;% 
+  ggplot(aes(x = r1, y = r2)) + 
+  geom_density_2d() +
+  theme_bw() +
+  xlab(&quot;Ratio of droplets with 1 cell / more than 1 cell&quot;) +
+  ylab(&quot;Ratio of droplets with 1 cell / zero cells&quot;)</code></pre>
+<p><img src="/post/2017-07-08-poisson-loading-of-microfluidic-droplets_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Ideally we would like to be in the top right portion of this plot where most of the droplets have 1 cell in them with few droplets with zero or more than 1 cell. However, ultimately there will be a trade off between the number of droplets with zero cells (efficiency) and the number off droplets with no more than 1 cell (specificity) and it is up to the researcher to determine what is reasonable for their applicaiton.</p>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/07/01/a-post-on-tournament-designs/" title="A Post on Tournament Designs">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+
