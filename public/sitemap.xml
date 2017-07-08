@@ -36,6 +36,12 @@
   </url>
   
   <url>
+    <loc>/tags/made-ridiculously-simple/</loc>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2017-07-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -61,7 +67,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
