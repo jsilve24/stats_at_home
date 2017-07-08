@@ -58,7 +58,7 @@ disqusShortname = "statistics-home"
     highlight = "default"
 
     # Google Analytics.
-    googleAnalytics = "Your Google Analytics tracking code"
+    googleAnalytics = "UA-102259122-1"
 
     # Sidebar social links.
     github = "jsilve24" # Your Github profile ID
