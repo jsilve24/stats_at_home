@@ -1,12 +1,12 @@
 ---
-title: Measure Theory Made Rediculously Simple
+title: Measure Theory Made Ridiculously Simple
 author: Justin Silverman
 date: '2017-06-26'
-slug: measure-theory-made-rediculously-simple
+slug: measure-theory-made-ridiculously-simple
 categories:
-  - Made Rediculously Simple
+  - Made Ridiculously Simple
 tags: []
-description: Measure theory is acctually really simple. Here are some core concepts of measure theory, introduced in a ridiculously simple way. 
+description: Measure theory is actually really simple. Here are some core concepts of measure theory, introduced in a ridiculously simple way. 
 draft: no
 keywords:
   - key
