@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/topics/topic-1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Error Analysis Made Ridiculously Simple</title>
+      <link>/2017/07/21/error-analysis-made-ridiculously-simple/</link>
+      <pubDate>Fri, 21 Jul 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/07/21/error-analysis-made-ridiculously-simple/</guid>
+      <description>Introduction Example 1 - Adding two measurements Example 1a - Uniform Uncertainty and Max/Min Bounds Example 1b - Gaussian Uncertainty and Standard Deviation as Bounds  How to Use Simulation for Calculations Example 2 - Shipping bricks  Improving Back of the Envelope Calculations More Resources Code for Plotting   Introduction All measurements have uncertainty. This is not a subjective opinion but an objective fact that should never be ignored.</description>
+    </item>
     
     <item>
       <title>Stochastic Loading of Microfluidic Droplets</title>

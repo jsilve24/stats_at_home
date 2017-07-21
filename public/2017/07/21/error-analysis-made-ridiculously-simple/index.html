@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Error Analysis Made Ridiculously Simple  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="All measurements have uncertainty. This is not a subjective opinion but an objective fact that should never be ignored. In light of this, I have always been curious about how infrequently uncertainty is actually taken into account in science. In this post I will advocate the use of simple simulation studies for error/uncertainty propagation." />
+
+<meta name="keywords" content="key, words, ">
+
+
+<meta property="og:title" content="Error Analysis Made Ridiculously Simple  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/07/21/error-analysis-made-ridiculously-simple/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="All measurements have uncertainty. This is not a subjective opinion but an objective fact that should never be ignored. In light of this, I have always been curious about how infrequently uncertainty is actually taken into account in science. In this post I will advocate the use of simple simulation studies for error/uncertainty propagation."/>
+<meta property="og:article:published_time" content="2017-07-21T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-07-21T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="Error Analysis Made Ridiculously Simple" />
+<meta name="twitter:description" content="All measurements have uncertainty. This is not a subjective opinion but an objective fact that should never be ignored. In light of this, I have always been curious about how infrequently uncertainty is actually taken into account in science. In this post I will advocate the use of simple simulation studies for error/uncertainty propagation." />
+<meta name="twitter:url" content="/2017/07/21/error-analysis-made-ridiculously-simple/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Error Analysis Made Ridiculously Simple",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-07-21",
+    "description": "All measurements have uncertainty. This is not a subjective opinion but an objective fact that should never be ignored. In light of this, I have always been curious about how infrequently uncertainty is actually taken into account in science. In this post I will advocate the use of simple simulation studies for error/uncertainty propagation.",
+    "wordCount": 3207
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/07/21/error-analysis-made-ridiculously-simple/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Error Analysis Made Ridiculously Simple
+</h1>
+
+  <div class="metas">
+<time datetime="2017-07-21">21 Jul, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 16 min
+  &middot; (3207 Words)
+  <br>
+  
+<a class="label" href="/tags/made-ridiculously-simple">Made Ridiculously Simple</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#example-1---adding-two-measurements">Example 1 - Adding two measurements</a><ul>
+<li><a href="#example-1a---uniform-uncertainty-and-maxmin-bounds">Example 1a - Uniform Uncertainty and Max/Min Bounds</a></li>
+<li><a href="#example-1b---gaussian-uncertainty-and-standard-deviation-as-bounds">Example 1b - Gaussian Uncertainty and Standard Deviation as Bounds</a></li>
+</ul></li>
+<li><a href="#how-to-use-simulation-for-calculations">How to Use Simulation for Calculations</a><ul>
+<li><a href="#example-2---shipping-bricks">Example 2 - Shipping bricks</a></li>
+</ul></li>
+<li><a href="#improving-back-of-the-envelope-calculations">Improving Back of the Envelope Calculations</a></li>
+<li><a href="#more-resources">More Resources</a></li>
+<li><a href="#code-for-plotting">Code for Plotting</a></li>
+</ul>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><strong>All measurements have uncertainty.</strong> This is not a subjective opinion but an objective fact that should never be ignored. In light of this, I have always been curious about how infrequently uncertainty is actually taken into account in science.</p>
+<p>In this post I will advocate the use of simple simulation studies for error/uncertainty propagation. <em>For our purposes, I will use the concepts of error and uncertainty interchangably.</em></p>
+<center>
+<img src="/img/2017-07-21-error-analysis-made-ridiculously-simple/uncertainty_meterstick.png">
+</center>
+<p><strong>When I talk about uncertainty I am talking about a probability distribution over possible true values given our measurement.</strong> Often our distribution will be centered and symmetric about the value we measured but it need not be. A typical choice of distribution is a normal distribution with mean equal to our measured value and a standard deviation that is dictated by the <a href="https://www.google.com/imgres?imgurl=https://pmstudycircle.com/wp-content/uploads/2012/09/accuracy-vs-precision-297x300.jpg&amp;imgrefurl=https://pmstudycircle.com/2012/04/precision-versus-accuracy-definitions-and-differences-between-them/&amp;h=300&amp;w=297&amp;tbnid=NsM6h7e1fGHGkM:&amp;tbnh=160&amp;tbnw=157&amp;usg=__jB99WY02L6pXK50THq4nsUnBJgU=&amp;vet=10ahUKEwjAyMHL_v_UAhUG7yYKHWAOBvIQ9QEILDAA..i&amp;docid=ztrrotsbzRcydM&amp;sa=X&amp;ved=0ahUKEwjAyMHL_v_UAhUG7yYKHWAOBvIQ9QEILDAA">precision</a> of our measurement device.</p>
+<p><strong>So what is propogation of uncertainty?</strong> Imagine that I measure <span class="math inline">\(x\)</span> but am interested in calculating <span class="math inline">\(y\)</span> where <span class="math inline">\(y = f(x)\)</span>. Since I know that there is uncertainty in my measurement of <span class="math inline">\(x\)</span>, I need to figure out the resulting uncertainty in my calculation of <span class="math inline">\(y\)</span>. This is actually a crucial concept. Imagine that <span class="math inline">\(y = x^{1000}\)</span>, it should be fairly obvious that small errors in the measurement of <span class="math inline">\(x\)</span> can lead to massive errors in the value of <span class="math inline">\(y\)</span>. What about for arbitrary functions and arbitrary distributions of error/uncertainty? Just to give a very quick example. Imagine that I measure <span class="math inline">\(x\)</span> such that the resulting uncertainty in the true value of <span class="math inline">\(x\)</span> is given by <span class="math inline">\(x \sim \mathcal{N}(0,1)\)</span>. In the following figure I show the distribution of our uncertainty in <span class="math inline">\(x\)</span> and the distribution of uncertainty in a number of calculated quantities <span class="math inline">\(y=f(x)\)</span>. Notice that the resulting distributions may not be normally distributed and are not necessarily easily intuited.</p>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>There is actually an entire field of mathematics devoted to <a href="https://en.wikipedia.org/wiki/Error_analysis_(mathematics)">Error Analysis</a>. Unfortunately, this subject is often taught with a bunch of formulas that need to be learned without much emphasis on understanding the concepts or intuition. However, with the abundance of computing resources available nowadays, I would advocate simulation studies to understand and do propagation of error calculations rather than learning these formulas as a starting point. I also feel that simulation studies will provide greater generalizability than many of the techniques taught in an introductory course on error analysis.</p>
+<p><strong>What can you do with all this?</strong> What I am advocating is a very general idea that can be used in many different ways. Here are a few examples:</p>
+<ol style="list-style-type: decimal">
+<li><p>Imagine you are reading a paper where the authors claimed to have used a given method to measure a quantity <span class="math inline">\(x\)</span> which is used to calculate a quantity of interest <span class="math inline">\(y\)</span>. Before you even see their results, you may want to estimate whether you believe that they have sufficient accuracy/precision in their measurement of <span class="math inline">\(y\)</span> to address their hypothesis or support their claims based on the uncertainty in their measurement of <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Imagine you are designing a study and you want to estimate the sample size needed so that you can calculate a quantity of interest <span class="math inline">\(y\)</span> with a given level of uncertainty. This is very similar to the idea of power calculations that are often done when designing experiments.</p></li>
+<li><p>Imagine you want to <a href="https://en.wikipedia.org/wiki/Guesstimate">“guesstimate”</a> a value <span class="math inline">\(y\)</span> based on your guess of a quantity <span class="math inline">\(x\)</span>. You may also want to use your estimate in your uncertainty over the quantity <span class="math inline">\(x\)</span> to estimate your uncertainty in your “guesstimate” of <span class="math inline">\(y\)</span>.</p></li>
+</ol>
+<p><strong>Overview of this post:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Example 1 is intended to build some intuition regarding what propagation of uncertainty is, why it is non-trivial, and to motivate and (informally) derive one of the basic formulas used in error analysis (the formula for adding two independent measurements). <strong>If you find my presentation here confusing, don’t worry, just skip to the next section and try to come back to this later if you want.</strong></p></li>
+<li><p>Using Simulation Studies: <strong>This section is the meat of the post and those familiar with error analysis should just skip to this section.</strong> Here I lay out just how simple it can be to do these calculations with a computer. I also show how approaching these problems through simulation can also allow an analyst to solve some really difficult problems almost trivially simply.</p></li>
+<li><p>Comments on “Back-of-the-Envelope” calculations. Here I briefly comment about how uncertainty propagation can lead to more informative back-of-the-envelope calculations with little extra effort <em>(spoiler: just replace “measured quantity” with “estimated/guessed quantity” in other parts of the post)</em>.</p></li>
+</ol>
+<p><strong>The take home message of this post</strong> is to always remember uncertainty in your calculations of measured/approximated quantities. Doing so is very powerful and can lead to better, more informative, and more robust calculations.</p>
+</div>
+<div id="example-1---adding-two-measurements" class="section level1">
+<h1>Example 1 - Adding two measurements</h1>
+<center>
+<img src="/img/2017-07-21-error-analysis-made-ridiculously-simple/table_measurement.png">
+</center>
+<p>Imagine you are trying to measure the length of a long table with a meter stick but the table is longer than 1 meter. To measure the table we lay the meter stick down starting at one end, mark the end of the meter stick, then move the meter stick to the mark and measure to the end of the table as shown in the above figure. Imagine that the measurements with the meter stick have an uncertainty of <span class="math inline">\(\pm 0.02\)</span> meters. Lets denote the first measurement by <span class="math inline">\(x \pm \delta x\)</span> and the second by <span class="math inline">\(y \pm \delta y\)</span>. We are interested in the sum of these two measurements which we will call <span class="math inline">\(z = x+y\)</span>. Its easy to figure out <span class="math inline">\(z = x+y\)</span>, but our interest is in how to combine the uncertainties <span class="math inline">\(\delta x\)</span> and <span class="math inline">\(\delta y\)</span> to get the uncertainty in <span class="math inline">\(\delta z\)</span>.</p>
+<p>The first approach is to simply add the uncertainties such that <span class="math inline">\(\delta z = \delta x + \delta y\)</span>. This approach can be useful if what you are interested in is the maximum possible uncertainty (e.g., the worst case scenario) but often this approach is overly conservative. Why do I say that this may be overly conservative? Consider that if my measurements are independent then the true value of either of our two measurements may be above or below the value we measured. If both measurements are greater than or less than their true values, then our uncertainties will add leading to a greater overall uncertainty in our combined measurement. However, if one measurement is above the true value and the other is below the true value, then some amount of the uncertainty will “cancel out”.</p>
+<p>So what might be a more appropriate way of combining errors from independent measurements? The following formula is <a href="https://physics.appstate.edu/undergraduate-programs/laboratory/resources/error-propagation">often taught</a> as an alternative to simply adding the errors <span class="math display">\[\delta z = \sqrt{(\delta x)^2+(\delta y)^2}.\]</span></p>
+<p>In the next two subsections I will try to explain how we can think about these two formulas (<span class="math inline">\(\delta z = \delta x + \delta y\)</span> vs. <span class="math inline">\(\delta z = \sqrt{(\delta x)^2+(\delta y)^2}\)</span>) and where they come from. I am hoping that this will provide a bridge between the traditional starting point for talking about propagation of errors and my more probabilistic, simulation based, treatment.</p>
+<div id="example-1a---uniform-uncertainty-and-maxmin-bounds" class="section level2">
+<h2>Example 1a - Uniform Uncertainty and Max/Min Bounds</h2>
+<p>Given the setup in the above example, imagine that the uncertainty of <span class="math inline">\(\pm 0.02\)</span> meters represents the bounds of a uniform distribution for the true value. That is, if we measured something as being 0.5 meters then the distribution of the true value is given in the following plot:</p>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>In this setup it may make sense to measure what the maximum and minimum possible bounds are on our combined measurement <span class="math inline">\(z = x+y\)</span>. This is simply given by the addition of the maximum and minimum bounds for the two measurements such that <span class="math inline">\(\delta z = \delta x + \delta y = 0.04\)</span>.</p>
+</div>
+<div id="example-1b---gaussian-uncertainty-and-standard-deviation-as-bounds" class="section level2">
+<h2>Example 1b - Gaussian Uncertainty and Standard Deviation as Bounds</h2>
+<p>What if instead we imagined that the uncertainty of <span class="math inline">\(\pm 0.02\)</span> meters represented the standard deviation of a normal distribution centered on our measured values. Here, the distribution of our uncertainty is shown in the following graph</p>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>In this case, values close to our measurement are more likely than values farther away from our measurement; this is likely a more realistic situation than the uniform error example above. However, when working with a normal distribution, the maximum and minimum error don’t really make any sense. For a normal distribution, the minimum and maximum possible values are at <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>, respectively, even though the probability of the true value being <span class="math inline">\(\pm \infty\)</span> is actually zero. Essentially, max/min bounds are just not a useful concept if our uncertainty is distributed normally. This is one reason why we instead choose to measure the standard deviation or variance of uncertainty that is normally distributed.</p>
+<p>Now lets do a small simulation study to determine the distribution of uncertainty in our table measurement example with normally distributed uncertainty.</p>
+<pre class="r"><code>iterations &lt;- 3000 # Number of experiments to simulate
+x &lt;- rnorm(iterations, mean = 1, sd = 0.02) # simulate first measurement
+y &lt;- rnorm(iterations, mean = 0.5, sd = 0.02) # simulate second measurement
+
+data.frame(&quot;x&quot; = x, 
+           &quot;y&quot; = y, 
+           &quot;z = x+y&quot; = x+y, # simulate the addition of the two measurements
+           check.names=F) %&gt;% 
+  plot_error_quantiles() +
+  ggtitle(&quot;Blue Regions represent 75% and 95% probability regions&quot;) +
+  xlab(&quot;Meters&quot;)</code></pre>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /> This figure shows the distribution of uncertainty in our combined measurement <span class="math inline">\(z\)</span> given the distributions of our measurements <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Note that the width of the distribution of <span class="math inline">\(z\)</span> is greater than the width of the distributions for <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>. But what is the standard deviation?</p>
+<pre class="r"><code>print(paste(&quot;Standard Deviation of Z:&quot;, signif(sd(x+y), 3)))</code></pre>
+<pre><code>## [1] &quot;Standard Deviation of Z: 0.0284&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;Uncertainty in Z by Square root formula:&quot;, signif(sqrt(0.02^2+0.02^2), 3)))</code></pre>
+<pre><code>## [1] &quot;Uncertainty in Z by Square root formula: 0.0283&quot;</code></pre>
+<p>We can see that the standard deviation of <span class="math inline">\(z\)</span> (which we have been denoting by <span class="math inline">\(\delta z\)</span>) which we obtained from this stimulation is nearly identical to the result of that square root formula I mentioned earlier. This isn’t intended to be a proper derivation of the square root formula, instead I am just trying to point out that thinking of error as a standard deviation leads to that square root formula. A proper derivation of the square root formula (<span class="math inline">\(\delta z = \sqrt{(\delta x)^2+(\delta y)^2}\)</span>) comes from the fact that variance of the addition of independent random variables adds (<span class="math inline">\(Var(X+Y) = Var(X)+Var(Y)\)</span>) and <span class="math inline">\(SD(x)^2 = Var(x)\)</span> where <span class="math inline">\(SD(x)\)</span> is the standard deviation of <span class="math inline">\(x\)</span>. Please note that measuring uncertainty as the standard deviation of a uniform random variable would also lead to the formula <span class="math inline">\(\delta z = \sqrt{(\delta x)^2+(\delta y)^2}\)</span>, I simply introduced the normal distribution here to motivate why we may need to use a standard deviation as a measure of uncertainty rather than minimum/maximum error bounds.</p>
+<p>So we have now explained how we can think about some of the common formulas for propagation of error/uncertainty and understand them as propagating different measures of uncertainty (min/max vs. standard deviation). Next we are going to see a slightly more complicated example.</p>
+</div>
+</div>
+<div id="how-to-use-simulation-for-calculations" class="section level1">
+<h1>How to Use Simulation for Calculations</h1>
+<p>Its really simple, here is the algorithm for a simulation study with <span class="math inline">\(t\)</span> iterations.</p>
+<ol style="list-style-type: decimal">
+<li>Simulate <span class="math inline">\(t\)</span> values from the distribution of each measured/estimated quantity.</li>
+<li>For each set of simulated values (e.g., one value from each measured/estimated quantity) plug those values into the function/calculation of interest and collect the results.</li>
+</ol>
+<p>The collected results form the distribution of uncertainty in our calculated quantity(ies).</p>
+<p>That’s it! Also note that this works for both univariate and multivariate measurements and functions (even though for simplicity everything I show in this post involve univariate quantities).</p>
+<p>So lets do something that seems complicated to do with basic error propagation formulas and then summarize the result in a non-standard but very useful way (using quantiles).</p>
+<div id="example-2---shipping-bricks" class="section level2">
+<h2>Example 2 - Shipping bricks</h2>
+<p>Lets imagine we need to ship a <a href="https://www.google.com/search?q=pallet+of+bricks&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=0ahUKEwimoYmCh_3UAhXKPj4KHai1AjQQ_AUIBygC&amp;biw=942&amp;bih=1080">pallet of bricks</a>. We pay for shipping by weight and want to estimate the cost of shipping all of our bricks. To estimate the weight we decided to calculate the dimensions of the pallet (width <span class="math inline">\(b_p\)</span>, and length <span class="math inline">\(l_p\)</span>), the height of the stack of bricks (<span class="math inline">\(h_p\)</span>; assume its the same height all around), the width, length, and height of each brick (<span class="math inline">\(b_b\)</span>, <span class="math inline">\(l_b\)</span>, and <span class="math inline">\(h_b\)</span>), and the weight of each brick <span class="math inline">\(w\)</span>. We have uncertainty in each one of our measured quantities. In particular the uncertainty in <span class="math inline">\(b\)</span>, <span class="math inline">\(l\)</span>, and <span class="math inline">\(h\)</span>, are normally distributed. <strong>Note:</strong> We are actually going to use truncated normal distributions since we are going to throw away values that are negative (which should not happen in our setup). In addition, imagine we have a strange scale with errors in <span class="math inline">\(w\)</span> that are distributed <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal</a> (log-normal distributed errors imply multiplicative uncertainty, e.g., we think there is a normal distribution of errors over the fold-change of the true value from our measured value).</p>
+<pre class="r"><code># Step 1: Simulate Values
+t &lt;- 1000 # Choose number of iterations
+b.p &lt;- rnorm(t, mean = 1.45, sd = 0.02) # we measured 1.45 meters
+l.p &lt;- rnorm(t, mean = 1.5, sd = 0.02) # we measured 1.5 meters
+h.p &lt;- rnorm(t, mean = 1, sd = 0.02) # we measured 1 meter
+b.b &lt;- rnorm(t, mean = 0.2, sd = 0.02) # we measured 200cm 
+l.b &lt;- rnorm(t, mean = 0.3, sd = 0.02) # we measured 200cm 
+h.b &lt;- rnorm(t, mean = 0.05, sd = 0.02) # we measured 50cm 
+w &lt;- rlnorm(t, meanlog = log(3.5), sdlog = 0.02) # we measured 3.5 kilograms
+
+# Step 2: Plug Values into Formulas
+d &lt;- data.frame(
+           # Our simulated Values
+           &quot;Pallet Width&quot; = b.p, 
+           &quot;Pallet Length&quot; = l.p, 
+           &quot;Height of all bricks&quot; = h.p, 
+           &quot;Brick Width&quot; = b.b, 
+           &quot;Brick Length&quot; = l.b, 
+           &quot;Brick Height&quot; = h.b, 
+           &quot;Weight of Brick&quot; = w, 
+           
+           # Now for the Calculated Values
+           # Weight * Volume of Pallet / Volume of 1 Brick
+           &quot;Weight of all Bricks&quot; = w*(b.p*l.p*h.p)/(b.b*l.b*h.b), 
+           
+           check.names = FALSE) # To make this plot nicely
+
+d &lt;- d[rowSums(d&lt;=0)==0,] # Remove negative values
+q &lt;- quantile(d[[&quot;Weight of all Bricks&quot;]], prob=0.98, na.rm = TRUE) # Just to make plot range nicer
+d &lt;- d[d$`Weight of all Bricks` &lt; q, ] # Just to make plot range nicer
+
+# Step 3 ... Collect and Analyze/Plot
+plot_error_quantiles(d) +
+  facet_wrap(~f, ncol=1, scales=&quot;free&quot;, strip.position=&quot;right&quot;) +
+  theme(axis.title.x = element_blank())</code></pre>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Compute quantiles (don&#39;t just show them)
+(quants &lt;- quantile(d$`Weight of all Bricks`, prob=c(0.025, 0.25, 0.75, 0.975)))</code></pre>
+<pre><code>##     2.5%      25%      75%    97.5% 
+## 1345.665 1948.135 3523.359 7281.592</code></pre>
+<pre class="r"><code># Also compute measurement without uncertainty propogation
+(without.prop &lt;- 3.5*(1.45*1.5*1)/(0.2*0.3*0.05))</code></pre>
+<pre><code>## [1] 2537.5</code></pre>
+<p>From this figure we can see that we actually have quite a bit of uncertainty in the weight of all the bricks. The light blue region shows the 95% probability region while the 75% region is shown in the darker blue. From this we can see that there is a 75% chance that the total weight of bricks will be between 1950 and 3520 kilograms. However, we also see that our 95% region is huge (1350 to 7280 kilograms) and therefore that we would likely need a more precise measurement device in order to be more certain of the total weight.</p>
+<p>On the other hand, if we just ignored the uncertainty propagation (you can imagine someone arguing that they should because the uncertainty in each measured quantity is “small”) then you would simply calculate that the weight of all the bricks is 2537 kilograms. We can see that this number really doesn’t capture the full story.</p>
+</div>
+</div>
+<div id="improving-back-of-the-envelope-calculations" class="section level1">
+<h1>Improving Back of the Envelope Calculations</h1>
+<p>Just as a quick point: notice that everything we have done here can be extended to approximate calculation where we guess at values to get an estimate of a calculated quantity. However, if we also estimate the our uncertainty in our guesses we can also get an idea of how uncertain we should be in the calculated quantity.</p>
+<p>Lets go through a quick example. Imagine we are trying to estimate the volume of the earth. I’m going to guess that the diameter of the earth is about 10,000 kilometers (I heard someone quote this value once). But I also realize that I am probably off in that guess. How off? I will model my uncertainty about my guess as a normal distribution with a standard deviation of 2500 kilometers <a href="https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule">(e.g., I think there is about a 68% chance that the true value is between 7,500 and 12,500 kilometers)</a>. <strong>So whats the volume in liters?</strong> To answer this question I am going to assume the earth is a perfect sphere.</p>
+<pre class="r"><code>t &lt;- 1000
+kms &lt;- rnorm(t, mean=10000, sd=2500)  # sample values our guessed distribution
+volume.km3 &lt;- (4/3)*pi*(kms/2)^3      # volume in cubic kilometers
+liters &lt;- volume.km3*1e12             # convert to liters
+data.frame(&quot;Diameter of Earth (Kilometers)&quot; = kms, 
+           &quot;Volume of Earth (Liters)&quot; = liters, 
+           check.names=FALSE) %&gt;% 
+  plot_error_quantiles() +
+  facet_wrap(~f, ncol=1, scales=&quot;free&quot;, strip.position=&quot;right&quot;) +
+  theme(axis.title.x = element_blank())</code></pre>
+<p><img src="/post/2017-07-21-error-analysis-made-ridiculously-simple_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p><a href="http://www.unitconverters.net/volume/earth-s-volume-to-liter.htm">This website</a> lists the earth volume as 1.083e+24 liters. Assuming that website is correct, the true value for the Earth’s value in liters corresponds to the 86-th percentile of our distribution of Volume of the earth. The crucial point here is not that I am correct in my guess. The crucial point is that by estimating the uncertainty in my guess, I was able to somewhat accurately estimate how uncertain I should be in my estimated answer. This can be a very useful tool that I find myself using quite frequent in everyday research and brainstorming.</p>
+</div>
+<div id="more-resources" class="section level1">
+<h1>More Resources</h1>
+<p>For those interested in learning more of traditional error analysis, beyond what I have discussed in this post, I recommend the book <a href="https://www.amazon.com/Introduction-Error-Analysis-Uncertainties-Measurements/dp/093570275X">An Introduction to Error Analysis</a> by John Taylor (one of my favorite Authors and one of my favorite cover photos for any textbook).</p>
+<p>In addition, for those interested more in simulation studies and quantification of uncertainty I would recommend reading a little bit on <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo Simulations</a> and <a href="https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/">Bayesian Statistics</a>.</p>
+</div>
+<div id="code-for-plotting" class="section level1">
+<h1>Code for Plotting</h1>
+<p>Below I give the code I used to create the plots with shaded quantiles.</p>
+<pre class="r"><code>print(plot_error_quantiles)</code></pre>
+<pre><code>## function(d, x.lim=NULL, scales = &quot;free_y&quot;){
+##   cn &lt;- colnames(d)
+##   d &lt;- d %&gt;% 
+##     gather(f, dist)
+##   
+##   
+##   d.summary &lt;- d %&gt;%
+##     group_by(f) %&gt;%
+##     summarize(p2.5 = quantile(dist, p=0.025), 
+##               p25 = quantile(dist, p=0.25),
+##               mean = mean(dist),
+##               p75 = quantile(dist, p=0.75), 
+##               p97.5 = quantile(dist, p=0.975)) %&gt;% 
+##     as.data.frame()
+##   rownames(d.summary) &lt;- d.summary$f
+##   
+##   d.density &lt;- d %&gt;% 
+##     split(.$f) %&gt;% 
+##     map(~with(density(.x$dist), data.frame(x,y))) %&gt;% 
+##     map(as.data.frame) %&gt;% 
+##     bind_rows(.id=&quot;f&quot;)  %&gt;% 
+##     mutate(gt.p25 = x &gt;= d.summary[f,&quot;p25&quot;],
+##            lt.p75 = x &lt;= d.summary[f,&quot;p75&quot;], 
+##            include.25.75 = gt.p25 &amp; lt.p75, 
+##            gt.p2.5 = x &gt;= d.summary[f,&quot;p2.5&quot;],
+##            lt.p97.5 = x &lt;= d.summary[f,&quot;p97.5&quot;], 
+##            include.2.5.97.5 = gt.p2.5 &amp; lt.p97.5) %&gt;% 
+##     mutate(f = factor(f, levels = cn)) 
+##   
+##   
+##  p &lt;- d.density %&gt;%
+##     ggplot(aes(x = x, y= y))+
+##     geom_area(fill=&quot;white&quot;, alpha=0.3, color=&quot;black&quot;) +
+##     geom_area(data = subset(d.density, include.2.5.97.5==TRUE), fill=&quot;#619CFF&quot;, alpha=0.5) +
+##     geom_area(data = subset(d.density, include.25.75==TRUE), fill=&quot;#619CFF&quot;, alpha=0.8) +
+##     facet_grid(f~., scales=scales) +
+##     theme_bw()+
+##     theme(strip.text.y = element_text(angle = 0)) +
+##     ylab(&quot;Density&quot;)+
+##     xlab(&quot;x&quot;)
+##  if (!is.null(x.lim)) p &lt;- p + xlim(x.lim)
+##  p
+## }</code></pre>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/07/08/stochastic-loading-of-microfluidic-droplets/" title="Stochastic Loading of Microfluidic Droplets">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+
