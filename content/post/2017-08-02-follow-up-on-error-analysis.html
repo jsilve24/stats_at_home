@@ -1,0 +1,70 @@
+---
+title: Follow-up on Error Analysis
+author: Justin Silverman
+date: '2017-08-02'
+slug: follow-up-on-error-analysis
+categories: []
+tags:
+  - Made Ridiculously Simple
+description: I wanted to write a quick post responding to a question that we received about our last post (Error Analysis Made Ridiculously Simple). A reader asked us to give some more detailed examples of how to estimate uncertainty/error in more complicated experimental designs. My response in short - "When in doubt, try to collect replicate samples in an appropriate way and try to think of ways to benchmark your measurements against known standards." Beyond this somewhat cryptic answer I will try to give a few examples that should be a little more clear and I will also at the end try to give a few words on accuracy vs. precision which I have in the past found can inspire some ideas. 
+draft: no
+keywords:
+  - key
+  - words
+topics: topic 1
+type: post
+---
+
+<!-- BLOGDOWN-HEAD -->
+<!-- /BLOGDOWN-HEAD -->
+
+<!-- BLOGDOWN-BODY-BEFORE -->
+<!-- /BLOGDOWN-BODY-BEFORE -->
+<p>I wanted to write a quick post responding to a question that we received about our <a href="http://www.statsathome.com/2017/07/21/error-analysis-made-ridiculously-simple/">last post (Error Analysis Made Ridiculously Simple)</a>.</p>
+<blockquote>
+<p>Can you give an example of how to generate an estimate of the error? It’s easy enough when measuring a table, as long as your meter stick is accurate: measure 1,000 times and make an inference. But in a setting where you don’t actually know the true outcome – let’s say you are trying to model household income – I’m not sure how to generate a reasonable guess of the size of the error. I suppose sometimes surveys provide error bands, but I don’t really trust them. The implication would be that they have some estimate of “true” income, which seems implausible. Even the administrative data they might be matching the surveys to is measured with error (e.g. people lie on tax returns, etc.).</p>
+<p>A more concrete example. One of the most important parameters in the field of public economics is the elasticity of taxable income: the degree to which economic units change their taxable income in response to a change in marginal tax rates. Necessary parameter for estimating welfare and revenue effects associated with taxation. However, income is measured with error – by the surveyor and because taxes are functions of annual income so individuals must have working forecasts of their annual income – and the variable of interest, the marginal tax rate people are responding to, is measured with error (by the surveyor through the measurement of income, and the individual through imperfect knowledge of the tax code). Lots of potential for error to swamp estimates.</p>
+<p>But there aren’t great estimates of the amount of error in incomes (ignoring the forecasting bit) and the estimates of the MTR errors are even worse. So I’m not sure how to incorporate an error analysis in this framework.</p>
+<p>Am I also right to infer that this is mainly a problem when you have a relatively small sample, or when the process you are modeling is non-linear? If you have large N and a linear process this seems to be less of a concern?</p>
+<p>At any rate, thanks for the post and I look forward to reading more.</p>
+</blockquote>
+<p>Great question. Unfortunately the answer is that it depends on what you have, what you can measure, or what you care about. When in doubt, try to collect replicate samples in an appropriate way and try to think of ways to benchmark your measurements against known standards. Beyond this somewhat cryptic answer I will try to give a few examples that should be a little more clear and I will also at the end try to give a few words on accuracy vs. precision which I have in the past found can inspire some ideas.</p>
+<div id="the-trivial-example-of-where-to-look" class="section level1">
+<h1>The trivial example of where to look</h1>
+<p>The trivial case. Many scientific instruments actually have reported accuracy/precision information. If it does not come with the instrument then a literature search can likely get you in the right ballpark to estimate these quantities.</p>
+</div>
+<div id="a-note-on-accuracy-vs.precision" class="section level1">
+<h1>A Note on Accuracy vs. Precision</h1>
+<p>I have always really like <a href="http://cdn.antarcticglaciers.org/wp-content/uploads/2013/11/precision_accuracy.png">this image of accuracy vs. precision</a> as I think it does a great job explaining the difference. Essentially, accuracy is how close you are to the true value, precision is how much your measurements cluster together.</p>
+<p>Ideally measurements are accurate and precise, but more often than not in complex systems such as biology or economics they are neither. It is also often much easier to estimate precision and not accuracy. <strong>Often, perhaps inappropriately, it is assumed that measurements are accurate but not precise</strong>. Think about mean zero normally distributed errors which show up all the time in various fields (even in my last post I really just talked about precision, note the distributions don’t have to be centered around your measurement but can be offset based on your estimate of accuracy).</p>
+<p>We can often measure precision by collecting replicate samples of a measurement (multiple measurements where the true value should be the same but is not known). Accuracy can often be estimated by collecting measurements on known references and measuring the deviation from the true value (multiple measurements where the true values are known but are different).</p>
+</div>
+<div id="regarding-your-question-of-sample-size" class="section level1">
+<h1>Regarding your question of sample size</h1>
+<p>The short answer is that this may not be a problem that goes away with larger sample size.</p>
+<p>For example, imagine there is a systematic bias in your measurements (e.g., you measure with low accuracy in some systematic way). With household income you could imagine this may occur in many ways including the high probability that someone who is unemployed may be home to answer the questions of a surveyor but not someone who is employed.</p>
+<p>However, some types of precision issues can get much better if you have a large enough sample size that it essentially acts like you have replicate samples (but be very careful because this is very often not the case).</p>
+</div>
+<div id="less-trivial-examples" class="section level1">
+<h1>Less trivial examples</h1>
+<p>Here I will use your example of household income (please excuse the fact that I know very little about measuring or talking about household income).</p>
+<p>Imagine you are designing a survey to model/measure total household income where you are going to use self-reported data from <span class="math inline">\(2N\)</span> participants that represent <span class="math inline">\(N\)</span> households each of which as 2 family members. As in the example of measuring a table, here you simply want to add the reported total income in each household (e.g., <span class="math inline">\(z = x_1+x_2\)</span>). For simplicity, we may assume that the errors associated with <span class="math inline">\(x_1\)</span> (<span class="math inline">\(\delta x_1\)</span>) and <span class="math inline">\(x_2\)</span> (<span class="math inline">\(\delta x_2\)</span>) are the same (<span class="math inline">\(\delta x_1 = \delta x_2\)</span> = <span class="math inline">\(\delta x\)</span>). Now the question is how to measure or estimate <span class="math inline">\(\delta x\)</span>.</p>
+<div id="design-the-experiment-with-estmation-of-error-in-mind-think-replicates." class="section level2">
+<h2>Design the experiment with estmation of error in mind (think replicates).</h2>
+<p><strong>The best way to estimate noise is to design an experiment with noise in mind.</strong> In this household income example imagine that you polled each person 1 week apart, or a subset of people multiple times. At a 1 week interval perhaps you could make the assumption that most people’s income has not changed and any change in their answer is likely due to measurement noise. By aggregating these differences between responses over all the people you polled multiple times you could get an estimate of the noise in your measurements.</p>
+<p>Of course there are probably tons of issues with the scheme I came up with. For example, I would imagine that there is a subset of people who’s incomes have actually changed in that week or they now have more information so they can better forecast their annual income. Alternatively, that person could simply remember the answer they gave last week and as a result it might be an underestimate of the total noise in your measurements. Even worse, you have now annoyed those individuals you asked for multiple measurements enough that they start giving you false information!</p>
+<p>Now all of this was just a way of measuring precision. You may be able to measure accuracy by sampling from individuals with known revenue (think a public figure who’s information is known; of course this is probably a biased estimate) or think of using reference subjects who are simply there to calibrate a surveyor’s measurements in some way.</p>
+<p>Either way, I obviously cannot claim to be an expert in this type of survey design or economics so I think it would have to come down to experts to decide how such a measurement of noise could be obtained.</p>
+</div>
+<div id="use-subsets-that-exist-in-the-data" class="section level2">
+<h2>Use subsets that exist in the data</h2>
+<p>Slightly modifying the household survey example, lets say someone already did this experiment (without collecting replicates) and asked you to analyze it. What can you do?</p>
+<p>Depending on your problem you could imagine trying to estimate this from the data by being somewhat clever and making some assumptions. For example if your dataset if rich enough, perhaps you could imagine trying to create “pseudo-replicates” (don’t know if that’s a term) by matching individuals based on level of education, age, sex, location, job, etc… and then calculating differences in responses between these groups. Really this is just a type of variance estimate but under certain circumstances (based on what makes sense for your problem) this information can be used to inform how “uncertain” you are in a given result.</p>
+<p>Of course this type of approach is often not as good and really just gets at precision but not really accuracy.</p>
+</div>
+<div id="the-semi-trivial-answer-that-is-acctually-often-the-most-useful-personally" class="section level2">
+<h2>The Semi-trivial answer that is acctually often the most useful personally</h2>
+<p>If all else fails, you can always guess. For example, lets say I will make $10,000 this year and that I made $8,000 last year. At the start of the year you ask me how much I will make this coming year. How accurate do you think I could be? Personally I bet I could get within $2000 with about 75% accuracy. So perhaps you might choose a standard deviation of $1500. But of course there are complications. Lets say I made $80,000 last year and $100,000 this coming year, I probably will have greater uncertainty in the true value (e.g., &gt; $2000 with 75% accuracy). In such a case perhaps you want to instead say that any person could likely get within a <strong>factor</strong> of 0.02 of their true income for the coming year. Rather than using a normal distribution (with additive errors), a log-normal distribution (which reflects such multiplicative errors) can be very useful in such situations.</p>
+<p>You can quickly see that quantifying your uncertainty is somewhat of an art that should be a melding of modeling and domain knowledge.</p>
+</div>
+</div>

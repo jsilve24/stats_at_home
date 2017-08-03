@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Fri, 21 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Follow-up on Error Analysis</title>
+      <link>/2017/08/02/follow-up-on-error-analysis/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/08/02/follow-up-on-error-analysis/</guid>
+      <description>I wanted to write a quick post responding to a question that we received about our last post (Error Analysis Made Ridiculously Simple).
+ Can you give an example of how to generate an estimate of the error? It’s easy enough when measuring a table, as long as your meter stick is accurate: measure 1,000 times and make an inference. But in a setting where you don’t actually know the true outcome – let’s say you are trying to model household income – I’m not sure how to generate a reasonable guess of the size of the error.</description>
+    </item>
     
     <item>
       <title>Error Analysis Made Ridiculously Simple</title>
