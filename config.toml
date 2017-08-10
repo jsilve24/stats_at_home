@@ -1,5 +1,5 @@
 # hostname (and path) to the root eg. http://spf13.com/
-baseurl = "/"
+baseurl = "http://statsathome.com"
 
 # Site title
 title = "Statistics @ Home"
@@ -18,7 +18,7 @@ metaDataFormat = "toml"
 theme = "hyde-y"
 
 # Pagination
-paginate = 10
+paginate = 20
 paginatePath = "page"
 
 # Enable Disqus integration
