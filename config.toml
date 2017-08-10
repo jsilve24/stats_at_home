@@ -18,7 +18,7 @@ metaDataFormat = "toml"
 theme = "hyde-y"
 
 # Pagination
-paginate = 20
+paginate = 10
 paginatePath = "page"
 
 # Enable Disqus integration
