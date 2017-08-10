@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Wed, 09 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/compositional-data-analysis/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building the ILR from the ALR Transform</title>
+      <link>/2017/08/10/building-the-ilr-from-the-alr-transform/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/08/10/building-the-ilr-from-the-alr-transform/</guid>
+      <description>Following up on a recent post on limitations of the ALR and Softmax transforms, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform.
+The ILR transform is just an orthonormal basis in the simplex with respect to the Aitchison metric (which follows naturally from using log-ratios - I will probably have a post explaining this more in the future). We are going to use the Gram-Schmidt orthonomalization process to build an orthonormal basis given a set of vectors which are not orthonormal (the coordinates defined by our ALR transform).</description>
+    </item>
     
     <item>
       <title>We can do better than the ALR or Softmax Transform</title>

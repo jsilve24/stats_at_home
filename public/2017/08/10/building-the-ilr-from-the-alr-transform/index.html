@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Building the ILR from the ALR Transform  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Following up on a recent post on limitations of the ALR and Softmax transforms, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform." />
+
+<meta name="keywords" content="key, words, ">
+
+
+<meta property="og:title" content="Building the ILR from the ALR Transform  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/08/10/building-the-ilr-from-the-alr-transform/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Following up on a recent post on limitations of the ALR and Softmax transforms, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform."/>
+<meta property="og:article:published_time" content="2017-08-10T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-08-10T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="Building the ILR from the ALR Transform" />
+<meta name="twitter:description" content="Following up on a recent post on limitations of the ALR and Softmax transforms, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform." />
+<meta name="twitter:url" content="/2017/08/10/building-the-ilr-from-the-alr-transform/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Building the ILR from the ALR Transform",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-08-10",
+    "description": "Following up on a recent post on limitations of the ALR and Softmax transforms, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform.",
+    "wordCount": 656
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/08/10/building-the-ilr-from-the-alr-transform/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Building the ILR from the ALR Transform
+</h1>
+
+  <div class="metas">
+<time datetime="2017-08-10">10 Aug, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 4 min
+  &middot; (656 Words)
+  <br>
+  
+<a class="label" href="/tags/compositional-data-analysis">Compositional Data Analysis</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>Following up on a <a href="http://www.statsathome.com/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/">recent post on limitations of the ALR and Softmax transforms</a>, I wanted to briefly show how we can derive an Isometric Log-Ratio transform from the Additive Log-Ratio (ALR) transform.</p>
+<p>The ILR transform is just an orthonormal basis in the simplex with respect to the Aitchison metric (which follows naturally from using log-ratios - I will probably have a post explaining this more in the future). We are going to use the <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt orthonomalization</a> process to build an orthonormal basis given a set of vectors which are not orthonormal (the coordinates defined by our ALR transform). This is actually the same approach used when the ILR transform was first described. In particular we will use the <a href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> which is essentially the same as the Gram-Schmidt orthonomalization.</p>
+<p>In order to set up the problem in a manner that allows us to use the QR decomposition we will need to rewrite the ALR in matrix form. <span class="math display">\[alr(\mathbf{x}) = \mathbf{y} = \left(\ln \frac{x_1}{x_D}, \dots, \ln \frac{x_{D-1}}{x_D}\right)\]</span> This can instead by written as a non-linear log-transform and a linear matrix operation as follows: <span class="math display">\[ alr(\mathbf{x}) = \mathbf{y} =  \ln(\mathbf{x})\cdot D =  \ln(\mathbf{x})\cdot\begin{pmatrix} 
+1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 1 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; 1 \\
+-1 &amp; -1 &amp; \cdots &amp; -1
+\end{pmatrix}\]</span></p>
+<p>Where we have introduced the matrix <span class="math inline">\(D\)</span> which represents a linear transformation of the log-transformed data into the log-contrasts defined by our chosen ALR basis (where we have chosen the D-th component as the reference here).</p>
+<p>We can create an orthonormal basis by preforming Gram-Schmidt orthonormalization on <span class="math inline">\(D\)</span>; we will call the result <span class="math inline">\(V\)</span>. The ILR transform can now be written as <span class="math display">\[ilr_V(\mathbf{x}) = \ln(\mathbf{x})\cdot V\]</span> with inverse transform given by <span class="math display">\[ilr_V^{-1}(\mathbf{y}) = \mathcal{C}[exp(\mathbf{y}\cdot V^t)]\]</span> where <span class="math inline">\(\mathcal{C}(\mathbf{a})= \left( \frac{a_1}{\sum_i a_i}, \dots, \frac{a_D}{\sum_i a_i} \right)\)</span> is the closure operation.</p>
+<p><strong>In this form the ILR really looks just like the ALR! We have just done some linear algebra on the matrix <span class="math inline">\(D\)</span> to turn it into the orthonormal basis defined in <span class="math inline">\(V\)</span>!</strong></p>
+<div id="demonstration" class="section level1">
+<h1>Demonstration</h1>
+<p>First load packages:</p>
+<pre class="r"><code>library(compositions) # for plotting ternary diagrams
+library(philr) # to compare to results of previous writeup </code></pre>
+<p>Now defining D and the Gram-Schmidt orthonormalized version of <span class="math inline">\(D\)</span> which we will call <span class="math inline">\(V\)</span>.</p>
+<pre class="r"><code>(D &lt;- rbind(diag(2), -1))</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1
+## [3,]   -1   -1</code></pre>
+<pre class="r"><code>(V &lt;- qr.Q(qr(D))) # The &quot;Contrast Matrix&quot; of the orthogonal basis</code></pre>
+<pre><code>##            [,1]       [,2]
+## [1,] -0.7071068  0.4082483
+## [2,]  0.0000000 -0.8164966
+## [3,]  0.7071068  0.4082483</code></pre>
+<p>Next lets look at the coordinates in the simplex defined by this contrast matrix we created <span class="math inline">\(V\)</span>. That is, lets look at the coordinates of the ILR transform we just created.</p>
+<pre class="r"><code>coords &lt;- as.matrix(rbind(cbind(0, seq(-1, 1, by=0.1)), 
+                          cbind(seq(-1, 1, by=0.1), 0)))
+plot(ilrInv(coords, V))</code></pre>
+<p><img src="/post/2017-08-10-building-the-ilr-from-the-alr-transform_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Now to compare to <a href="http://www.statsathome.com/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/">previous write-up</a>, lets create a circle in one basis (which we will define based on a sequential binary partition) and then transform it into the basis we just created. We should see the same circle suggesting that our created basis (while it was not created with a sequential binary partition) is a valid ILR basis.</p>
+<pre class="r"><code>phy1 &lt;- named_rtree(3)
+t &lt;- seq(0, 2*pi, by = 0.1)
+x &lt;- cos(t)
+y &lt;- sin(t)
+circ1 &lt;- cbind(x, y)
+colnames(circ1) &lt;- c(&quot;n1&quot;, &quot;n2&quot;)
+
+par(mfrow=c(1,2))
+plot(circ1, asp=1)
+plot(unclass(ilr(philrInv(circ1, tree = phy1), V = V)), asp=1)</code></pre>
+<p><img src="/post/2017-08-10-building-the-ilr-from-the-alr-transform_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>As it turns out, what we ended up creating corresponds to a sequential binary partition but this does not necessarily need to be the case. Think of it like this: there are 3 possible sequential binary partitions of 3 variables but there are an infinite number of rotations of a basis defined by a sequential binary partition. Thus there are an infinite number of ILR transformations for 3 variables (each corresponding to a rotation of the orthonormal basis) but only three of those correspond to sequential binary partitions.</p>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/" title="We can do better than the ALR or Softmax Transform">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+

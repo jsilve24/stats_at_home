@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/2017/08/10/building-the-ilr-from-the-alr-transform/</loc>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/</loc>
     <lastmod>2017-08-09T00:00:00+00:00</lastmod>
   </url>
@@ -57,7 +62,7 @@
   
   <url>
     <loc>/tags/compositional-data-analysis/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,7 +74,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -87,25 +92,25 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/topics/topic-1/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/topics/</loc>
-    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
