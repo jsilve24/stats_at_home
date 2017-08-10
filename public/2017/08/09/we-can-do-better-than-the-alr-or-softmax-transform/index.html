@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>We can do better than the ALR or Softmax Transform  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Short post describing one of the key limitations with the additive log-ratio (ALR) transform (which is essentially the same as the softmax transform)." />
+
+<meta name="keywords" content="key, words, ">
+
+
+<meta property="og:title" content="We can do better than the ALR or Softmax Transform  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Short post describing one of the key limitations with the additive log-ratio (ALR) transform (which is essentially the same as the softmax transform)."/>
+<meta property="og:article:published_time" content="2017-08-09T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-08-09T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="We can do better than the ALR or Softmax Transform" />
+<meta name="twitter:description" content="Short post describing one of the key limitations with the additive log-ratio (ALR) transform (which is essentially the same as the softmax transform)." />
+<meta name="twitter:url" content="/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "We can do better than the ALR or Softmax Transform",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-08-09",
+    "description": "Short post describing one of the key limitations with the additive log-ratio (ALR) transform (which is essentially the same as the softmax transform).",
+    "wordCount": 1035
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>We can do better than the ALR or Softmax Transform
+</h1>
+
+  <div class="metas">
+<time datetime="2017-08-09">9 Aug, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 5 min
+  &middot; (1035 Words)
+  <br>
+  
+<a class="label" href="/tags/compositional-data-analysis">Compositional Data Analysis</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>In multiple places in the Compositional Data Analysis literature (for example <a href="http://dugi-doc.udg.edu/bitstream/handle/10256/297/CoDa-book.pdf?sequence=1">here</a> and <a href="http://www.leg.ufpr.br/lib/exe/fetch.php/pessoais:abtmartins:a_concise_guide_to_compositional_data_analysis.pdf">here</a>) people refer to the Additive Log-Ratio transform (ALR) as “not preserving metric concepts”. But what exactly does this mean and how can we visualize this problem?</p>
+<p>Here I am going to briefly describe how this problem can be seen with the ALR transform and then show how the Isometric Log-Ratio (ILR) transform does not have this problem.</p>
+<p><strong>Note 1:</strong> The ALR transform is just a <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax transform</a> that decreases the dimension of the transformed space by 1. The softmax transform has 1 too many dimensions compared to the dimensions of information in the simplex.</p>
+<p><strong>Note 2:</strong> I just want to be clear: I often find the ALR transform very useful for data analysis (its not all bad). That said, I do think it is essential to understand its limitations.</p>
+<div id="the-alr-transform" class="section level1">
+<h1>The ALR Transform</h1>
+<p>Assuming we take the D-th component of a composition as reference, the ALR transform is given by <span class="math display">\[alr(\mathbf{x}) = \mathbf{y} = \left(\ln \frac{x_1}{x_D}, \dots, \ln \frac{x_{D-1}}{x_D}\right)\]</span></p>
+<p>The inverse operation is given by <span class="math display">\[alr^{-1}(\mathbf{y}) = \left( \frac{e^{y_1}}{\sum_ie^{y_i}+1}, \dots, \frac{e^{y_{D-1}}}{\sum_ie^{y_i}+1},  \frac{1}{\sum_ie^{y_i}+1}\right)\]</span></p>
+<p>I am going to write a few functions for the ALR and inverse ALR transforms using an arbitrary reference for the transform (e.g., allowing us to use something other than the <span class="math inline">\(D\)</span>-th component as the reference; the code may not be the most elegant but it works).</p>
+<pre class="r"><code>alr &lt;- function(x, col){
+  if (is.vector(x)) x &lt;- matrix(x, 1, length(x))
+  D &lt;- ncol(x)
+  col=D
+  return(log(t(apply(x, 1, function(a)  a[-col]/a[col]))))
+}
+
+alr.inv &lt;- function(y, col){
+  if (is.vector(y)) y &lt;- matrix(y, 1, length(y))
+  D &lt;- ncol(y)
+  y &lt;- exp(y)
+  if (col==(D+1)){
+    y &lt;- cbind(y, 1)
+  } else if (col==1){
+    y &lt;- cbind(1, y)
+  } else if (col &lt;= D) {
+    y &lt;- cbind(y[,1:(col-1),drop=F], 1, y[,col:D, drop=F])  
+  } 
+  return(y/rowSums(y))
+}</code></pre>
+<p>Now I am going to parameterize a circle in one ALR coordinate system and transform it to another ALR coordinate system, we will see that the circle has been warped.</p>
+<pre class="r"><code>t &lt;- seq(0, 2*pi, by = 0.1)
+x &lt;- cos(t)
+y &lt;- sin(t)
+circ &lt;- cbind(x, y)
+
+par(mfrow=c(1,2))
+plot(circ, asp=1) # Plot the circle in one ALR coordinate system
+plot(alr(alr.inv(circ, 2),3), asp=1) # Plot in a transormed ALR coordinate system. </code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Just to drive the point home, lets look at how distances (as computed by euclidean distances in the transformed space) have changed between these two ALR transforms.</p>
+<pre class="r"><code>max(dist(circ)) # Max distance between datapoints in original </code></pre>
+<pre><code>## [1] 1.999568</code></pre>
+<pre class="r"><code>max(dist(alr(alr.inv(circ, 2),3))) # in other alr coordinate system</code></pre>
+<pre><code>## [1] 3.234656</code></pre>
+</div>
+<div id="why-does-this-happen" class="section level1">
+<h1>Why does this happen?</h1>
+<p>The ALR transform corresponds to an oblique coordinate system in the simplex (it is not a basis). More specifically we may say it is oblique with respect to a consistent metric in the simplex (the Aitchison metric).</p>
+<p>So lets look at the coordinates induced by the two ALR transforms we just used.</p>
+<pre class="r"><code>library(compositions)
+coords &lt;- as.matrix(rbind(cbind(0, seq(-1, 1, by=0.1)), 
+                          cbind(seq(-1, 1, by=0.1), 0)))
+par(mfrow=c(1,2))
+plot(acomp(alr.inv(coords, 2))) # One ALR
+plot(acomp(alr.inv(coords, 3))) # The Other ALR</code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Unfortunately, it can be difficult to build much intuition by looking at these simplex plots. Lets instead look at the coordinates of one ALR transform in terms of the other ALR coordinates</p>
+<pre class="r"><code>plot(alr(alr.inv(coords, 2),3), asp=1) </code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>In this form I think it drives home what we mean by “oblique” coordinates, they are not orthogonal (nor do they have unit length so they do not represent an “orthonormal basis”). A careful observer will also notice that the spacing between the points is different for the two coordinates (it is not just a rotation of two lines intersecting at an oblique angle).</p>
+</div>
+<div id="this-does-not-happen-for-ilrphilr-transforms" class="section level1">
+<h1>This does not happen for ILR/PhILR transforms</h1>
+<p>While I am not going into much detail about the ILR transform I will just demonstrate that this transform does not have these problems. <a href="https://link.springer.com/article/10.1023/A:1023818214614">More details on the ILR transform can be found here.</a> I also use the term PhILR and ILR interchangeably even though the PhILR transform is really just a special case of the ILR transform when the basis is built from a phylogenetic tree. <a href="https://elifesciences.org/articles/21887">I introduced this name in a recent paper.</a> The crucial point I am trying to make is that we can do better than the ALR/Softmax transform.</p>
+<pre class="r"><code>library(philr) # Package for building ILR from phylogenetic tree</code></pre>
+<p>We can create two different ILR transforms by using two separate sequential binary partitions (we are going to use two random phylogenetic trees).</p>
+<pre class="r"><code>phy1 &lt;- named_rtree(3)
+phy2 &lt;- named_rtree(3)
+
+t &lt;- seq(0, 2*pi, by = 0.1)
+x &lt;- cos(t)
+y &lt;- sin(t)
+circ1 &lt;- cbind(x, y)
+colnames(circ1) &lt;- c(&quot;n1&quot;, &quot;n2&quot;)
+circ2 &lt;- philr(philrInv(circ1, tree = phy1), tree=phy2)</code></pre>
+<pre><code>## Building Sequential Binary Partition from Tree...</code></pre>
+<pre><code>## Building Contrast Matrix...</code></pre>
+<pre><code>## Transforming the Data...</code></pre>
+<pre><code>## Calculating ILR Weights...</code></pre>
+<pre class="r"><code>par(mfrow=c(1,2))
+plot(circ1, asp = 1)
+plot(circ2, asp = 1)</code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>max(dist(circ1)) # Max distance between datapoints in original </code></pre>
+<pre><code>## [1] 1.999568</code></pre>
+<pre class="r"><code>max(dist(circ2)) # with respect to other philr transform </code></pre>
+<pre><code>## [1] 1.999568</code></pre>
+<p>Thus we see that in two different ILR bases we get the identical representation of shapes. We also see that distances with respect to the Euclidean metric are respected between different transforms. Now we can look at how this transform looks in the simplex and again when we view one ILR coordinate system in another.</p>
+<pre class="r"><code>coords &lt;- as.matrix(rbind(cbind(0, seq(-1, 1, by=0.1)), 
+                          cbind(seq(-1, 1, by=0.1), 0)))
+colnames(coords) &lt;- c(&quot;n1&quot;, &quot;n2&quot;)
+par(mfrow=c(1,2))
+plot(acomp(philrInv(coords, tree=phy1)[,c(&quot;t1&quot;, &quot;t2&quot;, &quot;t3&quot;)]))
+plot(acomp(philrInv(coords, tree=phy2)[,c(&quot;t1&quot;, &quot;t2&quot;, &quot;t3&quot;)]))</code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Thus we see that two different ILR bases are just rotations of each other. But what is more important is what one coordinate system looks like with respect to another.</p>
+<pre class="r"><code>plot(philr(philrInv(coords, tree=phy2), tree=phy1), asp=1)</code></pre>
+<pre><code>## Building Sequential Binary Partition from Tree...</code></pre>
+<pre><code>## Building Contrast Matrix...</code></pre>
+<pre><code>## Transforming the Data...</code></pre>
+<pre><code>## Calculating ILR Weights...</code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>We see that one ILR basis is just a rotation of the other that maintains the orthogonality of the coordinate system. (Actually the ILR transform represents an orthonormal basis in the simplex with respect to the Aitchison metric).</p>
+</div>
+<div id="final-note-on-centered-log-ratio-clr-transform" class="section level1">
+<h1>Final Note on Centered Log Ratio (CLR) Transform</h1>
+<p>As a final point I just wanted to show what the coordinates of the CLR transform look like in the simplex (to help build intuition for interested readers).</p>
+<pre class="r"><code>coords &lt;- as.matrix(rbind(cbind(0, 0, seq(-1, 1, by=0.1)),
+                          cbind(0, seq(-1, 1, by=0.1), 0),
+                          cbind(seq(-1, 1, by=0.1), 0, 0)))
+plot(clrInv(coords))</code></pre>
+<p><img src="/post/2017-08-09-we-can-do-better-than-the-alr-or-softmax-transform_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/08/02/follow-up-on-error-analysis/" title="Follow-up on Error Analysis">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+

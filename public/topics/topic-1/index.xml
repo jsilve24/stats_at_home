@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Wed, 02 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/topics/topic-1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>We can do better than the ALR or Softmax Transform</title>
+      <link>/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/</link>
+      <pubDate>Wed, 09 Aug 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/08/09/we-can-do-better-than-the-alr-or-softmax-transform/</guid>
+      <description>In multiple places in the Compositional Data Analysis literature (for example here and here) people refer to the Additive Log-Ratio transform (ALR) as “not preserving metric concepts”. But what exactly does this mean and how can we visualize this problem?
+Here I am going to briefly describe how this problem can be seen with the ALR transform and then show how the Isometric Log-Ratio (ILR) transform does not have this problem.</description>
+    </item>
     
     <item>
       <title>Follow-up on Error Analysis</title>
