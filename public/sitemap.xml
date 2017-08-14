@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/2017/08/13/a-new-functional-clustering-algorithm/</loc>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/08/10/building-the-ilr-from-the-alr-transform/</loc>
     <lastmod>2017-08-10T00:00:00+00:00</lastmod>
   </url>
@@ -67,6 +72,12 @@
   </url>
   
   <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/made-ridiculously-simple/</loc>
     <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -74,13 +85,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -92,7 +103,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,13 +115,13 @@
   
   <url>
     <loc>/topics/topic-1/</loc>
-    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/topics/</loc>
-    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

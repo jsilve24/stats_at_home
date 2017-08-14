@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>A New(?) Functional Clustering Algorithm  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions." />
+
+<meta name="keywords" content="key, words, ">
+
+
+<meta property="og:title" content="A New(?) Functional Clustering Algorithm  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/08/13/a-new-functional-clustering-algorithm/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions."/>
+<meta property="og:article:published_time" content="2017-08-13T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-08-13T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="A New(?) Functional Clustering Algorithm" />
+<meta name="twitter:description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions." />
+<meta name="twitter:url" content="/2017/08/13/a-new-functional-clustering-algorithm/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "A New(?) Functional Clustering Algorithm",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-08-13",
+    "description": "In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions.",
+    "wordCount": 1692
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/08/13/a-new-functional-clustering-algorithm/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>A New(?) Functional Clustering Algorithm
+</h1>
+
+  <div class="metas">
+<time datetime="2017-08-13">13 Aug, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 8 min
+  &middot; (1692 Words)
+  <br>
+  
+<a class="label" href="/tags/r">R</a>
+
+<a class="label" href="/tags/machine-learning">Machine Learning</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <div id="TOC">
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#my-solution---hybrid-k-meanslinear-regression-with-transformation">My Solution - Hybrid K-Means/Linear-Regression with Transformation</a></li>
+<li><a href="#starting-on-boring-simulated-data">Starting on Boring Simulated Data</a></li>
+<li><a href="#now-a-more-interesting-simulated-dataset">Now a more interesting simulated dataset</a></li>
+<li><a href="#more-realistic-presense-of-observational-noise">More realistic, presense of observational noise</a></li>
+<li><a href="#conclusions-and-future-directions">Conclusions and future directions</a></li>
+</ul>
+</div>
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>I am a fan of the <a href="https://stackexchange.com/">Stack Exchange forums</a> in particular I like <a href="https://stats.stackexchange.com/">Cross Validated</a> and <a href="https://stackoverflow.com/">Stack Overflow</a>. An <a href="https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745">interesting question regarding functional clustering</a> was posted recently. Essentially someone had the following dataset.</p>
+<pre class="r"><code>plot(Retirees)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Essentially the poster wanted a way of clustering the observations into the “lines” that are fairly easy to observe in the data. I am going to ignore the fact that these lines are actually the result of artifact (e.g., conversion of discrete values to percentages and then plotting the percentages vs. a variable used to calculate the percentages) and just pretend they are real as I think its still an interesting problem. I am actually going to simulate some non-artifactual data and use this as well.</p>
+<p>Not too surprisingly, the poster stated that K-means clustering had not preformed too well.</p>
+<pre class="r"><code># Function to enable easier plotting of the results.
+plot_groupings &lt;- function(d, g, col=rainbow(length(unique(g))), 
+                           plot.lines=TRUE, point.color=FALSE, ...){
+  K &lt;- length(unique(g))
+  if (point.color) {
+    plot(d, col=g, ...)}
+  else {
+    plot(d, ...)
+  }
+  if (plot.lines){
+    for (i in 1:K){
+      d.local &lt;- d[g == i,]
+      d.local &lt;- d.local[order(d.local[,1]), ]
+      lines(d.local, col = col[i], lwd=2)
+    }
+  }
+}
+
+kmean.clusters &lt;- kmeans(Retirees, 10, nstart=20)
+plot_groupings(Retirees, kmean.clusters$cluster)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We see that this is fairly obviously not capturing the functional pattern that is readily apparent by eye.</p>
+</div>
+<div id="my-solution---hybrid-k-meanslinear-regression-with-transformation" class="section level1">
+<h1>My Solution - Hybrid K-Means/Linear-Regression with Transformation</h1>
+<p>My Solution ended up being an approach to functional clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work.</p>
+<p>Like K-Means the algorithm is based off of iterative calculation of group parameters and then assignment of observations to the “nearest” group. Unlike K-means instead of just calculating the mean, I am actually calculating a regression for each group. And instead of calculating distance to the nearest group mean, I am turning the squared residuals into a probability and then using a sampling step to assign the observation to groups based on that probability. Importantly, this sampling step is one component of the algorithm that helps prevent it from getting stuck in local-optima. The other component that helps avoid local optima is that I run the algorithm from multiple starting points (multiple “units”) in parallel, for each iteration I take the “unit” that is doing the worst (based on sum of squared residuals) and replace it with the “unit” that is doing the best.</p>
+<p>I have also made heavy use of the <code>purrr::map</code> function and the <code>lm.fit</code> (rather than normal <code>lm</code>) function for speed. I find that the algorithm works pretty well and surprisingly quickly.</p>
+</div>
+<div id="starting-on-boring-simulated-data" class="section level1">
+<h1>Starting on Boring Simulated Data</h1>
+<p>To start off I will simulate some data similar to the data provided by the user.</p>
+<pre class="r"><code>library(tidyverse)
+set.seed(4)
+
+lambda &lt;- seq(0.01, .1, by=0.01)
+x &lt;- 5:100
+pars &lt;- expand.grid(&quot;lambda&quot; = lambda, &quot;x&quot; = x)
+dat &lt;- cbind(pars$x, exp(-pars$lambda*pars$x))</code></pre>
+<p>In answering the user’s question I also suggested a log-transformation (if the patterns were not purely artifactual).</p>
+<pre class="r"><code>dat.log &lt;- cbind(dat[,1], log(dat[,2]))
+
+par(mfrow=c(1,2))
+plot(dat, main=&quot;Original&quot;)
+plot(dat.log, main=&quot;Log-transformed&quot;)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p>Next I implement the actual Regression-K-Means Algorithm.</p>
+<pre class="r"><code># Function to convert vector/matrix to probabilities (e.g., normalize to 1)
+miniclo &lt;- function (c){
+  if (is.vector(c)) 
+    c &lt;- matrix(c, nrow = 1)
+  (c/rowSums(c)) 
+}
+
+# The Main Function
+# K: Number of Clusters
+# n.unit: Number of parallel optimizations to run
+# n.iter: Number of iterations to run the optimization for
+# warmup.frac: what portion of iterations could be warmup (added stocastic varition to
+#   escape local optima)
+func_cluster &lt;- function(dat, K, n.unit=4, n.iter=100, warmup.frac=0.9){
+  # Create Design Matrix and Response
+  X &lt;- as.matrix(cbind(1, dat[,1])) # Design matrix, add intercept
+  Y &lt;- dat[,2] # Responses
+  n &lt;- nrow(X) # Number of observations
+  
+  # Random Initialize the group assignments. 
+  gs &lt;- as.list(1:n.unit) %&gt;% 
+    map(~sample(1:K, size = nrow(dat), replace = TRUE)) 
+  
+  # Create a safe version that deals with degeneration that can occur in some units 
+  # code will allow this to be fixed. 
+  safe_lm &lt;- safely(function(i, X, Y) lm.fit(X[i,], Y[i]))
+  
+  for (i in 1:n.iter) {
+    # Start out by fitting linear regressons to each group
+    fits &lt;- gs %&gt;% 
+      map(~split(1:n, .x)) %&gt;% 
+      #at_depth(2, ~lm.fit(X[.x,], Y[.x])) # Fit models
+      at_depth(2, safe_lm, X, Y) %&gt;% 
+      at_depth(2, &quot;result&quot;)
+    
+    # Replace Nulls with Best non-null from last iteration
+    nulls &lt;- fits %&gt;% 
+      at_depth(2, is.null) %&gt;% 
+      map(unlist) %&gt;% 
+      map(any) %&gt;% 
+      unlist()
+    
+    if (any(nulls)){
+      d &lt;- rank(best.worst.store, ties.method=&quot;random&quot;)
+      d &lt;- which(d==min(d[!nulls]))
+      fits[nulls] &lt;- fits[d[rep(1, sum(nulls))]]
+    }
+    
+    # Calculate the squared residuals of each data-point to each
+    # groups fitted linear model. Note I also add a small value (0.0001)
+    # to avoid zero values that can show up later when converting to probabilities
+    # and inverting. 
+    sq.resids &lt;- fits %&gt;% 
+      at_depth(2, &quot;coefficients&quot;) %&gt;% # Extract Coefficients
+      at_depth(2, ~((Y-X%*%.x)^2)+0.0001) %&gt;%  # Predict and Compute Squared Residuals
+      map(bind_cols)
+    
+    ncolumns &lt;- map(sq.resids, ncol)
+    nulls &lt;- ncolumns &lt; K
+    if (any(nulls)){
+      d &lt;- rank(best.worst.store, ties.method=&quot;random&quot;)
+      d &lt;- which(d==min(d[!nulls]))
+      sq.resids[nulls] &lt;- sq.resids[d[rep(1, sum(nulls))]]
+    }    
+
+    # Store which &quot;unit&quot; which of the n.unit optimiztions did the 
+    # best and which did the worst
+    best.worst.store &lt;- sq.resids %&gt;% 
+      map(sum) %&gt;% 
+      unlist()
+    best.worst &lt;- c(which.min(best.worst.store), which.max(best.worst.store))
+  
+    # Compute new group assignements, notice I convert the relative
+    # squared residual of each model into a probability and then use the 
+    # inverse of this probability as the probability that a data-point
+    # belongs to that group
+     new.gs &lt;- sq.resids  %&gt;% 
+      map(as.matrix) %&gt;% 
+      map(miniclo)  %&gt;% # Add small value to fix zeros
+      map(~.x^(-1)) %&gt;% 
+      map(miniclo)
+    if (i &lt; round(n.iter*warmup.frac)){ # Warmup with extra stochastic variation to get out of local-optima
+      new.gs &lt;- new.gs %&gt;% 
+      map(~apply(.x, 1, function(x) sample(1:K, 1, replace = TRUE, prob = x))) # Add sampling to get over some minima
+    } else { # just take maxima
+      new.gs &lt;- new.gs %&gt;% 
+      map(max.col, ties.method=&quot;random&quot;) # Add sampling to get over some minima
+    }
+    
+  
+    # Replace the worst unit with the best
+    new.gs[[best.worst[2]]] &lt;- new.gs[[best.worst[1]]]
+  
+    # Update the cluster assignemnts for each unit
+    gs &lt;- new.gs
+  }
+  return(gs[[best.worst[1]]])
+}
+
+
+
+# Now investigate results of best unit and plot 
+best.g &lt;- func_cluster(dat.log, K=10, n.iter=200)
+par(mfrow=c(1,2))
+plot_groupings(dat.log, best.g, main=&quot;Log Transformed Results&quot;)
+plot_groupings(dat, best.g, main=&quot;Results on Original Scale&quot;)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
+<p>As you can see, the algorithm does quite well and in this case nearly all points are classified correctly (it actually improves if <code>n.iter</code> and <code>n.unit</code> are increased).</p>
+<p>Finally I applied it to the data provided by the poster. I transformed both the X and Y axis to linearize the data. I could have also used a non-linear function rather than a linear one but this seemed easier.</p>
+<pre class="r"><code>dat &lt;- Retirees 
+dat.log &lt;- cbind(log(dat[,1]), log(dat[,2]/100))
+
+best.g &lt;- func_cluster(dat.log, K=10, n.iter=200)
+par(mfrow=c(1,2))
+plot_groupings(dat.log, best.g, main=&quot;Log Transformed Results&quot;)
+plot_groupings(dat, best.g, main=&quot;Reesults on Original Scale&quot;)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p>Its not perfect (again, it actually improves with more iterations) but it is definitely doing a ton better than regular K-Means we tried originally.</p>
+</div>
+<div id="now-a-more-interesting-simulated-dataset" class="section level1">
+<h1>Now a more interesting simulated dataset</h1>
+<p>About 7 years ago I did some work with a very smart friend on some image analysis algorithms for detecting linear segments in images. This recent problem of functional clustering actually made me want to simulate this problem again and try it out.</p>
+<pre class="r"><code>limits &lt;- as.list(1:10) %&gt;%
+  map(~c(rnorm(1, -75, 25), rnorm(1, 75, 25))) %&gt;% 
+  map(~.x[order(.x)]) %&gt;% 
+  map(~seq(.x[1], .x[2], length.out=25))
+
+dat &lt;- rnorm(10, 0, 5) %&gt;% 
+  as.list() %&gt;% 
+  map2(limits, ~.x*.y+rnorm(1, 0, 500)) %&gt;% 
+  map2(limits, ~cbind(&quot;y&quot; = .x, &quot;x&quot; = .y)) %&gt;% # Sorry about the swapping of x and y here (can&#39;t change purrr)
+  map(as.data.frame) %&gt;% 
+  bind_rows(.id=&quot;group&quot;) %&gt;% 
+  mutate(group = factor(group, as.character(1:10))) 
+
+# Now try to cluster (without knowing true groupings)
+dat.run &lt;- as.matrix(dat[,c(3,2)])
+best.g &lt;- func_cluster(dat.run, K=10, n.iter=250, n.unit=6)
+
+
+par(mfrow=c(1,2))
+plot_groupings(dat.run, best.g, plot.lines = F, point.color = F, main=&quot;True&quot;)
+plot_groupings(dat[,c(&quot;x&quot;, &quot;y&quot;)], dat$group, main=&quot;My Algorithms Results&quot;)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+</div>
+<div id="more-realistic-presense-of-observational-noise" class="section level1">
+<h1>More realistic, presense of observational noise</h1>
+<p>Lets also see how well it works in the presence of some added noise.</p>
+<pre class="r"><code>limits &lt;- as.list(1:6) %&gt;%
+  map(~c(rnorm(1, -75, 25), rnorm(1, 75, 25))) %&gt;% 
+  map(~.x[order(.x)]) %&gt;% 
+  map(~seq(.x[1], .x[2], length.out=25))
+
+dat &lt;- rnorm(6, 0, 5) %&gt;% 
+  as.list() %&gt;% 
+  map2(limits, ~.x*.y+rnorm(1, 0, 500)) %&gt;% 
+  map2(limits, ~cbind(&quot;y&quot; = .x, &quot;x&quot; = .y)) %&gt;% # Sorry about the swapping of x and y here (can&#39;t change purrr)
+  map(as.data.frame) %&gt;% 
+  bind_rows(.id=&quot;group&quot;) %&gt;% 
+  mutate(group = factor(group, as.character(1:10))) %&gt;% 
+  mutate(y = y + rnorm(nrow(.), 0, 40)) # Add gaussian observation noise to dependent variable
+
+# Now to cluster without knowing true groupings. 
+dat.run &lt;- as.matrix(dat[,c(3,2)])
+
+best.g &lt;- func_cluster(dat.run, K=6, n.iter=500, n.unit=6)
+
+# Finally K-Means and DBSCAN as a point of comparison
+library(dbscan)
+kmean.clusters &lt;- kmeans(dat.run, 10, nstart=20)
+db &lt;- dbscan(dat.run, eps = 30, minPts = 2)
+
+par(mfrow=c(3,2))
+plot_groupings(dat.run, dat$group, plot.lines=F, point.color=F, main=&quot;Data Seen by Classifiers&quot;)
+plot.new()
+plot_groupings(dat.run, dat$group, main=&quot;True&quot;)
+plot_groupings(dat.run, best.g, plot.lines = T, point.color = F, main=&quot;My Algorithms Results&quot;)
+
+plot_groupings(dat.run, kmean.clusters$cluster, main=&quot;K-Means&quot;)
+plot_groupings(dat.run, db$cluster, main=&quot;DBSCAN&quot;)</code></pre>
+<p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
+</div>
+<div id="conclusions-and-future-directions" class="section level1">
+<h1>Conclusions and future directions</h1>
+<p>So it looks to me like it is actually doing pretty darn well (note that differences in the the color of the lines between the True and Computed results doesn’t matter, only that points in the same cluster are given the same color). It’s beating K-Means and DBSCAN at least. I am particularly happy because for a number of these lines I couldn’t visually pick out those groups if I hadn’t colored the true values in the prior plot.</p>
+<p>I think that this approach, of using residuals (or even more generally an arbitrary loss-function) as a means of doing k-means clustering is quite general and would work for other models (not just linear models, or for other linear models with more complex features). I would be interested to know if this has been done before (I would be shocked if I am really inventing something new here). Another idea would be to more to non-parametrics models that might have some more interesting properties (more on that to come if I have time).</p>
+<p>I will probably do a literature review in the next few days to see if something like this already exists. If you know about something similar please let me know.</p>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/08/10/building-the-ilr-from-the-alr-transform/" title="Building the ILR from the ALR Transform">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+

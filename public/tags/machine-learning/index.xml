@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Statistics @ Home</title>
+    <link>/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Statistics @ Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
+    <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
+    <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
+    <lastBuildDate>Sun, 13 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A New(?) Functional Clustering Algorithm</title>
+      <link>/2017/08/13/a-new-functional-clustering-algorithm/</link>
+      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/08/13/a-new-functional-clustering-algorithm/</guid>
+      <description>Motivation My Solution - Hybrid K-Means/Linear-Regression with Transformation Starting on Boring Simulated Data Now a more interesting simulated dataset More realistic, presense of observational noise Conclusions and future directions   Motivation I am a fan of the Stack Exchange forums in particular I like Cross Validated and Stack Overflow. An interesting question regarding functional clustering was posted recently. Essentially someone had the following dataset.
+plot(Retirees) Essentially the poster wanted a way of clustering the observations into the “lines” that are fairly easy to observe in the data.</description>
+    </item>
+    
+  </channel>
+</rss>

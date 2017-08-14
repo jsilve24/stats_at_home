@@ -1,0 +1,387 @@
+---
+title: A New(?) Functional Clustering Algorithm
+author: Justin Silverman
+date: '2017-08-13'
+slug: a-new-functional-clustering-algorithm
+categories: []
+tags:
+  - R
+  - Machine Learning
+description: In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions. 
+
+draft: no
+keywords:
+  - key
+  - words
+topics: topic 1
+type: post
+
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+---
+
+# Motivation
+I am a fan of the [Stack Exchange forums](https://stackexchange.com/) in particular I like [Cross Validated](https://stats.stackexchange.com/) and [Stack Overflow](https://stackoverflow.com/). An [interesting question regarding functional clustering](https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745) was posted recently. Essentially someone had the following dataset. 
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+Retirees<- data.frame(No_Races = c(11L, 11L, 21L, 12L, 15L, 10L, 23L, 13L, 19L, 11L, 22L, 14L, 
+                                   17L, 33L, 12L, 45L, 15L, 55L, 22L, 41L, 19L, 16L, 13L, 26L, 23L, 
+                                   10L, 20L, 44L, 17L, 14L, 21L, 28L, 18L, 11L, 22L, 37L, 26L, 30L, 
+                                   15L, 23L, 31L, 47L, 12L, 20L, 16L, 36L, 37L, 29L, 21L, 17L, 68L, 
+                                   56L, 13L, 22L, 27L, 18L, 23L, 14L, 28L, 19L, 24L, 10L, 15L, 20L, 
+                                   35L, 25L, 36L, 31L, 26L, 21L, 37L, 16L, 32L, 27L, 11L, 22L, 33L, 
+                                   28L, 17L, 40L, 23L, 35L, 53L, 65L, 12L, 18L, 30L, 66L, 24L, 36L, 
+                                   48L, 49L, 25L, 63L, 19L, 38L, 32L, 45L, 13L, 26L, 78L, 39L, 52L, 
+                                   46L, 33L, 20L, 60L, 27L, 34L, 41L, 69L, 14L, 21L, 42L, 28L, 35L, 
+                                   57L, 50L, 36L, 29L, 22L, 81L, 37L, 15L, 38L, 23L, 46L, 31L, 48L, 
+                                   16L, 24L, 32L, 57L, 49L, 41L, 33L, 25L, 42L, 17L, 34L, 26L, 35L, 
+                                   18L, 27L, 54L, 45L, 37L, 28L, 47L, 19L, 57L, 29L, 39L, 10L, 20L, 
+                                   30L, 40L, 41L, 31L, 21L, 42L, 32L, 54L, 11L, 22L, 33L, 44L, 66L, 
+                                   67L, 45L, 34L, 23L, 69L, 46L, 35L, 47L, 59L, 71L, 36L, 12L, 24L, 
+                                   60L, 61L, 37L, 25L, 38L, 51L, 64L, 13L, 39L, 26L, 53L, 80L, 67L, 
+                                   27L, 68L, 55L, 14L, 42L, 28L, 43L, 58L, 29L, 44L, 74L, 15L, 45L, 
+                                   30L, 46L, 31L, 47L, 79L, 16L, 32L, 48L, 49L, 33L, 50L, 17L, 34L, 
+                                   52L, 35L, 53L, 18L, 72L, 36L, 54L, 37L, 56L, 19L, 38L, 39L, 20L, 
+                                   40L, 61L, 41L, 83L, 21L, 42L, 43L, 65L, 87L, 22L, 45L, 23L, 46L, 
+                                   93L, 47L, 71L, 24L, 72L, 49L, 25L, 100L, 51L, 26L, 52L, 27L, 
+                                   54L, 28L, 85L, 57L, 29L, 59L, 30L, 31L, 32L, 96L, 65L, 33L, 67L, 
+                                   34L, 35L, 36L, 37L, 74L, 38L, 77L, 39L, 40L, 41L, 42L, 43L, 44L, 
+                                   45L, 46L, 47L, 48L, 49L, 50L, 51L, 52L, 53L, 54L, 55L, 56L, 59L, 
+                                   60L, 61L, 62L, 64L, 65L, 68L, 69L, 71L, 73L, 77L, 82L, 83L, 92L, 
+                                   98L), 
+                      Perc_Retired = c(54.5454545454545, 45.4545454545455, 42.8571428571429, 41.6666666666667, 
+                                       40, 40, 39.1304347826087, 38.4615384615385, 36.8421052631579, 
+                                       36.3636363636364, 36.3636363636364, 35.7142857142857, 35.2941176470588, 
+                                       33.3333333333333, 33.3333333333333, 33.3333333333333, 33.3333333333333, 
+                                       32.7272727272727, 31.8181818181818, 31.7073170731707, 31.5789473684211, 
+                                       31.25, 30.7692307692308, 30.7692307692308, 30.4347826086957, 
+                                       30, 30, 29.5454545454545, 29.4117647058824, 28.5714285714286, 
+                                       28.5714285714286, 28.5714285714286, 27.7777777777778, 27.2727272727273, 
+                                       27.2727272727273, 27.027027027027, 26.9230769230769, 26.6666666666667, 
+                                       26.6666666666667, 26.0869565217391, 25.8064516129032, 25.531914893617, 
+                                       25, 25, 25, 25, 24.3243243243243, 24.1379310344828, 23.8095238095238, 
+                                       23.5294117647059, 23.5294117647059, 23.2142857142857, 23.0769230769231, 
+                                       22.7272727272727, 22.2222222222222, 22.2222222222222, 21.7391304347826, 
+                                       21.4285714285714, 21.4285714285714, 21.0526315789474, 20.8333333333333, 
+                                       20, 20, 20, 20, 20, 19.4444444444444, 19.3548387096774, 19.2307692307692, 
+                                       19.047619047619, 18.9189189189189, 18.75, 18.75, 18.5185185185185, 
+                                       18.1818181818182, 18.1818181818182, 18.1818181818182, 17.8571428571429, 
+                                       17.6470588235294, 17.5, 17.3913043478261, 17.1428571428571, 16.9811320754717, 
+                                       16.9230769230769, 16.6666666666667, 16.6666666666667, 16.6666666666667, 
+                                       16.6666666666667, 16.6666666666667, 16.6666666666667, 16.6666666666667, 
+                                       16.3265306122449, 16, 15.8730158730159, 15.7894736842105, 15.7894736842105, 
+                                       15.625, 15.5555555555556, 15.3846153846154, 15.3846153846154, 
+                                       15.3846153846154, 15.3846153846154, 15.3846153846154, 15.2173913043478, 
+                                       15.1515151515152, 15, 15, 14.8148148148148, 14.7058823529412, 
+                                       14.6341463414634, 14.4927536231884, 14.2857142857143, 14.2857142857143, 
+                                       14.2857142857143, 14.2857142857143, 14.2857142857143, 14.0350877192982, 
+                                       14, 13.8888888888889, 13.7931034482759, 13.6363636363636, 13.5802469135802, 
+                                       13.5135135135135, 13.3333333333333, 13.1578947368421, 13.0434782608696, 
+                                       13.0434782608696, 12.9032258064516, 12.5, 12.5, 12.5, 12.5, 12.280701754386, 
+                                       12.2448979591837, 12.1951219512195, 12.1212121212121, 12, 11.9047619047619, 
+                                       11.7647058823529, 11.7647058823529, 11.5384615384615, 11.4285714285714, 
+                                       11.1111111111111, 11.1111111111111, 11.1111111111111, 11.1111111111111, 
+                                       10.8108108108108, 10.7142857142857, 10.6382978723404, 10.5263157894737, 
+                                       10.5263157894737, 10.3448275862069, 10.2564102564103, 10, 10, 
+                                       10, 10, 9.75609756097561, 9.67741935483871, 9.52380952380952, 
+                                       9.52380952380952, 9.375, 9.25925925925926, 9.09090909090909, 
+                                       9.09090909090909, 9.09090909090909, 9.09090909090909, 9.09090909090909, 
+                                       8.95522388059701, 8.88888888888889, 8.82352941176471, 8.69565217391304, 
+                                       8.69565217391304, 8.69565217391304, 8.57142857142857, 8.51063829787234, 
+                                       8.47457627118644, 8.45070422535211, 8.33333333333333, 8.33333333333333, 
+                                       8.33333333333333, 8.33333333333333, 8.19672131147541, 8.10810810810811, 
+                                       8, 7.89473684210526, 7.84313725490196, 7.8125, 7.69230769230769, 
+                                       7.69230769230769, 7.69230769230769, 7.54716981132075, 7.5, 7.46268656716418, 
+                                       7.40740740740741, 7.35294117647059, 7.27272727272727, 7.14285714285714, 
+                                       7.14285714285714, 7.14285714285714, 6.97674418604651, 6.89655172413793, 
+                                       6.89655172413793, 6.81818181818182, 6.75675675675676, 6.66666666666667, 
+                                       6.66666666666667, 6.66666666666667, 6.52173913043478, 6.45161290322581, 
+                                       6.38297872340426, 6.32911392405063, 6.25, 6.25, 6.25, 6.12244897959184, 
+                                       6.06060606060606, 6, 5.88235294117647, 5.88235294117647, 5.76923076923077, 
+                                       5.71428571428571, 5.66037735849057, 5.55555555555556, 5.55555555555556, 
+                                       5.55555555555556, 5.55555555555556, 5.40540540540541, 5.35714285714286, 
+                                       5.26315789473684, 5.26315789473684, 5.12820512820513, 5, 5, 4.91803278688525, 
+                                       4.8780487804878, 4.81927710843374, 4.76190476190476, 4.76190476190476, 
+                                       4.65116279069767, 4.61538461538461, 4.59770114942529, 4.54545454545455, 
+                                       4.44444444444444, 4.34782608695652, 4.34782608695652, 4.3010752688172, 
+                                       4.25531914893617, 4.22535211267606, 4.16666666666667, 4.16666666666667, 
+                                       4.08163265306122, 4, 4, 3.92156862745098, 3.84615384615385, 3.84615384615385, 
+                                       3.7037037037037, 3.7037037037037, 3.57142857142857, 3.52941176470588, 
+                                       3.50877192982456, 3.44827586206897, 3.38983050847458, 3.33333333333333, 
+                                       3.2258064516129, 3.125, 3.125, 3.07692307692308, 3.03030303030303, 
+                                       2.98507462686567, 2.94117647058824, 2.85714285714286, 2.77777777777778, 
+                                       2.7027027027027, 2.7027027027027, 2.63157894736842, 2.5974025974026, 
+                                       2.56410256410256, 2.5, 2.4390243902439, 2.38095238095238, 2.32558139534884, 
+                                       2.27272727272727, 2.22222222222222, 2.17391304347826, 2.12765957446809, 
+                                       2.08333333333333, 2.04081632653061, 2, 1.96078431372549, 1.92307692307692, 
+                                       1.88679245283019, 1.85185185185185, 1.81818181818182, 1.78571428571429, 
+                                       1.69491525423729, 1.66666666666667, 1.63934426229508, 1.61290322580645, 
+                                       1.5625, 1.53846153846154, 1.47058823529412, 1.44927536231884, 
+                                       1.40845070422535, 1.36986301369863, 1.2987012987013, 1.21951219512195, 
+                                       1.20481927710843, 1.08695652173913, 1.02040816326531))
+
+```
+```{r}
+plot(Retirees)
+```
+
+Essentially the poster wanted a way of clustering the observations into the "lines" that are fairly easy to observe in the data. I am going to ignore the fact that these lines are actually the result of artifact (e.g., conversion of discrete values to percentages and then plotting the percentages vs. a variable used to calculate the percentages) and just pretend they are real as I think its still an interesting problem. I am actually going to simulate some non-artifactual data and use this as well. 
+
+Not too surprisingly, the poster stated that K-means clustering had not preformed too well. 
+
+```{r}
+# Function to enable easier plotting of the results.
+plot_groupings <- function(d, g, col=rainbow(length(unique(g))), 
+                           plot.lines=TRUE, point.color=FALSE, ...){
+  K <- length(unique(g))
+  if (point.color) {
+    plot(d, col=g, ...)}
+  else {
+    plot(d, ...)
+  }
+  if (plot.lines){
+    for (i in 1:K){
+      d.local <- d[g == i,]
+      d.local <- d.local[order(d.local[,1]), ]
+      lines(d.local, col = col[i], lwd=2)
+    }
+  }
+}
+
+kmean.clusters <- kmeans(Retirees, 10, nstart=20)
+plot_groupings(Retirees, kmean.clusters$cluster)
+```
+
+We see that this is fairly obviously not capturing the functional pattern that is readily apparent by eye. 
+
+# My Solution - Hybrid K-Means/Linear-Regression with Transformation
+My Solution ended up being an approach to functional clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work. 
+
+Like K-Means the algorithm is based off of iterative calculation of group parameters and then assignment of observations to the "nearest" group. Unlike K-means instead of just calculating the mean, I am actually calculating a regression for each group. And instead of calculating distance to the nearest group mean, I am turning the squared residuals into a probability and then using a sampling step to assign the observation to groups based on that probability. Importantly, this sampling step is one component of the algorithm that helps prevent it from getting stuck in local-optima. The other component that helps avoid local optima is that I run the algorithm from multiple starting points (multiple "units") in parallel, for each iteration I take the "unit" that is doing the worst (based on sum of squared residuals) and replace it with the "unit" that is doing the best. 
+
+I have also made heavy use of the `purrr::map` function and the `lm.fit` (rather than normal `lm`) function for speed. I find that the algorithm works pretty well and surprisingly quickly. 
+
+# Starting on Boring Simulated Data
+To start off I will simulate some data similar to the data provided by the user. 
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+set.seed(4)
+
+lambda <- seq(0.01, .1, by=0.01)
+x <- 5:100
+pars <- expand.grid("lambda" = lambda, "x" = x)
+dat <- cbind(pars$x, exp(-pars$lambda*pars$x))
+```
+
+
+In answering the user's question I also suggested a log-transformation (if the patterns were not purely artifactual). 
+```{r, fig.height=5, fig.width=8}
+dat.log <- cbind(dat[,1], log(dat[,2]))
+
+par(mfrow=c(1,2))
+plot(dat, main="Original")
+plot(dat.log, main="Log-transformed")
+```
+
+
+Next I implement the actual Regression-K-Means Algorithm. 
+
+```{r, fig.height=5, fig.width=8}
+# Function to convert vector/matrix to probabilities (e.g., normalize to 1)
+miniclo <- function (c){
+  if (is.vector(c)) 
+    c <- matrix(c, nrow = 1)
+  (c/rowSums(c)) 
+}
+
+# The Main Function
+# K: Number of Clusters
+# n.unit: Number of parallel optimizations to run
+# n.iter: Number of iterations to run the optimization for
+# warmup.frac: what portion of iterations could be warmup (added stocastic varition to
+#   escape local optima)
+func_cluster <- function(dat, K, n.unit=4, n.iter=100, warmup.frac=0.9){
+  # Create Design Matrix and Response
+  X <- as.matrix(cbind(1, dat[,1])) # Design matrix, add intercept
+  Y <- dat[,2] # Responses
+  n <- nrow(X) # Number of observations
+  
+  # Random Initialize the group assignments. 
+  gs <- as.list(1:n.unit) %>% 
+    map(~sample(1:K, size = nrow(dat), replace = TRUE)) 
+  
+  # Create a safe version that deals with degeneration that can occur in some units 
+  # code will allow this to be fixed. 
+  safe_lm <- safely(function(i, X, Y) lm.fit(X[i,], Y[i]))
+  
+  for (i in 1:n.iter) {
+    # Start out by fitting linear regressons to each group
+    fits <- gs %>% 
+      map(~split(1:n, .x)) %>% 
+      #at_depth(2, ~lm.fit(X[.x,], Y[.x])) # Fit models
+      at_depth(2, safe_lm, X, Y) %>% 
+      at_depth(2, "result")
+    
+    # Replace Nulls with Best non-null from last iteration
+    nulls <- fits %>% 
+      at_depth(2, is.null) %>% 
+      map(unlist) %>% 
+      map(any) %>% 
+      unlist()
+    
+    if (any(nulls)){
+      d <- rank(best.worst.store, ties.method="random")
+      d <- which(d==min(d[!nulls]))
+      fits[nulls] <- fits[d[rep(1, sum(nulls))]]
+    }
+    
+    # Calculate the squared residuals of each data-point to each
+    # groups fitted linear model. Note I also add a small value (0.0001)
+    # to avoid zero values that can show up later when converting to probabilities
+    # and inverting. 
+    sq.resids <- fits %>% 
+      at_depth(2, "coefficients") %>% # Extract Coefficients
+      at_depth(2, ~((Y-X%*%.x)^2)+0.0001) %>%  # Predict and Compute Squared Residuals
+      map(bind_cols)
+    
+    ncolumns <- map(sq.resids, ncol)
+    nulls <- ncolumns < K
+    if (any(nulls)){
+      d <- rank(best.worst.store, ties.method="random")
+      d <- which(d==min(d[!nulls]))
+      sq.resids[nulls] <- sq.resids[d[rep(1, sum(nulls))]]
+    }    
+
+    # Store which "unit" which of the n.unit optimiztions did the 
+    # best and which did the worst
+    best.worst.store <- sq.resids %>% 
+      map(sum) %>% 
+      unlist()
+    best.worst <- c(which.min(best.worst.store), which.max(best.worst.store))
+  
+    # Compute new group assignements, notice I convert the relative
+    # squared residual of each model into a probability and then use the 
+    # inverse of this probability as the probability that a data-point
+    # belongs to that group
+     new.gs <- sq.resids  %>% 
+      map(as.matrix) %>% 
+      map(miniclo)  %>% # Add small value to fix zeros
+      map(~.x^(-1)) %>% 
+      map(miniclo)
+    if (i < round(n.iter*warmup.frac)){ # Warmup with extra stochastic variation to get out of local-optima
+      new.gs <- new.gs %>% 
+      map(~apply(.x, 1, function(x) sample(1:K, 1, replace = TRUE, prob = x))) # Add sampling to get over some minima
+    } else { # just take maxima
+      new.gs <- new.gs %>% 
+      map(max.col, ties.method="random") # Add sampling to get over some minima
+    }
+    
+  
+    # Replace the worst unit with the best
+    new.gs[[best.worst[2]]] <- new.gs[[best.worst[1]]]
+  
+    # Update the cluster assignemnts for each unit
+    gs <- new.gs
+  }
+  return(gs[[best.worst[1]]])
+}
+
+
+
+# Now investigate results of best unit and plot 
+best.g <- func_cluster(dat.log, K=10, n.iter=200)
+par(mfrow=c(1,2))
+plot_groupings(dat.log, best.g, main="Log Transformed Results")
+plot_groupings(dat, best.g, main="Results on Original Scale")
+```
+
+As you can see, the algorithm does quite well and in this case nearly all points are classified correctly (it actually improves if `n.iter` and `n.unit` are increased). 
+
+Finally I applied it to the data provided by the poster. I transformed both the X and Y axis to linearize the data. I could have also used a non-linear function rather than a linear one but this seemed easier.  
+
+```{r, fig.height=5, fig.width=8}
+dat <- Retirees 
+dat.log <- cbind(log(dat[,1]), log(dat[,2]/100))
+
+best.g <- func_cluster(dat.log, K=10, n.iter=200)
+par(mfrow=c(1,2))
+plot_groupings(dat.log, best.g, main="Log Transformed Results")
+plot_groupings(dat, best.g, main="Reesults on Original Scale")
+```
+
+Its not perfect (again, it actually improves with more iterations) but it is definitely doing a ton better than regular K-Means we tried originally. 
+
+# Now a more interesting simulated dataset
+About 7 years ago I did some work with a very smart friend on some image analysis algorithms for detecting linear segments in images. This recent problem of functional clustering actually made me want to simulate this problem again and try it out. 
+
+```{r, fig.height=5, fig.width=8, warning=FALSE}
+limits <- as.list(1:10) %>%
+  map(~c(rnorm(1, -75, 25), rnorm(1, 75, 25))) %>% 
+  map(~.x[order(.x)]) %>% 
+  map(~seq(.x[1], .x[2], length.out=25))
+
+dat <- rnorm(10, 0, 5) %>% 
+  as.list() %>% 
+  map2(limits, ~.x*.y+rnorm(1, 0, 500)) %>% 
+  map2(limits, ~cbind("y" = .x, "x" = .y)) %>% # Sorry about the swapping of x and y here (can't change purrr)
+  map(as.data.frame) %>% 
+  bind_rows(.id="group") %>% 
+  mutate(group = factor(group, as.character(1:10))) 
+
+# Now try to cluster (without knowing true groupings)
+dat.run <- as.matrix(dat[,c(3,2)])
+best.g <- func_cluster(dat.run, K=10, n.iter=250, n.unit=6)
+
+
+par(mfrow=c(1,2))
+plot_groupings(dat.run, best.g, plot.lines = F, point.color = F, main="True")
+plot_groupings(dat[,c("x", "y")], dat$group, main="My Algorithms Results")
+```
+
+# More realistic, presense of observational noise
+Lets also see how well it works in the presence of some added noise. 
+```{r, fig.height=12, fig.width=8, warning=FALSE}
+limits <- as.list(1:6) %>%
+  map(~c(rnorm(1, -75, 25), rnorm(1, 75, 25))) %>% 
+  map(~.x[order(.x)]) %>% 
+  map(~seq(.x[1], .x[2], length.out=25))
+
+dat <- rnorm(6, 0, 5) %>% 
+  as.list() %>% 
+  map2(limits, ~.x*.y+rnorm(1, 0, 500)) %>% 
+  map2(limits, ~cbind("y" = .x, "x" = .y)) %>% # Sorry about the swapping of x and y here (can't change purrr)
+  map(as.data.frame) %>% 
+  bind_rows(.id="group") %>% 
+  mutate(group = factor(group, as.character(1:10))) %>% 
+  mutate(y = y + rnorm(nrow(.), 0, 40)) # Add gaussian observation noise to dependent variable
+
+# Now to cluster without knowing true groupings. 
+dat.run <- as.matrix(dat[,c(3,2)])
+
+best.g <- func_cluster(dat.run, K=6, n.iter=500, n.unit=6)
+
+# Finally K-Means and DBSCAN as a point of comparison
+library(dbscan)
+kmean.clusters <- kmeans(dat.run, 10, nstart=20)
+db <- dbscan(dat.run, eps = 30, minPts = 2)
+
+par(mfrow=c(3,2))
+plot_groupings(dat.run, dat$group, plot.lines=F, point.color=F, main="Data Seen by Classifiers")
+plot.new()
+plot_groupings(dat.run, dat$group, main="True")
+plot_groupings(dat.run, best.g, plot.lines = T, point.color = F, main="My Algorithms Results")
+
+plot_groupings(dat.run, kmean.clusters$cluster, main="K-Means")
+plot_groupings(dat.run, db$cluster, main="DBSCAN")
+
+```
+
+# Conclusions and future directions
+So it looks to me like it is actually doing pretty darn well (note that differences in the the color of the lines between the True and Computed results doesn't matter, only that points in the same cluster are given the same color). It's beating K-Means and DBSCAN at least. I am particularly happy because for a number of these lines I couldn't visually pick out those groups if I hadn't colored the true values in the prior plot.
+
+I think that this approach, of using residuals (or even more generally an arbitrary loss-function) as a means of doing k-means clustering is quite general and would work for other models (not just linear models, or for other linear models with more complex features). I would be interested to know if this has been done before (I would be shocked if I am really inventing something new here). Another idea would be to more to non-parametrics models that might have some more interesting properties (more on that to come if I have time).
+
+I will probably do a literature review in the next few days to see if something like this already exists. If you know about something similar please let me know. 
