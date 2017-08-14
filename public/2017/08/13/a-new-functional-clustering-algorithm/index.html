@@ -5,26 +5,26 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>A New(?) Functional Clustering Algorithm  &middot; Statistics @ Home</title>
+  <title>A New(?) Regression Clustering Algorithm  &middot; Statistics @ Home</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions." />
+<meta name="description" content="In this post I describe an algorithm for clustering regression data that is based somewhat on K-Means. I cooked it up yesterday when looking over Cross Validated questions. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts). So, don&#39;t I feel silly with the title for this post. Still I left it in to grip the readers attention! (Is it working?)" />
 
 <meta name="keywords" content="key, words, ">
 
 
-<meta property="og:title" content="A New(?) Functional Clustering Algorithm  &middot; Statistics @ Home ">
+<meta property="og:title" content="A New(?) Regression Clustering Algorithm  &middot; Statistics @ Home ">
 <meta property="og:site_name" content="Statistics @ Home"/>
 <meta property="og:url" content="/2017/08/13/a-new-functional-clustering-algorithm/" />
 <meta property="og:locale" content="en-EN">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions."/>
+<meta property="og:description" content="In this post I describe an algorithm for clustering regression data that is based somewhat on K-Means. I cooked it up yesterday when looking over Cross Validated questions. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts). So, don&#39;t I feel silly with the title for this post. Still I left it in to grip the readers attention! (Is it working?)"/>
 <meta property="og:article:published_time" content="2017-08-13T00:00:00Z" />
 <meta property="og:article:modified_time" content="2017-08-13T00:00:00Z" />
 
@@ -40,8 +40,8 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@inschool4life" />
 <meta name="twitter:creator" content="@inschool4life" />
-<meta name="twitter:title" content="A New(?) Functional Clustering Algorithm" />
-<meta name="twitter:description" content="In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions." />
+<meta name="twitter:title" content="A New(?) Regression Clustering Algorithm" />
+<meta name="twitter:description" content="In this post I describe an algorithm for clustering regression data that is based somewhat on K-Means. I cooked it up yesterday when looking over Cross Validated questions. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts). So, don&#39;t I feel silly with the title for this post. Still I left it in to grip the readers attention! (Is it working?)" />
 <meta name="twitter:url" content="/2017/08/13/a-new-functional-clustering-algorithm/" />
 <meta name="twitter:domain" content="/">
   
@@ -50,14 +50,14 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "A New(?) Functional Clustering Algorithm",
+    "headline": "A New(?) Regression Clustering Algorithm",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
     "datePublished": "2017-08-13",
-    "description": "In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions.",
-    "wordCount": 1692
+    "description": "In this post I describe an algorithm for clustering regression data that is based somewhat on K-Means. I cooked it up yesterday when looking over Cross Validated questions. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts). So, don&#39;t I feel silly with the title for this post. Still I left it in to grip the readers attention! (Is it working?)",
+    "wordCount": 1842
   }
 </script>
 
@@ -188,7 +188,7 @@ MathJax.Hub.Config({
 
 <article id="main-content" class="container main_content single">
   <header class="container hat">
-  <h1>A New(?) Functional Clustering Algorithm
+  <h1>A New(?) Regression Clustering Algorithm
 </h1>
 
   <div class="metas">
@@ -198,8 +198,8 @@ MathJax.Hub.Config({
   
     &middot; by Justin Silverman
   
-  &middot; Read in about 8 min
-  &middot; (1692 Words)
+  &middot; Read in about 9 min
+  &middot; (1842 Words)
   <br>
   
 <a class="label" href="/tags/r">R</a>
@@ -225,7 +225,7 @@ MathJax.Hub.Config({
 </div>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>I am a fan of the <a href="https://stackexchange.com/">Stack Exchange forums</a> in particular I like <a href="https://stats.stackexchange.com/">Cross Validated</a> and <a href="https://stackoverflow.com/">Stack Overflow</a>. An <a href="https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745">interesting question regarding functional clustering</a> was posted recently. Essentially someone had the following dataset.</p>
+<p>I am a fan of the <a href="https://stackexchange.com/">Stack Exchange forums</a>. In particular, I like <a href="https://stats.stackexchange.com/">Cross Validated</a> and <a href="https://stackoverflow.com/">Stack Overflow</a>. An <a href="https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745">interesting question regarding clustering</a> was posted recently. Essentially someone had the following dataset.</p>
 <pre class="r"><code>plot(Retirees)</code></pre>
 <p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Essentially the poster wanted a way of clustering the observations into the “lines” that are fairly easy to observe in the data. I am going to ignore the fact that these lines are actually the result of artifact (e.g., conversion of discrete values to percentages and then plotting the percentages vs. a variable used to calculate the percentages) and just pretend they are real as I think its still an interesting problem. I am actually going to simulate some non-artifactual data and use this as well.</p>
@@ -255,8 +255,9 @@ plot_groupings(Retirees, kmean.clusters$cluster)</code></pre>
 </div>
 <div id="my-solution---hybrid-k-meanslinear-regression-with-transformation" class="section level1">
 <h1>My Solution - Hybrid K-Means/Linear-Regression with Transformation</h1>
-<p>My Solution ended up being an approach to functional clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work.</p>
-<p>Like K-Means the algorithm is based off of iterative calculation of group parameters and then assignment of observations to the “nearest” group. Unlike K-means instead of just calculating the mean, I am actually calculating a regression for each group. And instead of calculating distance to the nearest group mean, I am turning the squared residuals into a probability and then using a sampling step to assign the observation to groups based on that probability. Importantly, this sampling step is one component of the algorithm that helps prevent it from getting stuck in local-optima. The other component that helps avoid local optima is that I run the algorithm from multiple starting points (multiple “units”) in parallel, for each iteration I take the “unit” that is doing the worst (based on sum of squared residuals) and replace it with the “unit” that is doing the best.</p>
+<p>My Solution ended up being an approach to regression clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work.</p>
+<p><strong>UPDATE:</strong> Not surprisingly, this is not a new method. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts mod). So, don’t I feel silly with the title for this post. Still, I left the title in to grip the readers attention! (Is it working?) Anyways, A brief Google search led me to the <a href="https://cran.r-project.org/web/packages/flexmix/index.html">FlexMix package</a>. It turns out this package is awesome, the authors of this package really did a great job and its super powerful. It’s faster than my implementation, probably more robust, and is a fully probabilistic model. <em>So here’s the deal:</em> You can keep reading this post (and I hope you do), hopefully see some pretty pictures and see how my method (and the FlexMix package) both school K-Means clustering and DBSCAN (which really is not a fair comparison because those methods were not even designed for this problem), or you can just head over and read the <a href="https://cran.r-project.org/web/packages/flexmix/index.html">Vignettes for the FlexMix package</a>.</p>
+<p><strong>Back to a description of my algorithm:</strong> Like K-Means the algorithm is based off of iterative calculation of group parameters and then assignment of observations to the “nearest” group. Unlike K-means instead of just calculating the mean, I am actually calculating a regression for each group. And instead of calculating distance to the nearest group mean, I am turning the squared residuals into a probability and then using a sampling step to assign the observation to groups based on that probability. Importantly, this sampling step is one component of the algorithm that helps prevent it from getting stuck in local-optima. The other component that helps avoid local optima is that I run the algorithm from multiple starting points (multiple “units”) in parallel, for each iteration I take the “unit” that is doing the worst (based on sum of squared residuals) and replace it with the “unit” that is doing the best.</p>
 <p>I have also made heavy use of the <code>purrr::map</code> function and the <code>lm.fit</code> (rather than normal <code>lm</code>) function for speed. I find that the algorithm works pretty well and surprisingly quickly.</p>
 </div>
 <div id="starting-on-boring-simulated-data" class="section level1">
@@ -446,15 +447,17 @@ best.g &lt;- func_cluster(dat.run, K=6, n.iter=500, n.unit=6)
 
 # Finally K-Means and DBSCAN as a point of comparison
 library(dbscan)
-kmean.clusters &lt;- kmeans(dat.run, 10, nstart=20)
+library(flexmix)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre class="r"><code>kmean.clusters &lt;- kmeans(dat.run, 10, nstart=20)
 db &lt;- dbscan(dat.run, eps = 30, minPts = 2)
+mod &lt;- flexmix(y ~ x, data = dat, k=6)
 
 par(mfrow=c(3,2))
 plot_groupings(dat.run, dat$group, plot.lines=F, point.color=F, main=&quot;Data Seen by Classifiers&quot;)
-plot.new()
 plot_groupings(dat.run, dat$group, main=&quot;True&quot;)
 plot_groupings(dat.run, best.g, plot.lines = T, point.color = F, main=&quot;My Algorithms Results&quot;)
-
+plot_groupings(dat.run, clusters(mod), main=&quot;FlexMix&quot;)
 plot_groupings(dat.run, kmean.clusters$cluster, main=&quot;K-Means&quot;)
 plot_groupings(dat.run, db$cluster, main=&quot;DBSCAN&quot;)</code></pre>
 <p><img src="/post/2017-08-13-a-new-functional-clustering-algorithm_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
@@ -462,8 +465,7 @@ plot_groupings(dat.run, db$cluster, main=&quot;DBSCAN&quot;)</code></pre>
 <div id="conclusions-and-future-directions" class="section level1">
 <h1>Conclusions and future directions</h1>
 <p>So it looks to me like it is actually doing pretty darn well (note that differences in the the color of the lines between the True and Computed results doesn’t matter, only that points in the same cluster are given the same color). It’s beating K-Means and DBSCAN at least. I am particularly happy because for a number of these lines I couldn’t visually pick out those groups if I hadn’t colored the true values in the prior plot.</p>
-<p>I think that this approach, of using residuals (or even more generally an arbitrary loss-function) as a means of doing k-means clustering is quite general and would work for other models (not just linear models, or for other linear models with more complex features). I would be interested to know if this has been done before (I would be shocked if I am really inventing something new here). Another idea would be to more to non-parametrics models that might have some more interesting properties (more on that to come if I have time).</p>
-<p>I will probably do a literature review in the next few days to see if something like this already exists. If you know about something similar please let me know.</p>
+<p>The approach and method I describe here are very general. I have used a mixture of univariate linear regression models for unsupervised learning. But there is no reason why it must stop there, multivariate regression with crazy types of covariates/features, with non-gaussian errors or even non-parametric regression models could be used. So keep this in mind, its a really cool method. Also remember the <a href="https://cran.r-project.org/web/packages/flexmix/index.html">FlexMix package</a> is really cool and can already do a lot of this and more.</p>
 </div>
 
 </div>

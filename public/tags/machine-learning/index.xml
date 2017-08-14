@@ -15,12 +15,12 @@
     
     
     <item>
-      <title>A New(?) Functional Clustering Algorithm</title>
+      <title>A New(?) Regression Clustering Algorithm</title>
       <link>/2017/08/13/a-new-functional-clustering-algorithm/</link>
       <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
       <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
       <guid>/2017/08/13/a-new-functional-clustering-algorithm/</guid>
-      <description>Motivation My Solution - Hybrid K-Means/Linear-Regression with Transformation Starting on Boring Simulated Data Now a more interesting simulated dataset More realistic, presense of observational noise Conclusions and future directions   Motivation I am a fan of the Stack Exchange forums in particular I like Cross Validated and Stack Overflow. An interesting question regarding functional clustering was posted recently. Essentially someone had the following dataset.
+      <description>Motivation My Solution - Hybrid K-Means/Linear-Regression with Transformation Starting on Boring Simulated Data Now a more interesting simulated dataset More realistic, presense of observational noise Conclusions and future directions   Motivation I am a fan of the Stack Exchange forums. In particular, I like Cross Validated and Stack Overflow. An interesting question regarding clustering was posted recently. Essentially someone had the following dataset.
 plot(Retirees) Essentially the poster wanted a way of clustering the observations into the “lines” that are fairly easy to observe in the data.</description>
     </item>
     

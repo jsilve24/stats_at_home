@@ -1,5 +1,5 @@
 ---
-title: A New(?) Functional Clustering Algorithm
+title: A New(?) Regression Clustering Algorithm
 author: Justin Silverman
 date: '2017-08-13'
 slug: a-new-functional-clustering-algorithm
@@ -7,7 +7,7 @@ categories: []
 tags:
   - R
   - Machine Learning
-description: In this post I describe a new algorithm for clustering functional data that is based somewhat on K-Means. I cooked it up this morning when looking over Cross Validated questions. 
+description: In this post I describe an algorithm for clustering regression data that is based somewhat on K-Means. I cooked it up yesterday when looking over Cross Validated questions. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts). So, don't I feel silly with the title for this post. Still I left it in to grip the readers attention! (Is it working?)  
 
 draft: no
 keywords:
@@ -23,7 +23,7 @@ output:
 ---
 
 # Motivation
-I am a fan of the [Stack Exchange forums](https://stackexchange.com/) in particular I like [Cross Validated](https://stats.stackexchange.com/) and [Stack Overflow](https://stackoverflow.com/). An [interesting question regarding functional clustering](https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745) was posted recently. Essentially someone had the following dataset. 
+I am a fan of the [Stack Exchange forums](https://stackexchange.com/). In particular, I like [Cross Validated](https://stats.stackexchange.com/) and [Stack Overflow](https://stackoverflow.com/). An [interesting question regarding clustering](https://stats.stackexchange.com/questions/297689/method-to-group-linear-features-in-a-graph/297745#297745) was posted recently. Essentially someone had the following dataset. 
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 Retirees<- data.frame(No_Races = c(11L, 11L, 21L, 12L, 15L, 10L, 23L, 13L, 19L, 11L, 22L, 14L, 
@@ -157,8 +157,11 @@ plot_groupings(Retirees, kmean.clusters$cluster)
 We see that this is fairly obviously not capturing the functional pattern that is readily apparent by eye. 
 
 # My Solution - Hybrid K-Means/Linear-Regression with Transformation
-My Solution ended up being an approach to functional clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work. 
+My Solution ended up being an approach to regression clustering that is a hybrid between regression and k-means clustering. I would be shocked if this is a new method, I bet it is a hacky-approximation to a better method. That said, I am not aware of anything exactly like it and I was quite happy with how well it seemed to work. 
 
+**UPDATE:** Not surprisingly, this is not a new method. A very smart professor at Duke has recently informed me that this is basically a mixture of regressions model (or a mixture of experts mod). So, don't I feel silly with the title for this post. Still, I left the title in to grip the readers attention! (Is it working?) Anyways, A brief Google search led me to the [FlexMix package](https://cran.r-project.org/web/packages/flexmix/index.html). It turns out this package is awesome, the authors of this package really did a great job and its super powerful. It's faster than my implementation, probably more robust, and is a fully probabilistic model. *So here's the deal:* You can keep reading this post (and I hope you do), hopefully see some pretty pictures and see how my method (and the FlexMix package) both school K-Means clustering and DBSCAN (which really is not a fair comparison because those methods were not even designed for this problem), or you can just head over and read the [Vignettes for the FlexMix package](https://cran.r-project.org/web/packages/flexmix/index.html). 
+
+**Back to a description of my algorithm:**
 Like K-Means the algorithm is based off of iterative calculation of group parameters and then assignment of observations to the "nearest" group. Unlike K-means instead of just calculating the mean, I am actually calculating a regression for each group. And instead of calculating distance to the nearest group mean, I am turning the squared residuals into a probability and then using a sampling step to assign the observation to groups based on that probability. Importantly, this sampling step is one component of the algorithm that helps prevent it from getting stuck in local-optima. The other component that helps avoid local optima is that I run the algorithm from multiple starting points (multiple "units") in parallel, for each iteration I take the "unit" that is doing the worst (based on sum of squared residuals) and replace it with the "unit" that is doing the best. 
 
 I have also made heavy use of the `purrr::map` function and the `lm.fit` (rather than normal `lm`) function for speed. I find that the algorithm works pretty well and surprisingly quickly. 
@@ -365,15 +368,16 @@ best.g <- func_cluster(dat.run, K=6, n.iter=500, n.unit=6)
 
 # Finally K-Means and DBSCAN as a point of comparison
 library(dbscan)
+library(flexmix)
 kmean.clusters <- kmeans(dat.run, 10, nstart=20)
 db <- dbscan(dat.run, eps = 30, minPts = 2)
+mod <- flexmix(y ~ x, data = dat, k=6)
 
 par(mfrow=c(3,2))
 plot_groupings(dat.run, dat$group, plot.lines=F, point.color=F, main="Data Seen by Classifiers")
-plot.new()
 plot_groupings(dat.run, dat$group, main="True")
 plot_groupings(dat.run, best.g, plot.lines = T, point.color = F, main="My Algorithms Results")
-
+plot_groupings(dat.run, clusters(mod), main="FlexMix")
 plot_groupings(dat.run, kmean.clusters$cluster, main="K-Means")
 plot_groupings(dat.run, db$cluster, main="DBSCAN")
 
@@ -382,6 +386,4 @@ plot_groupings(dat.run, db$cluster, main="DBSCAN")
 # Conclusions and future directions
 So it looks to me like it is actually doing pretty darn well (note that differences in the the color of the lines between the True and Computed results doesn't matter, only that points in the same cluster are given the same color). It's beating K-Means and DBSCAN at least. I am particularly happy because for a number of these lines I couldn't visually pick out those groups if I hadn't colored the true values in the prior plot.
 
-I think that this approach, of using residuals (or even more generally an arbitrary loss-function) as a means of doing k-means clustering is quite general and would work for other models (not just linear models, or for other linear models with more complex features). I would be interested to know if this has been done before (I would be shocked if I am really inventing something new here). Another idea would be to more to non-parametrics models that might have some more interesting properties (more on that to come if I have time).
-
-I will probably do a literature review in the next few days to see if something like this already exists. If you know about something similar please let me know. 
+The approach and method I describe here are very general. I have used a mixture of univariate linear regression models for unsupervised learning. But there is no reason why it must stop there, multivariate regression with crazy types of covariates/features, with non-gaussian errors or even non-parametric regression models could be used. So keep this in mind, its a really cool method. Also remember the [FlexMix package](https://cran.r-project.org/web/packages/flexmix/index.html) is really cool and can already do a lot of this and more. 
