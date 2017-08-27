@@ -1,0 +1,329 @@
+---
+title: Does Gauss Love Me More in the Kitchen?
+author: Rachel Silverman
+date: '2017-08-27'
+slug: does-gauss-love-me-more-in-the-kitchen
+categories: []
+tags:
+  - R
+description: First things first, Gauss is our dog. Since I am able to work from home, my dog Gauss and I spend a lot of time together. As a result, I like to think I know why he does what he does. But of course I will never really know - though, it’s nice to think that I do. Both of us being a creatures of habit, we have fallen into a nice routine during the day - one where he sleeps the day away and comes to get me around 4pm for some outdoor training/playing. I have noticed that whenever I do anything interesting or out of the norm, he is right there, waiting to see if he can benefit from the activity. Most remarkably, it feels like whenever we are in the kitchen, he sits down right in the middle of everything waiting for scraps and food that drops on the floor. I know Gauss loves me, but I wonder if I am more valuable to him in certain rooms? Does he “love” me more in the kitchen?...
+keywords:
+  - key
+  - words
+topics:
+  - topic 1
+type: post
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+library(rms)
+library(survminer)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(forcats)
+library(kableExtra)
+library(survival)
+#library(RColorBrewer)
+Gauss<- read.csv("gauss_data.csv", header = T) %>% 
+        mutate(Gauss_Activity = recode(Gauss_Activity, "Walking/Excersing" = "Walking/Exercising"))
+```
+
+## The Idea
+First things first, Gauss is our dog.
+
+Since I am able to work from home, my dog Gauss and I spend a lot of time together. As a result, I like to think I know why he does what he does. But of course I will never really know - though, it's nice to think that I do. Both of us being a creatures of habit, we have fallen into a nice routine during the day - one where he sleeps the day away and comes to get me around 4pm for some outdoor training/playing. I have noticed that whenever I do anything interesting or out of the norm, he is right there, waiting to see if he can benefit from the activity. Most remarkably, it feels like whenever we are in the kitchen, he sits down right in the middle of everything waiting for scraps and food that drops on the floor.
+<center>
+![Gauss at Thanksgiving.](/img/2017-08-27-does-gauss-love-me-more-in-the-kitchen/gauss_oven.jpg)
+</center>
+
+I know Gauss loves me, but I wonder if I am more valuable to him in certain rooms? Does he "love" me more in the kitchen?
+
+## The Objective
+Primary Objective: To determine if Gauss follows me more often and/or more quickly into the kitchen. 
+
+Secondary Objective: To determine what Gauss' day looks like. 
+
+## Data Collection
+Data was collected over 11 days. I filled out a 7 question survey on my phone, every 30 minutes (while awake), and every time he or I changed rooms or started/stopped an activity. In addition every survey entry was time stamped. 
+
+Here were the survey questions:
+
+1. Which room is Gauss in?
+2. Which room is Rachel in?
+3. What is Gauss' Activity? Mutually exclusive activities - Gauss cannot be both "Alert focusing on human" AND doing another activity. If he is "Alert focusing on human", he is literally sitting and only watching me.
+4. What is Rachel's Activity?
+5. It is a joint activity? - Meaning is Gauss required to take part in the activity? (E.g. Training is a joint activity since Gauss does not have the option to opt-out)
+6. Is Gauss with Rachel? 
+7. Entry Type: 30 minute or phase change
+
+Justin was out of town at the time so I was the only human living in the house for all 11 days. We did have a second dog for 4 days during the 11 day period. Other than the presence of the extra dog, these 11 days were a typical 11 days for Gauss (i.e. typical work week for me, typical afternoon activities for him, typical exercise, etc.). We felt that the additional dog should not bias the results, as Gauss' preference to be with me in certain rooms would be maintained, or the extra dog would capture Gauss' attention independently of my location. There was a total of 591 completed surveys with no partial responses.  
+
+## Exploratory Data Analysis
+First, let's examine what Gauss' days look like. Here is the breakdown of the 11 days in terms of the proportion of time spent in each activity. Each pie chart represents a 24 hour period.
+
+```{r, warning = FALSE, echo = FALSE,  fig.align="center"}
+# Make Datasets
+cols <- c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a')
+GaussLag <- Gauss %>% 
+  filter(I_LagDataset == 1)
+GaussActivityData <- Gauss %>% 
+        filter(I_Gauss_Activity == 1 & Day != 12) %>%
+        group_by(Day,Gauss_Activity) %>% 
+        summarize(duration=sum(Duration_Gauss_Activity)) %>% 
+        mutate(freq = duration /sum(duration))
+
+p <- ggplot(GaussActivityData,aes(x="", y=freq, fill = Gauss_Activity)) +
+        geom_bar(width=1,stat = "identity") + 
+        facet_wrap( ~ Day, ncol = 4) + 
+        coord_polar(theta = "y") +
+        scale_fill_manual(values=cols) +
+        labs(palette = "Dog Activity") +
+        theme_minimal() + 
+        theme(axis.title.x = element_blank(),
+                axis.title.y = element_blank(),
+                panel.border = element_blank(),
+                panel.grid=element_blank(),
+                axis.ticks = element_blank(),
+                plot.title=element_text(size=14, face="bold"),
+                legend.title = element_blank()) +
+        theme(axis.text.x=element_blank()) +
+        labs(title = "Breakdown of Gauss' Days", subtitle = "All 11 Days")
+p
+```
+
+We see that each day is a little different for Gauss. However, it is clear that Gauss spends a prominent proportion of his days asleep. We also see the impact of the second dog, with us from day 2 through day 5 since the time spent "Playing with Dog" is increased over time period. Additionally, we see that on day 6, the day after his playmate left, Gauss slept more than any other day in the 11 day study period. 
+
+```{r, echo = FALSE, warning = FALSE}
+GaussActivityData2 <- Gauss %>% 
+        filter(I_Gauss_Activity == 1) %>%
+        group_by(Gauss_Activity) %>% 
+        summarize(duration=sum(Duration_Gauss_Activity)) %>% 
+        mutate(freq = round(duration /sum(duration),2), averagehrs =round(duration/(60*11), 2))
+```
+
+Below shows Gauss' average day (over the course of the study): 
+```{r, echo = FALSE}
+kable(GaussActivityData2, col.names = c("Activity", "Total Duration over 11 Days (minutes)", "Average % Time Spent in Activity", "Average Hours Spent in Activity" ))
+```
+
+```{r, echo = FALSE, fig.align="center"}
+ggplot(GaussActivityData2,aes(x="", y=averagehrs, fill = Gauss_Activity)) +
+        geom_bar(width=1,stat = "identity") + 
+        # geom_text(aes(label = paste(round(averagehrs,1))), size=3, position = position_stack(vjust = 0.5)) +
+        coord_polar(theta = "y") +
+        scale_fill_manual(values = cols) +
+        theme_minimal() + 
+        theme(axis.title.x = element_blank(),
+                axis.title.y = element_blank(),
+                panel.border = element_blank(),
+                panel.grid=element_blank(),
+                axis.ticks = element_blank(),
+                plot.title=element_text(size=14, face="bold"),
+                legend.title = element_blank()) +
+        theme(axis.text.x=element_blank()) +
+        labs(title = "Breakdown of Gauss' Days", subtitle = "Average of the 11 Days")
+```
+
+So Gauss spent, on average, ~15 hours of his days sleeping. ~2 hours of his days was spent doing an "unknown" activity - this only happens when I leave the house and he is in the crate. In the crate, I believe he is most likely sleeping (since when I come home he sometimes is still asleep). 
+
+If we assume that he is sleeping in the crate, which I believe to be a reasonable assumption, then those 15 hours of sleep a day turns into ~17 hours of sleep per day. He spent on average 1.5 hours per day exploring and sniffing and 1.4 hours focused on me. He spent about an hour per day doing each of the following: looking out the window (squirrel watching), playing with a dog (also in this category is playing by himself with a toy), and training. Eating/drinking, walking/exercising, and playing with a human constitute ~1 hour per day total. 
+
+This next plot tracks my location and Gauss' location through time over the 11 days. Most notably, the red and blue lines (representing me and Gauss respectively) track together for almost the entirety of the 11 days. It's tough to see what is really happening on the day-to-day level with this plot, but it gives a nice overview of our "togetherness."
+
+```{r, echo = FALSE, warning = FALSE,  fig.align="center"}
+# Plots -------------------------------------------------------------------
+
+# JDS Initial Processing
+d <- Gauss %>% 
+  mutate(RecordedDate = parse_date_time(RecordedDate, order = "%m/%d/%y %h:%m"))  %>% 
+  select(RecordedDate, Gauss_Location, Rachel_Location, Visiting_Dog) %>% 
+  gather(Person, Location, -RecordedDate, -Visiting_Dog) %>% 
+  group_by(Person) %>% 
+  mutate(RecordedDate.lead = lead(RecordedDate, default=NA)) %>% 
+  ungroup() %>% 
+  mutate(Location = fct_other(Location, keep=c("Bedroom", "Family Room", "Front Yard", 
+                                               "Neighbors", "Crate", "Car", "Kitchen", 
+                                               "Back Yard", "Forest", "Bathroom"))) %>% 
+  mutate(Location = fct_collapse(Location, Yard = c("Front Yard", "Back Yard")), 
+         Person = fct_recode(Person, Gauss = "Gauss_Location", Rachel = "Rachel_Location"))
+
+
+# Relevel Location to make Plot more visually appealing
+# Order by Summed time in each location
+Location.Order <- d %>% 
+  mutate(time.spent = RecordedDate.lead-RecordedDate) %>% 
+  group_by(Location) %>% 
+  summarize(sum = sum(time.spent, na.rm = T)) %>% 
+  arrange(sum) %>% 
+  .$Location
+
+d <- d %>% 
+  mutate(Location = factor(Location, level = Location.Order))
+
+visiting.dog.dates <- filter(d, Visiting_Dog=="Yes") %>% 
+  .$RecordedDate 
+visiting.dog.dates <- c(min = min(visiting.dog.dates), max = max(visiting.dog.dates))
+
+# Main one
+p <- d %>% 
+  mutate(Location.Lag = factor(lag(Location), levels = Location.Order)) %>%
+  ggplot(aes(y = RecordedDate, x = Location, color=Person))+
+  geom_rect(ymin=as.integer(visiting.dog.dates["min"]), ymax=as.integer(visiting.dog.dates["max"]), 
+            xmin=-Inf, xmax=Inf, fill="lightgrey", color="lightgrey") +
+  geom_linerange(aes(ymin = RecordedDate,ymax = RecordedDate.lead), size=2, position=position_dodge(.5)) +
+  theme_bw() +
+  annotate("label", y = mean(visiting.dog.dates), x = 0.75, label = "Dog Visiting", size = 3, col = "darkgrey") +
+  coord_flip() +
+  scale_color_manual(values = c('#1f78b4','#e31a1c'))
+p
+```
+
+Let's examine day 8 day (which was June 1, 2017) to get a feel for what is happening on a daily scale. 
+
+```{r, echo = FALSE, warning = FALSE,  fig.align="center"}
+d2 <- Gauss %>% 
+  filter(Day == 8) %>% 
+  mutate(RecordedDate = parse_date_time(RecordedDate, order = "%m/%d/%y %h:%m"))  %>% 
+  select(RecordedDate, Gauss_Location, Rachel_Location, Visiting_Dog) %>% 
+  gather(Person, Location, -RecordedDate, -Visiting_Dog) %>% 
+  group_by(Person) %>% 
+  mutate(RecordedDate.lead = lead(RecordedDate, default=NA)) %>% 
+  ungroup() %>% 
+  mutate(Location = fct_other(Location, keep=c("Bedroom", "Family Room", "Front Yard", 
+                                               "Neighbors", "Crate", "Car", "Kitchen", 
+                                               "Back Yard", "Forest", "Bathroom"))) %>% 
+  mutate(Location = fct_collapse(Location, Yard = c("Front Yard", "Back Yard")), 
+         Person = fct_recode(Person, Gauss = "Gauss_Location", Rachel = "Rachel_Location"))
+
+
+# Relevel Location to make Plot more visually appealing
+# Order by Summed time in each location
+Location.Order2 <- d2 %>% 
+  mutate(time.spent = RecordedDate.lead-RecordedDate) %>% 
+  group_by(Location) %>% 
+  summarize(sum = sum(time.spent, na.rm = T)) %>% 
+  arrange(sum) %>% 
+  .$Location
+
+d2 <- d2 %>% 
+  mutate(Location = factor(Location, level = Location.Order2))
+
+p2 <- d2 %>% 
+  mutate(Location.Lag = factor(lag(Location), levels = Location.Order)) %>%
+  ggplot(aes(y = RecordedDate, x = Location, color=Person))+
+  geom_linerange(aes(ymin = RecordedDate,ymax = RecordedDate.lead), size=2, position=position_dodge(.5)) +
+  theme_bw() +
+  coord_flip() +
+  scale_color_manual(values = c('#1f78b4','#e31a1c'))
+p2
+```
+
+**PLAY - BY - PLAY:** We woke up at 9am, we took a walk together (this is "Yard" time), he ate his breakfast in the family room, I went into the kitchen to make breakfast and he followed, then we spent the rest of the morning in the family room together, apart from one bathroom break. For lunch he followed me into the kitchen and I put him outside for some yard time while I ate, we then went over to the neighbors for a quick play-date and then back to the kitchen. Gauss took a break to check out the family room for a quick second and then came back to me in the kitchen. We spent another couple hours in the family room before we got into the car and went for a hike. When we came back, I showered and Gauss stayed in the family room before going into the crate. I left to visit a friend. When I came back, we went outside for a brief minute, then bathroom, then playtime in the family room (the "Other" is him playing by himself with a toy), and finally, I cleaned up the kitchen and he was right there with me. End of day 8. 
+
+As we can see here, Gauss is my shadow. It amazes me that before doing this study, I had no idea how much time we actually spent together.
+
+## Back to the Primary Objective
+
+If Gauss "loves"" me more in the kitchen then I would expect that the time it takes for him to follow me to the kitchen is shorter than the time it takes him to follow me to other locations. 
+
+First, let's take a look at the frequencies of Gauss' decisions. Here, we are only looking at the "phase changes" not the "30 minute" responses, meaning that either he or I decided to move or change activities. We are applying this restriction because we do not want to artificially inflate some of his decisions to stay in a certain state simply because he is asleep, or not faced with a decision. During a "phase change" Gauss is making a decision about where he wants to be and what he wants to do. As a result, examining these frequencies gives some insight into his initial preferences. 
+
+
+```{r,echo = F,warning = F}
+t <- Gauss %>% 
+        filter(Entry_Type=="Phase change") %>% 
+        group_by(Rachel_Location, Gauss_Location) %>% 
+        summarise(n=n()) %>% 
+        mutate(freq = round(n/sum(n),2)) %>% 
+        filter(Rachel_Location %in% c("Bathroom","Bedroom","Family Room", "Kitchen"))
+
+
+kable(t, "html",col.names = c("Rachel's Location", "Gauss' Location", "Frequency","Pr(Gauss Location|Rachel Location)"))%>%
+        kable_styling(bootstrap_options = c("striped","hover","condensed")) %>% 
+        collapse_rows(columns = 1:2)
+```
+
+Looking at this table, we see that he chooses to be with me 18% of the time when I am in the bathroom (it is kind of surprising he would want to be in the bathroom at all), 70% of the time when I am in the bedroom, 84% of the time when I am in the family room, and 47% of the time when I am in the kitchen. So it would seem that my being in the kitchen is not terribly compelling to him. Now, remember those time series plots? He typically does follow me, but this table is mostly capturing those brief moments before he follows (but also when he doesn't follow me OR when he chooses to get up and do something else).
+
+What will be more telling is the lag time. Let's take a look at how long Gauss would wait before we were in the same room. 
+```{r, echo = F}
+t2 <- GaussLag %>% 
+        group_by(Rachel_Location) %>% 
+        summarise(avg = round(mean(Cumulative_Lag),2), n = n()) %>% 
+        mutate()
+kable(t2, col.names = c("Rachel's Location","Average Lag Time in Minutes","Total Lag Occurrances"))
+```
+
+First, I want to point out how few occurrences there are where he is not with me. That said, it appears that if Gauss does not follow me to the kitchen immediately, he will wait an average of ~11 minutes before joining me. But this doesn't tell the whole story either. Sometimes, I came back to the room where Gauss was when my activity in the kitchen is finished. When this happens, Gauss' decision gets "Censored" at that time - he is no longer able to join me in the kitchen simply because I am no longer there. I want to clarify here, this doesn't not mean that I missed him so much that I came back to him (Justin's initial reaction...), it simply means that my activity was over and my natural path in the house took me to same location he was in. For example, I am watching TV, get up to grab a snack in the kitchen, and then return to the family room to watch TV. All the while, Gauss is in the family room.
+
+Perhaps a more accurate representation of the data is:
+```{r, echo = F}
+t3 <- GaussLag %>% 
+        group_by(Censored,Rachel_Location) %>% 
+        summarise(avg = round(mean(Cumulative_Lag),2),n=n()) %>% 
+        mutate()
+kable(t3, col.names = c("Censored","Rachel's Location","Average Lag Time in Minutes","Total Lag Occurrances"))
+```
+
+Here we have a "Censored" variable, 0 = Not Censored (Gauss joined me), 1 = Censored (Gauss didn't have enough time to join me). This is starting to look like "survival-ish" data with some occurrences being censored and "time to event" measurements. Here, the "event"" would be joining me in a room. 
+
+We do not have the typical survival data since we have a lot of occurrences from the same individual, so... *non-independent measurements*. This rules out any formal survival testing techniques, which is okay because I believe we have already achieved the answer to our question. However, I believe Kaplan-Meier curves will be able to tell the story of Gauss' lag times pretty nicely.
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.align="center"}
+
+cols2 <- c('#e41a1c','#377eb8','#4daf4a','#984ea3')
+# 
+# sf <- GaussLag %>%
+#         filter(Rachel_Location %in% c("Bathroom","Bedroom","Family Room", "Kitchen"))
+# my.fit1 <- survfit(Surv(sf$Cumulative_Lag,sf$Censored==0)~sf$Rachel_Location) 
+
+sf2 <- Gauss %>% 
+        filter(Rachel_Location %in% c("Bathroom","Bedroom","Family Room", "Kitchen")) %>% 
+        filter(Censored != 2) %>% 
+        filter(I_LagDataset == 1 | Cumulative_Lag == 0)
+
+my.fit2 <- survfit(Surv(sf2$Cumulative_Lag,sf2$Censored == 0)~sf2$Rachel_Location) 
+
+p<- ggsurvplot(my.fit2,data = sf2, conf.int = F, pval = F, risk.table = T, 
+           ylab = "Pr(Ignoring Rachel's Location)", 
+           legend.title = "Rachel's Location",
+           legend.labs = c("Bathroom","Bedroom","Family Room","Kitchen"),
+           risk.table.title = "# Occurrances at Risk to Join Rachel",
+           risk.table.fontsize = 3,
+           risk.table.height = 0.4,
+           palette = cols2)
+p$table$theme$plot.title$size <- 10 
+p$table$theme$axis.title.y$size <- 10
+p$plot$theme$axis.title.y$size <- 10
+p
+```
+
+Each colored line represents my location in either the Bathroom, Bedroom, Family Room, or Kitchen. **Here's how to read this plot:** Let's examine the purple line (Kitchen). There are 65 occurrences when I was in the Kitchen and Gauss had a choice to come and join me - therefore at time 0, there are 65 occurrences where I was in the kitchen "at risk" of being ignored. At 10 minutes, there were only 8 occurrences of my being in the kitchen still "at risk" of or continuing to be ignored. This means that for 57 out of the 65 of the times that I was in the kitchen, Gauss joined me there or didn't have the chance to join me because I returned to him by 10 minutes. These calculations are computed at every time point, not just in 10 minute intervals. 
+
+As indicated by the straight vertical line at time 0, Gauss pretty much follows me immediately, regardless of which room I'm in. In the table below the curves we see that at time 0, there were 265 potential times when Gauss could have ignored my being in the family room and 94% of the time he joined me within 1 minute (Green Line). 
+
+When I am in the bathroom (Red Line), he joins me immediately 33% of the time. If he doesn't join immediately, then there is a decent chance that he won't join me. This makes sense too, as most bathroom breaks are quick and when they are longer, like when showering, he can hear what is happening without coming to investigate. 
+
+When I am in the bedroom (Blue Line), 86% of the time he follows me immediately. Also likely is that he can wait up to 20 minutes before coming and joining me. This typically happens around bedtime, while I am getting ready for bed - he will hang out on the carpet in the hall until I get into my bed and then comes into the room.   
+
+*Now, the kitchen (Purple Line).*
+
+He is a little less binary when it comes to the kitchen - this is very different than what I expected. He mostly, 65% of the time, comes immediately. However, he is willing give me a few minutes before accompanying me. By 10 minutes, the probability that he joins me is 77%, by 20 minutes, the probability that he joins me is only 80%. It is definitely not a given that he wants to be with me when I am in the kitchen.
+
+In fact, you could make the case that he wants to be with me more in the family room than in the kitchen.
+
+## Conclusion
+Does this mean that he doesn't love me more in the kitchen? Well, technically I didn't do any testing , but I feel pretty confident that he will likely follow me anywhere, and on the rare occasion he chooses not to, it might be because I'm in the bathroom.
+
+I guess that's love though.
+
+
+```{r}
+summary(my.fit2)
+```
+
+
+## Limitations
+Obviously, this study was only 11 days in length and so, if these 11 days were atypical and were not a random sample of Gauss' days, all inference will be biased. We do not believe that this happened but it should be mentioned. Additionally, for practical reasons activities or movements that took less than 2 minutes to complete did not get documented. For example, a short trip to the bedroom to grab a book and come back to the family room would not have been documented. This did not happen very often, and we do not feel that this greatly impacted the study.  
+

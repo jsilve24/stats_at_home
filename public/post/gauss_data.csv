@@ -1,0 +1,591 @@
+StartDate,EndDate,Survey_Seconds,RecordedDate,RecordedTime,Hour_Recorded,Minute_Recorded,Until_Hour,Until_Minute,Day,Visiting_Dog,Entry_Type,Gauss_Location,Rachel_Location,I_LagDataset,Joint_Activity,Cumulative_Lag,Censored,Gauss_Activity,Same_Activity,I_Gauss_Activity,Duration_Gauss_Activity,Rachel_Activity,Joint_Purpose
+5/25/2017 7:30,5/25/2017 7:31,31,5/25/2017 7:31,7:31:00 AM,7,31,7,52,1,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,0,1,21,Sleeping,Yes
+5/25/2017 7:52,5/25/2017 7:52,32,5/25/2017 7:52,7:52:00 AM,7,52,8,1,1,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Alert focusing on human,0,0,9,Sleeping,Yes
+5/25/2017 8:00,5/25/2017 8:01,69,5/25/2017 8:01,8:01:00 AM,8,1,8,2,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,1,10,Cleaning,No
+5/25/2017 8:02,5/25/2017 8:02,33,5/25/2017 8:02,8:02:00 AM,8,2,8,26,1,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,1,24,Training,Yes
+5/25/2017 8:25,5/25/2017 8:26,79,5/25/2017 8:26,8:26:00 AM,8,26,8,28,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,2,Cooking,No
+5/25/2017 8:28,5/25/2017 8:28,17,5/25/2017 8:28,8:28:00 AM,8,28,8,31,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,3,Cooking,No
+5/25/2017 8:30,5/25/2017 8:31,47,5/25/2017 8:31,8:31:00 AM,8,31,8,37,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,1,9,Cooking,No
+5/25/2017 8:35,5/25/2017 8:37,63,5/25/2017 8:37,8:37:00 AM,8,37,8,41,1,No,Phase change,Family Room,Kitchen,,No,3,1,Alert looking out the window,0,1,4,Cooking,No
+5/25/2017 8:41,5/25/2017 8:41,38,5/25/2017 8:41,8:41:00 AM,8,41,8,48,1,No,Phase change,Landing,Kitchen,1,No,11,1,Playing with dog,0,1,7,Cooking,No
+5/25/2017 8:45,5/25/2017 8:48,157,5/25/2017 8:48,8:48:00 AM,8,48,9,1,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,13,Socializing,No
+5/25/2017 9:00,5/25/2017 9:01,42,5/25/2017 9:01,9:01:00 AM,9,1,9,31,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,30,Socializing,No
+5/25/2017 9:31,5/25/2017 9:31,16,5/25/2017 9:31,9:31:00 AM,9,31,10,0,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,59,Working,No
+5/25/2017 10:00,5/25/2017 10:00,25,5/25/2017 10:00,10:00:00 AM,10,0,10,11,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,70,Working,No
+5/25/2017 10:10,5/25/2017 10:11,21,5/25/2017 10:11,10:11:00 AM,10,11,10,22,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,11,Working,No
+5/25/2017 10:21,5/25/2017 10:22,35,5/25/2017 10:22,10:22:00 AM,10,22,10,26,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,4,Working,No
+5/25/2017 10:25,5/25/2017 10:26,60,5/25/2017 10:26,10:26:00 AM,10,26,10,30,1,No,Phase change,Family Room,Family Room,,No,0,0,Playing with dog,0,0,4,Working,No
+5/25/2017 10:30,5/25/2017 10:30,14,5/25/2017 10:30,10:30:00 AM,10,30,10,41,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,1,1,15,Working,No
+5/25/2017 10:41,5/25/2017 10:41,15,5/25/2017 10:41,10:41:00 AM,10,41,10,43,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,2,Working,No
+5/25/2017 10:43,5/25/2017 10:43,14,5/25/2017 10:43,10:43:00 AM,10,43,11,0,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,17,Working,No
+5/25/2017 11:00,5/25/2017 11:00,15,5/25/2017 11:00,11:00:00 AM,11,0,11,30,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,47,Working,No
+5/25/2017 11:30,5/25/2017 11:30,16,5/25/2017 11:30,11:30:00 AM,11,30,11,43,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,60,Working,No
+5/25/2017 11:42,5/25/2017 11:43,47,5/25/2017 11:43,11:43:00 AM,11,43,11,54,1,No,Phase change,Back Yard,Bathroom,,No,11,2,Sniffing,0,1,11,Bathing/Getting Ready,No
+5/25/2017 11:52,5/25/2017 11:54,73,5/25/2017 11:54,11:54:00 AM,11,54,13,30,1,No,Grouped,Crate,Out,,No,96,2,Unknown,0,1,96,Travelling,No
+5/25/2017 13:29,5/25/2017 13:30,41,5/25/2017 13:30,1:30:00 PM,13,30,13,30,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Sniffing,0,0,0,Cooking,No
+5/25/2017 13:30,5/25/2017 13:30,17,5/25/2017 13:30,1:30:00 PM,13,30,13,32,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Sniffing,1,1,2,Cooking,No
+5/25/2017 13:32,5/25/2017 13:32,19,5/25/2017 13:32,1:32:00 PM,13,32,13,34,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,2,Working,No
+5/25/2017 13:33,5/25/2017 13:34,13,5/25/2017 13:34,1:34:00 PM,13,34,13,42,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,8,Working,No
+5/25/2017 13:42,5/25/2017 13:42,18,5/25/2017 13:42,1:42:00 PM,13,42,13,51,1,No,Phase change,Landing,Kitchen,1,No,9,1,Alert looking out the window,0,1,9,Cooking,No
+5/25/2017 13:50,5/25/2017 13:51,36,5/25/2017 13:51,1:51:00 PM,13,51,14,1,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,10,Eating,No
+5/25/2017 14:00,5/25/2017 14:01,35,5/25/2017 14:01,2:01:00 PM,14,1,14,32,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,31,Petting gauss,Yes
+5/25/2017 14:31,5/25/2017 14:32,25,5/25/2017 14:32,2:32:00 PM,14,32,14,44,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,12,Socializing,No
+5/25/2017 14:44,5/25/2017 14:44,24,5/25/2017 14:44,2:44:00 PM,14,44,14,58,1,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,14,Socializing,No
+5/25/2017 14:58,5/25/2017 14:58,23,5/25/2017 14:58,2:58:00 PM,14,58,15,1,1,No,Phase change,Back Yard,Kitchen,,No,3,2,Sleeping,0,0,3,Cooking,No
+5/25/2017 15:01,5/25/2017 15:01,19,5/25/2017 15:01,3:01:00 PM,15,1,15,7,1,No,30 minute,Back Yard,Kitchen,,No,9,2,Sleeping,1,1,9,Cooking,No
+5/25/2017 15:05,5/25/2017 15:07,69,5/25/2017 15:07,3:07:00 PM,15,7,15,15,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,8,Cooking,No
+5/25/2017 15:14,5/25/2017 15:15,28,5/25/2017 15:15,3:15:00 PM,15,15,15,30,1,No,Phase change,Landing,Kitchen,,No,15,0,Alert looking out the window,0,0,15,Cooking,No
+5/25/2017 15:30,5/25/2017 15:30,19,5/25/2017 15:30,3:30:00 PM,15,30,15,39,1,No,30 minute,Family Room,Kitchen,1,No,24,0,Alert looking out the window,1,1,24,Cooking,No
+5/25/2017 15:38,5/25/2017 15:39,18,5/25/2017 15:39,3:39:00 PM,15,39,15,42,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,3,Cooking,No
+5/25/2017 15:42,5/25/2017 15:42,19,5/25/2017 15:42,3:42:00 PM,15,42,15,53,1,No,Phase change,Family Room,Kitchen,,No,11,1,Alert focusing on human,1,1,14,Cooking,No
+5/25/2017 15:53,5/25/2017 15:53,14,5/25/2017 15:53,3:53:00 PM,15,53,16,1,1,No,Phase change,Family Room,Kitchen,,No,19,1,Sleeping,0,0,8,Cooking,No
+5/25/2017 16:00,5/25/2017 16:01,14,5/25/2017 16:01,4:01:00 PM,16,1,16,31,1,No,30 minute,Family Room,Kitchen,1,No,49,1,Sleeping,1,1,38,Cooking,No
+5/25/2017 16:31,5/25/2017 16:31,20,5/25/2017 16:31,4:31:00 PM,16,31,16,45,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,14,Working,No
+5/25/2017 16:45,5/25/2017 16:45,18,5/25/2017 16:45,4:45:00 PM,16,45,17,1,1,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,16,Exercising,Yes
+5/25/2017 17:00,5/25/2017 17:01,44,5/25/2017 17:01,5:01:00 PM,17,1,17,27,1,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,42,Exercising,Yes
+5/25/2017 17:26,5/25/2017 17:27,77,5/25/2017 17:27,5:27:00 PM,17,27,17,32,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,5,Working,No
+5/25/2017 17:30,5/25/2017 17:32,85,5/25/2017 17:32,5:32:00 PM,17,32,17,43,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,11,Socializing,No
+5/25/2017 17:43,5/25/2017 17:43,22,5/25/2017 17:43,5:43:00 PM,17,43,17,45,1,No,Phase change,Gym,Kitchen,,No,2,0,Alert looking out the window,0,0,2,Cleaning,No
+5/25/2017 17:44,5/25/2017 17:45,16,5/25/2017 17:45,5:45:00 PM,17,45,17,57,1,No,Phase change,Landing,Kitchen,1,No,14,0,Alert looking out the window,1,1,14,Cleaning,No
+5/25/2017 17:57,5/25/2017 17:57,36,5/25/2017 17:57,5:57:00 PM,17,57,18,0,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,3,Cooking,No
+5/25/2017 18:00,5/25/2017 18:00,19,5/25/2017 18:00,6:00:00 PM,18,0,18,12,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,1,12,Cooking,No
+5/25/2017 18:12,5/25/2017 18:12,15,5/25/2017 18:12,6:12:00 PM,18,12,18,30,1,No,Phase change,Family Room,Kitchen,1,No,18,1,Alert looking out the window,0,1,18,Cooking,No
+5/25/2017 18:30,5/25/2017 18:30,22,5/25/2017 18:30,6:30:00 PM,18,30,18,36,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,6,Cooking,No
+5/25/2017 18:36,5/25/2017 18:36,30,5/25/2017 18:36,6:36:00 PM,18,36,18,41,1,No,30 minute,Landing,Kitchen,1,No,5,1,Alert looking out the window,0,1,5,Cooking,No
+5/25/2017 18:40,5/25/2017 18:41,48,5/25/2017 18:41,6:41:00 PM,18,41,18,52,1,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,11,Cooking,No
+5/25/2017 18:51,5/25/2017 18:52,16,5/25/2017 18:52,6:52:00 PM,18,52,19,0,1,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Training,0,0,8,Training,Yes
+5/25/2017 19:00,5/25/2017 19:00,14,5/25/2017 19:00,7:00:00 PM,19,0,19,7,1,No,30 minute,Back Yard,Back Yard,,Yes,0,0,Training,1,1,15,Training,Yes
+5/25/2017 19:07,5/25/2017 19:07,18,5/25/2017 19:07,7:07:00 PM,19,7,19,28,1,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,21,Cooking,No
+5/25/2017 19:28,5/25/2017 19:28,27,5/25/2017 19:28,7:28:00 PM,19,28,19,31,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,3,Eating,No
+5/25/2017 19:30,5/25/2017 19:31,43,5/25/2017 19:31,7:31:00 PM,19,31,19,33,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,1,5,Eating,No
+5/25/2017 19:33,5/25/2017 19:33,26,5/25/2017 19:33,7:33:00 PM,19,33,19,38,1,No,Phase change,Landing,Kitchen,1,No,5,1,Playing with dog,0,1,5,Eating,No
+5/25/2017 19:37,5/25/2017 19:38,25,5/25/2017 19:38,7:38:00 PM,19,38,20,0,1,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Eating/Drinking,0,0,22,Eating,Yes
+5/25/2017 20:00,5/25/2017 20:00,16,5/25/2017 20:00,8:00:00 PM,20,0,20,10,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Eating/Drinking,1,1,32,Cleaning,No
+5/25/2017 20:10,5/25/2017 20:10,30,5/25/2017 20:10,8:10:00 PM,20,10,20,15,1,No,Phase change,Landing,Kitchen,1,No,5,1,Playing with dog,0,1,5,Cleaning,No
+5/25/2017 20:14,5/25/2017 20:15,14,5/25/2017 20:15,8:15:00 PM,20,15,20,30,1,No,Phase change,Back Yard,Kitchen,,No,15,2,Sniffing,0,1,15,Cleaning,No
+5/25/2017 20:30,5/25/2017 20:30,17,5/25/2017 20:30,8:30:00 PM,20,30,20,53,1,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,23,Cleaning,No
+5/25/2017 20:52,5/25/2017 20:53,14,5/25/2017 20:53,8:53:00 PM,20,53,21,1,1,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,8,Playing,Yes
+5/25/2017 21:00,5/25/2017 21:01,23,5/25/2017 21:01,9:01:00 PM,21,1,21,31,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,30,Socializing,No
+5/25/2017 21:30,5/25/2017 21:31,16,5/25/2017 21:31,9:31:00 PM,21,31,21,42,1,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,41,Socializing,No
+5/25/2017 21:42,5/25/2017 21:42,16,5/25/2017 21:42,9:42:00 PM,21,42,22,1,1,No,Phase change,Family Room,Bathroom,,No,19,1,Sleeping,1,0,60,Bathing/Getting Ready,No
+5/25/2017 22:01,5/25/2017 22:01,14,5/25/2017 22:01,10:01:00 PM,22,1,22,2,1,No,30 minute,Family Room,Bathroom,1,No,20,1,Sleeping,1,0,61,Bathing/Getting Ready,No
+5/25/2017 22:02,5/25/2017 22:02,24,5/25/2017 22:02,10:02:00 PM,22,2,22,31,1,No,Phase change,Crate,Bedroom,1,Yes,29,0,Sleeping,1,0,90,Bathing/Getting Ready,No
+5/25/2017 22:30,5/25/2017 22:31,23,5/25/2017 22:31,10:31:00 PM,22,31,23,59,1,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,149,Sleeping,Yes
+5/26/2017 0:00,5/26/2017 0:00,1,5/26/2017 0:00,12:00:00 AM,0,0,7,13,2,No,Fixed,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,433,Sleeping,Yes
+5/26/2017 7:12,5/26/2017 7:13,69,5/26/2017 7:13,7:13:00 AM,7,13,7,30,2,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,17,Training,Yes
+5/26/2017 7:30,5/26/2017 7:30,29,5/26/2017 7:30,7:30:00 AM,7,30,7,36,2,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,23,Training,Yes
+5/26/2017 7:35,5/26/2017 7:36,39,5/26/2017 7:36,7:36:00 AM,7,36,7,41,2,No,Phase change,Family Room,Kitchen,1,No,5,1,Eating/Drinking,0,1,5,Eating,No
+5/26/2017 7:39,5/26/2017 7:41,97,5/26/2017 7:41,7:41:00 AM,7,41,7,53,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,12,Eating,No
+5/26/2017 7:53,5/26/2017 7:53,16,5/26/2017 7:53,7:53:00 AM,7,53,8,1,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,8,Socializing,No
+5/26/2017 8:00,5/26/2017 8:01,76,5/26/2017 8:01,8:01:00 AM,8,1,8,32,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,39,Socializing,No
+5/26/2017 8:30,5/26/2017 8:32,114,5/26/2017 8:32,8:32:00 AM,8,32,12,23,2,No,Grouped,Crate,Out,,No,231,2,Unknown,0,1,231,Working,No
+5/26/2017 12:22,5/26/2017 12:23,85,5/26/2017 12:23,12:23:00 PM,12,23,12,32,2,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,0,9,Socializing,No
+5/26/2017 12:32,5/26/2017 12:32,34,5/26/2017 12:32,12:32:00 PM,12,32,12,52,2,No,30 minute,Back Yard,Back Yard,,Yes,0,0,Sniffing,1,1,29,Socializing,No
+5/26/2017 12:51,5/26/2017 12:52,75,5/26/2017 12:52,12:52:00 PM,12,52,12,55,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,3,Socializing,No
+5/26/2017 12:54,5/26/2017 12:55,65,5/26/2017 12:55,12:55:00 PM,12,55,12,57,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,2,Socializing,No
+5/26/2017 12:57,5/26/2017 12:57,38,5/26/2017 12:57,12:57:00 PM,12,57,13,0,2,No,Phase change,Kitchen,Family Room,1,No,3,0,Sleeping,1,0,5,Socializing,No
+5/26/2017 13:00,5/26/2017 13:00,20,5/26/2017 13:00,1:00:00 PM,13,0,13,7,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,12,Socializing,No
+5/26/2017 13:07,5/26/2017 13:07,16,5/26/2017 13:07,1:07:00 PM,13,7,13,12,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,5,Socializing,No
+5/26/2017 13:11,5/26/2017 13:12,30,5/26/2017 13:12,1:12:00 PM,13,12,13,13,2,No,Phase change,Kitchen,Family Room,1,No,1,0,Sleeping,0,0,1,Socializing,No
+5/26/2017 13:12,5/26/2017 13:12,17,5/26/2017 13:13,1:13:00 PM,13,13,13,26,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,14,Socializing,No
+5/26/2017 13:25,5/26/2017 13:26,18,5/26/2017 13:26,1:26:00 PM,13,26,13,30,2,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,4,Cooking,No
+5/26/2017 13:29,5/26/2017 13:30,25,5/26/2017 13:30,1:30:00 PM,13,30,13,30,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,0,4,Eating,No
+5/26/2017 13:30,5/26/2017 13:30,18,5/26/2017 13:30,1:30:00 PM,13,30,14,1,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,0,35,Eating,No
+5/26/2017 14:00,5/26/2017 14:00,17,5/26/2017 14:01,2:01:00 PM,14,1,14,8,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,42,Eating,No
+5/26/2017 14:07,5/26/2017 14:08,57,5/26/2017 14:08,2:08:00 PM,14,8,14,35,2,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,0,27,Working,No
+5/26/2017 14:35,5/26/2017 14:35,16,5/26/2017 14:35,2:35:00 PM,14,35,14,48,2,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sniffing,1,0,40,Working,No
+5/26/2017 14:47,5/26/2017 14:48,94,5/26/2017 14:48,2:48:00 PM,14,48,14,52,2,No,Phase change,Back Yard,Family Room,1,No,4,0,Sniffing,1,1,44,Working,No
+5/26/2017 14:52,5/26/2017 14:52,16,5/26/2017 14:52,2:52:00 PM,14,52,15,1,2,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,9,Working,No
+5/26/2017 15:01,5/26/2017 15:01,39,5/26/2017 15:01,3:01:00 PM,15,1,15,41,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,49,Petting gauss,Yes
+5/26/2017 15:41,5/26/2017 15:41,24,5/26/2017 15:41,3:41:00 PM,15,41,16,0,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,68,Sleeping,No
+5/26/2017 16:00,5/26/2017 16:00,17,5/26/2017 16:00,4:00:00 PM,16,0,16,31,2,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,99,Socializing,No
+5/26/2017 16:30,5/26/2017 16:31,39,5/26/2017 16:31,4:31:00 PM,16,31,16,37,2,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Playing with dog,0,1,6,Socializing,No
+5/26/2017 16:36,5/26/2017 16:37,26,5/26/2017 16:37,4:37:00 PM,16,37,17,5,2,Yes,Phase change,Car,Car,,Yes,0,0,Alert focusing on human,0,1,28,Travelling,Yes
+5/26/2017 17:04,5/26/2017 18:04,3602,5/26/2017 17:05,5:05:00 PM,17,5,18,8,2,Yes,30 minute,Petco,Petco,,Yes,0,0,Training,0,0,63,Training,Yes
+5/26/2017 18:06,5/26/2017 18:08,71,5/26/2017 18:08,6:08:00 PM,18,8,18,34,2,Yes,30 minute,Petco,Petco,,Yes,0,0,Training,1,1,89,Training,Yes
+5/26/2017 18:32,5/26/2017 18:34,101,5/26/2017 18:34,6:34:00 PM,18,34,18,46,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,12,Working,No
+5/26/2017 18:45,5/26/2017 18:46,64,5/26/2017 18:46,6:46:00 PM,18,46,18,50,2,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Playing with dog,0,1,4,Socializing,No
+5/26/2017 18:50,5/26/2017 18:50,18,5/26/2017 18:50,6:50:00 PM,18,50,19,1,2,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sleeping,0,0,11,Socializing,No
+5/26/2017 19:01,5/26/2017 19:01,19,5/26/2017 19:01,7:01:00 PM,19,1,19,17,2,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Sleeping,1,1,27,Socializing,No
+5/26/2017 19:17,5/26/2017 19:17,20,5/26/2017 19:17,7:17:00 PM,19,17,19,22,2,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Playing with dog,0,1,5,Socializing,No
+5/26/2017 19:21,5/26/2017 19:22,40,5/26/2017 19:22,7:22:00 PM,19,22,19,25,2,Yes,Phase change,Family Room,Kitchen,1,No,3,0,Alert focusing on human,0,1,3,Cooking,No
+5/26/2017 19:24,5/26/2017 19:25,40,5/26/2017 19:25,7:25:00 PM,19,25,19,36,2,Yes,Phase change,Kitchen,Family Room,1,No,11,1,Playing with dog,0,0,11,Cooking,No
+5/26/2017 19:36,5/26/2017 19:36,19,5/26/2017 19:36,7:36:00 PM,19,36,19,43,2,Yes,30 minute,Kitchen,Kitchen,,Yes,0,0,Playing with dog,1,0,18,Cooking,No
+5/26/2017 19:42,5/26/2017 19:43,24,5/26/2017 19:43,7:43:00 PM,19,43,20,1,2,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,1,0,36,Eating,No
+5/26/2017 20:00,5/26/2017 20:01,41,5/26/2017 20:01,8:01:00 PM,20,1,20,16,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,1,1,51,Socializing,No
+5/26/2017 20:15,5/26/2017 20:16,19,5/26/2017 20:16,8:16:00 PM,20,16,20,17,2,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,1,Socializing,No
+5/26/2017 20:17,5/26/2017 20:17,17,5/26/2017 20:17,8:17:00 PM,20,17,20,19,2,Yes,Phase change,Kitchen,Family Room,1,No,2,0,Sleeping,0,0,2,Socializing,No
+5/26/2017 20:19,5/26/2017 20:19,31,5/26/2017 20:19,8:19:00 PM,20,19,20,30,2,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,13,Socializing,No
+5/26/2017 20:30,5/26/2017 20:30,16,5/26/2017 20:30,8:30:00 PM,20,30,20,47,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,30,Socializing,No
+5/26/2017 20:47,5/26/2017 20:47,19,5/26/2017 20:47,8:47:00 PM,20,47,20,49,2,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Sleeping,1,1,32,Cleaning,No
+5/26/2017 20:48,5/26/2017 20:49,37,5/26/2017 20:49,8:49:00 PM,20,49,21,1,2,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Playing with dog,0,0,12,Cleaning,No
+5/26/2017 21:00,5/26/2017 21:01,33,5/26/2017 21:01,9:01:00 PM,21,1,21,9,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,1,1,20,Working,No
+5/26/2017 21:08,5/26/2017 21:09,13,5/26/2017 21:09,9:09:00 PM,21,9,21,10,2,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,1,Cooking,No
+5/26/2017 21:10,5/26/2017 21:10,13,5/26/2017 21:10,9:10:00 PM,21,10,21,11,2,Yes,Phase change,Landing,Kitchen,1,No,1,0,Alert looking out the window,0,1,1,Cooking,No
+5/26/2017 21:11,5/26/2017 21:11,16,5/26/2017 21:11,9:11:00 PM,21,11,21,15,2,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,1,4,Cooking,No
+5/26/2017 21:15,5/26/2017 21:15,13,5/26/2017 21:15,9:15:00 PM,21,15,21,21,2,Yes,Phase change,Family Room,Kitchen,,No,6,0,Playing with dog,0,1,6,Cooking,No
+5/26/2017 21:21,5/26/2017 21:21,11,5/26/2017 21:21,9:21:00 PM,21,21,21,23,2,Yes,Phase change,Family Room,Kitchen,1,No,8,0,Sleeping,0,1,2,Cooking,No
+5/26/2017 21:23,5/26/2017 21:23,11,5/26/2017 21:23,9:23:00 PM,21,23,21,30,2,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,7,Cooking,No
+5/26/2017 21:30,5/26/2017 21:30,18,5/26/2017 21:30,9:30:00 PM,21,30,21,41,2,Yes,30 minute,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,1,11,Cooking,No
+5/26/2017 21:40,5/26/2017 21:41,20,5/26/2017 21:41,9:41:00 PM,21,41,22,0,2,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,0,19,Petting gauss,Yes
+5/26/2017 22:00,5/26/2017 22:00,19,5/26/2017 22:00,10:00:00 PM,22,0,22,20,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with human,1,1,39,Petting gauss,Yes
+5/26/2017 22:19,5/26/2017 22:20,17,5/26/2017 22:20,10:20:00 PM,22,20,22,36,2,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,16,Socializing,No
+5/26/2017 22:36,5/26/2017 22:36,16,5/26/2017 22:36,10:36:00 PM,22,36,22,59,2,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,39,Socializing,No
+5/26/2017 22:59,5/26/2017 22:59,23,5/26/2017 22:59,10:59:00 PM,22,59,23,59,2,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,121,Sleeping,Yes
+5/26/2017 0:00,5/26/2017 0:00,23,5/27/2017 0:00,12:00:00 AM,0,0,8,34,3,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,514,Sleeping,Yes
+5/27/2017 8:32,5/27/2017 8:34,164,5/27/2017 8:34,8:34:00 AM,8,34,11,33,3,Yes,Grouped,Neighbors,Neighbors,,No,0,0,Playing with dog,0,0,179,Socializing,No
+5/27/2017 11:32,5/27/2017 11:33,29,5/27/2017 11:33,11:33:00 AM,11,33,12,1,3,Yes,30 minute,Neighbors,Neighbors,,Yes,0,0,Playing with dog,1,1,207,Socializing,No
+5/27/2017 11:58,5/27/2017 12:01,162,5/27/2017 12:01,12:01:00 PM,12,1,12,13,3,Yes,30 minute,Neighbors,Neighbors,,Yes,0,0,Alert focusing on human,0,1,12,Socializing,Yes
+5/27/2017 12:13,5/27/2017 12:13,44,5/27/2017 12:13,12:13:00 PM,12,13,12,32,3,Yes,Phase change,Car,Car,,Yes,0,0,Alert looking out the window,0,0,19,Travelling,No
+5/27/2017 12:31,5/27/2017 12:32,54,5/27/2017 12:32,12:32:00 PM,12,32,13,21,3,Yes,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,1,1,68,Travelling,No
+5/27/2017 13:16,5/27/2017 13:21,310,5/27/2017 13:21,1:21:00 PM,13,21,13,40,3,Yes,30 minute,Forest,Forest,,Yes,0,0,Playing with dog,0,1,19,Socializing,Yes
+5/27/2017 13:40,5/27/2017 13:40,24,5/27/2017 13:40,1:40:00 PM,13,40,14,2,3,Yes,30 minute,Forest,Forest,,Yes,0,0,Sniffing,0,1,22,Socializing,Yes
+5/27/2017 14:02,5/27/2017 14:02,40,5/27/2017 14:02,2:02:00 PM,14,2,14,30,3,Yes,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,0,1,28,Travelling,No
+5/27/2017 14:30,5/27/2017 14:30,22,5/27/2017 14:30,2:30:00 PM,14,30,14,41,3,Yes,30 minute,Back Yard,Family Room,,No,11,2,Playing with dog,0,1,11,Cleaning,No
+5/27/2017 14:39,5/27/2017 14:41,99,5/27/2017 14:41,2:41:00 PM,14,41,14,45,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,4,Eating,No
+5/27/2017 14:44,5/27/2017 14:45,22,5/27/2017 14:45,2:45:00 PM,14,45,15,1,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,16,Eating,No
+5/27/2017 15:00,5/27/2017 15:01,24,5/27/2017 15:01,3:01:00 PM,15,1,15,7,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,22,Socializing,No
+5/27/2017 15:05,5/27/2017 15:07,144,5/27/2017 15:07,3:07:00 PM,15,7,15,31,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,46,Socializing,No
+5/27/2017 15:30,5/27/2017 15:31,21,5/27/2017 15:31,3:31:00 PM,15,31,15,57,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,72,Sleeping,No
+5/27/2017 15:57,5/27/2017 15:57,15,5/27/2017 15:57,3:57:00 PM,15,57,16,40,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,115,Sleeping,No
+5/27/2017 16:40,5/27/2017 16:40,18,5/27/2017 16:40,4:40:00 PM,16,40,16,49,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,124,Sleeping,No
+5/27/2017 16:48,5/27/2017 16:49,17,5/27/2017 16:49,4:49:00 PM,16,49,17,1,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Training,0,0,12,Training,Yes
+5/27/2017 17:01,5/27/2017 17:01,11,5/27/2017 17:01,5:01:00 PM,17,1,17,6,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Training,1,1,17,Training,Yes
+5/27/2017 17:05,5/27/2017 17:06,66,5/27/2017 17:06,5:06:00 PM,17,6,17,35,3,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,29,Socializing,No
+5/27/2017 17:34,5/27/2017 17:35,57,5/27/2017 17:35,5:35:00 PM,17,35,17,56,3,Yes,30 minute,Family Room,Kitchen,1,Yes,21,1,Sleeping,0,0,21,Cleaning,No
+5/27/2017 17:54,5/27/2017 17:56,87,5/27/2017 17:56,5:56:00 PM,17,56,18,1,3,Yes,Phase change,Bedroom,Bathroom,,Yes,5,1,Sleeping,1,0,26,Bathing/Getting Ready,No
+5/27/2017 18:00,5/27/2017 18:01,37,5/27/2017 18:01,6:01:00 PM,18,1,18,27,3,Yes,30 minute,Bedroom,Bathroom,1,Yes,31,1,Sleeping,1,1,52,Bathing/Getting Ready,No
+5/27/2017 18:27,5/27/2017 18:27,24,5/27/2017 18:27,6:27:00 PM,18,27,18,32,3,Yes,Phase change,Back Yard,Bedroom,,No,5,2,Sniffing,0,1,5,Bathing/Getting Ready,No
+5/27/2017 18:30,5/27/2017 18:32,98,5/27/2017 18:32,6:32:00 PM,18,32,19,11,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,39,Socializing,No
+5/27/2017 19:09,5/27/2017 19:11,76,5/27/2017 19:11,7:11:00 PM,19,11,19,31,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,59,Socializing,No
+5/27/2017 19:31,5/27/2017 19:31,15,5/27/2017 19:31,7:31:00 PM,19,31,19,57,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,85,Socializing,No
+5/27/2017 19:56,5/27/2017 19:57,15,5/27/2017 19:57,7:57:00 PM,19,57,20,1,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Training,0,0,4,Training,Yes
+5/27/2017 20:00,5/27/2017 20:01,14,5/27/2017 20:01,8:01:00 PM,20,1,20,26,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Training,1,0,29,Training,Yes
+5/27/2017 20:25,5/27/2017 20:26,25,5/27/2017 20:26,8:26:00 PM,20,26,20,31,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Training,1,1,34,Training,Yes
+5/27/2017 20:31,5/27/2017 20:31,41,5/27/2017 20:31,8:31:00 PM,20,31,21,3,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,32,Socializing,No
+5/27/2017 21:01,5/27/2017 21:03,65,5/27/2017 21:03,9:03:00 PM,21,3,21,7,3,Yes,30 minute,Kitchen,Family Room,,Yes,4,0,Alert focusing on human,0,1,4,Eating,No
+5/27/2017 21:06,5/27/2017 21:07,66,5/27/2017 21:07,9:07:00 PM,21,7,21,9,3,Yes,Phase change,Kitchen,Family Room,1,Yes,6,0,Sleeping,0,0,2,Eating,No
+5/27/2017 21:08,5/27/2017 21:09,32,5/27/2017 21:09,9:09:00 PM,21,9,21,31,3,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,24,Eating,No
+5/27/2017 21:31,5/27/2017 21:31,18,5/27/2017 21:31,9:31:00 PM,21,31,22,3,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,56,Socializing,No
+5/27/2017 22:02,5/27/2017 22:02,17,5/27/2017 22:03,10:03:00 PM,22,3,22,28,3,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,81,Socializing,No
+5/27/2017 22:26,5/27/2017 22:28,130,5/27/2017 22:28,10:28:00 PM,22,28,22,33,3,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,5,Training,Yes
+5/27/2017 22:32,5/27/2017 22:33,37,5/27/2017 22:33,10:33:00 PM,22,33,23,59,3,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,147,Sleeping,Yes
+5/27/2017 0:00,5/27/2017 0:00,37,5/28/2017 0:00,12:00:00 AM,0,0,7,22,4,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,442,Sleeping,Yes
+5/28/2017 7:19,5/28/2017 7:22,128,5/28/2017 7:22,7:22:00 AM,7,22,7,31,4,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,9,Socializing,Yes
+5/28/2017 7:31,5/28/2017 7:31,30,5/28/2017 7:31,7:31:00 AM,7,31,8,1,4,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,30,Training,Yes
+5/28/2017 8:01,5/28/2017 8:01,25,5/28/2017 8:01,8:01:00 AM,8,1,8,8,4,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,37,Training,Yes
+5/28/2017 8:08,5/28/2017 8:08,33,5/28/2017 8:08,8:08:00 AM,8,8,8,31,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,23,Petting gauss,Yes
+5/28/2017 8:31,5/28/2017 8:31,24,5/28/2017 8:31,8:31:00 AM,8,31,8,49,4,Yes,30 minute,Family Room,Front Yard,1,No,18,1,Unknown,0,1,18,Training,No
+5/28/2017 8:49,5/28/2017 8:49,29,5/28/2017 8:49,8:49:00 AM,8,49,9,0,4,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,11,Cooking,No
+5/28/2017 9:00,5/28/2017 9:00,21,5/28/2017 9:00,9:00:00 AM,9,0,9,42,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,42,Eating,No
+5/28/2017 9:40,5/28/2017 9:42,107,5/28/2017 9:42,9:42:00 AM,9,42,10,0,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,18,Socializing,No
+5/28/2017 10:00,5/28/2017 10:00,13,5/28/2017 10:00,10:00:00 AM,10,0,10,31,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,49,Socializing,No
+5/28/2017 10:30,5/28/2017 10:31,15,5/28/2017 10:31,10:31:00 AM,10,31,10,35,4,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,4,Socializing,No
+5/28/2017 10:35,5/28/2017 10:35,15,5/28/2017 10:35,10:35:00 AM,10,35,11,1,4,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Playing with dog,0,0,26,Working,No
+5/28/2017 10:35,5/28/2017 11:01,1560,5/28/2017 11:01,11:01:00 AM,11,1,11,13,4,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Playing with dog,1,1,38,Working,No
+5/28/2017 11:12,5/28/2017 11:13,12,5/28/2017 11:13,11:13:00 AM,11,13,11,30,4,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Sleeping,0,0,17,Working,No
+5/28/2017 11:30,5/28/2017 11:30,12,5/28/2017 11:30,11:30:00 AM,11,30,11,45,4,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Sleeping,1,0,32,Working,No
+5/28/2017 11:44,5/28/2017 11:45,39,5/28/2017 11:45,11:45:00 AM,11,45,12,3,4,Yes,Phase change,Kitchen,Family Room,,No,18,0,Sleeping,1,0,50,Socializing,No
+5/28/2017 12:01,5/28/2017 12:03,138,5/28/2017 12:03,12:03:00 PM,12,3,12,19,4,Yes,30 minute,Kitchen,Family Room,1,No,34,0,Sleeping,1,0,66,Socializing,No
+5/28/2017 12:18,5/28/2017 12:19,15,5/28/2017 12:19,12:19:00 PM,12,19,12,30,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,77,Socializing,No
+5/28/2017 12:30,5/28/2017 12:30,28,5/28/2017 12:30,12:30:00 PM,12,30,13,0,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,107,Socializing,No
+5/28/2017 13:00,5/28/2017 13:00,13,5/28/2017 13:00,1:00:00 PM,13,0,13,14,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,121,Socializing,No
+5/28/2017 13:13,5/28/2017 13:14,60,5/28/2017 13:14,1:14:00 PM,13,14,13,37,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,23,Eating,No
+5/28/2017 13:36,5/28/2017 13:37,21,5/28/2017 13:37,1:37:00 PM,13,37,14,2,4,Yes,30 minute,Back Yard,Family Room,,No,25,2,Sleeping,0,0,25,Socializing,No
+5/28/2017 14:02,5/28/2017 14:02,26,5/28/2017 14:02,2:02:00 PM,14,2,14,30,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,53,Socializing,No
+5/28/2017 14:30,5/28/2017 14:30,16,5/28/2017 14:30,2:30:00 PM,14,30,15,2,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,85,Socializing,No
+5/28/2017 15:00,5/28/2017 15:02,65,5/28/2017 15:02,3:02:00 PM,15,2,15,33,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,116,Socializing,No
+5/28/2017 15:32,5/28/2017 15:33,58,5/28/2017 15:33,3:33:00 PM,15,33,16,5,4,Yes,30 minute,Forest,Forest,,Yes,0,0,Walking/Excersing,0,1,32,Training,Yes
+5/28/2017 16:04,5/28/2017 16:05,48,5/28/2017 16:05,4:05:00 PM,16,5,16,31,4,Yes,30 minute,Forest,Forest,,Yes,0,0,Sniffing,0,0,26,Socializing,Yes
+5/28/2017 16:31,5/28/2017 16:31,38,5/28/2017 16:31,4:31:00 PM,16,31,16,48,4,Yes,30 minute,Forest,Forest,,Yes,0,0,Sniffing,1,1,43,Socializing,Yes
+5/28/2017 16:47,5/28/2017 16:48,30,5/28/2017 16:48,4:48:00 PM,16,48,17,3,4,Yes,Phase change,Car,Car,,Yes,0,0,Sleeping,0,0,15,Travelling,No
+5/28/2017 17:00,5/28/2017 17:03,153,5/28/2017 17:03,5:03:00 PM,17,3,17,32,4,Yes,30 minute,Car,Car,,Yes,0,0,Sleeping,1,0,44,Travelling,Yes
+5/28/2017 17:32,5/28/2017 17:32,31,5/28/2017 17:32,5:32:00 PM,17,32,17,43,4,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Sleeping,1,1,55,Working,No
+5/28/2017 17:41,5/28/2017 17:42,87,5/28/2017 17:43,5:43:00 PM,17,43,17,46,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,3,Eating,No
+5/28/2017 17:45,5/28/2017 17:46,23,5/28/2017 17:46,5:46:00 PM,17,46,18,1,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,15,Eating,No
+5/28/2017 18:01,5/28/2017 18:01,25,5/28/2017 18:01,6:01:00 PM,18,1,18,5,4,Yes,30 minute,Bathroom,Bathroom,,Yes,0,0,Alert focusing on human,0,0,4,Bathing/Getting Ready,No
+5/28/2017 18:04,5/28/2017 18:05,44,5/28/2017 18:05,6:05:00 PM,18,5,18,12,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,11,Petting gauss,Yes
+5/28/2017 18:10,5/28/2017 18:12,110,5/28/2017 18:12,6:12:00 PM,18,12,18,30,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,18,Socializing,No
+5/28/2017 18:30,5/28/2017 18:30,21,5/28/2017 18:30,6:30:00 PM,18,30,19,5,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,53,Socializing,No
+5/28/2017 19:05,5/28/2017 19:05,15,5/28/2017 19:05,7:05:00 PM,19,5,19,37,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,85,Socializing,No
+5/28/2017 19:35,5/28/2017 19:37,71,5/28/2017 19:37,7:37:00 PM,19,37,19,50,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,98,Petting gauss,Yes
+5/28/2017 19:49,5/28/2017 19:50,25,5/28/2017 19:50,7:50:00 PM,19,50,19,52,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,2,Socializing,No
+5/28/2017 19:52,5/28/2017 19:52,15,5/28/2017 19:52,7:52:00 PM,19,52,20,14,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Training,0,0,22,Training,Yes
+5/28/2017 20:14,5/28/2017 20:14,22,5/28/2017 20:14,8:14:00 PM,20,14,20,18,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Training,1,1,26,Training,Yes
+5/28/2017 20:18,5/28/2017 20:18,18,5/28/2017 20:18,8:18:00 PM,20,18,20,31,4,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,13,Socializing,No
+5/28/2017 20:30,5/28/2017 20:31,42,5/28/2017 20:31,8:31:00 PM,20,31,20,47,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,16,Working,No
+5/28/2017 20:45,5/28/2017 20:47,120,5/28/2017 20:47,8:47:00 PM,20,47,21,1,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,14,Working,No
+5/28/2017 21:00,5/28/2017 21:01,20,5/28/2017 21:01,9:01:00 PM,21,1,21,31,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,30,Working,No
+5/28/2017 21:31,5/28/2017 21:31,32,5/28/2017 21:31,9:31:00 PM,21,31,22,6,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,65,Socializing,No
+5/28/2017 22:06,5/28/2017 22:06,21,5/28/2017 22:06,10:06:00 PM,22,6,22,26,4,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,85,Petting gauss,Yes
+5/28/2017 22:26,5/28/2017 22:26,15,5/28/2017 22:26,10:26:00 PM,22,26,22,51,4,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,110,Socializing,No
+5/28/2017 22:48,5/28/2017 22:51,139,5/28/2017 22:51,10:51:00 PM,22,51,23,4,4,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,0,123,Bathing/Getting Ready,No
+5/28/2017 23:04,5/28/2017 23:04,20,5/28/2017 23:04,11:04:00 PM,23,4,23,59,4,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,116,Sleeping,Yes
+5/28/2017 0:00,5/28/2017 0:00,20,5/29/2017 0:00,12:00:00 AM,0,0,7,16,5,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,436,Sleeping,Yes
+5/29/2017 7:16,5/29/2017 7:16,19,5/29/2017 7:16,7:16:00 AM,7,16,7,26,5,Yes,Phase change,Bedroom,Bedroom,,Yes,0,0,Playing with dog,0,1,10,Sleeping,No
+5/29/2017 7:25,5/29/2017 7:26,52,5/29/2017 7:26,7:26:00 AM,7,26,7,30,5,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,0,4,Socializing,No
+5/29/2017 7:30,5/29/2017 7:30,14,5/29/2017 7:30,7:30:00 AM,7,30,8,0,5,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Sniffing,1,1,34,Socializing,No
+5/29/2017 8:00,5/29/2017 8:00,30,5/29/2017 8:00,8:00:00 AM,8,0,8,33,5,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,33,Training,Yes
+5/29/2017 8:32,5/29/2017 8:33,20,5/29/2017 8:33,8:33:00 AM,8,33,8,35,5,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,35,Bathing/Getting Ready,Yes
+5/29/2017 8:35,5/29/2017 8:35,21,5/29/2017 8:35,8:35:00 AM,8,35,8,44,5,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Playing with dog,0,1,9,Socializing,No
+5/29/2017 8:44,5/29/2017 8:44,16,5/29/2017 8:44,8:44:00 AM,8,44,8,45,5,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,1,Socializing,No
+5/29/2017 8:45,5/29/2017 8:45,15,5/29/2017 8:45,8:45:00 AM,8,45,9,3,5,Yes,Phase change,Front Yard,Front Yard,,Yes,0,0,Playing with dog,0,0,18,Socializing,No
+5/29/2017 9:01,5/29/2017 9:03,123,5/29/2017 9:03,9:03:00 AM,9,3,9,36,5,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Playing with dog,1,0,51,Socializing,No
+5/29/2017 9:35,5/29/2017 9:36,42,5/29/2017 9:36,9:36:00 AM,9,36,10,7,5,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Playing with dog,1,1,82,Socializing,No
+5/29/2017 10:06,5/29/2017 10:07,60,5/29/2017 10:07,10:07:00 AM,10,7,10,13,5,Yes,30 minute,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,6,Socializing,No
+5/29/2017 10:13,5/29/2017 10:13,60,5/29/2017 10:13,10:13:00 AM,10,13,10,34,5,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,21,Cooking,No
+5/29/2017 10:13,5/29/2017 10:34,1243,5/29/2017 10:34,10:34:00 AM,10,34,10,40,5,Yes,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,1,27,Cooking,No
+5/29/2017 10:40,5/29/2017 10:40,38,5/29/2017 10:40,10:40:00 AM,10,40,11,1,5,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,21,Socializing,No
+5/29/2017 11:00,5/29/2017 11:01,32,5/29/2017 11:01,11:01:00 AM,11,1,11,31,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,51,Socializing,No
+5/29/2017 11:31,5/29/2017 11:31,18,5/29/2017 11:31,11:31:00 AM,11,31,12,1,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,81,Socializing,No
+5/29/2017 12:00,5/29/2017 12:01,57,5/29/2017 12:01,12:01:00 PM,12,1,12,32,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,112,Socializing,No
+5/29/2017 12:32,5/29/2017 12:32,20,5/29/2017 12:32,12:32:00 PM,12,32,12,39,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,119,Socializing,No
+5/29/2017 12:39,5/29/2017 12:39,23,5/29/2017 12:39,12:39:00 PM,12,39,13,2,5,Yes,Phase change,Back Yard,Bathroom,,No,23,2,Sniffing,0,0,23,Bathing/Getting Ready,No
+5/29/2017 13:00,5/29/2017 13:02,72,5/29/2017 13:02,1:02:00 PM,13,2,13,41,5,Yes,30 minute,Neighbors,Neighbors,,Yes,0,0,Sniffing,1,0,62,Socializing,No
+5/29/2017 13:41,5/29/2017 13:41,17,5/29/2017 13:41,1:41:00 PM,13,41,14,2,5,Yes,30 minute,Neighbors,Neighbors,,No,0,0,Sniffing,1,0,83,Socializing,No
+5/29/2017 14:01,5/29/2017 14:02,91,5/29/2017 14:02,2:02:00 PM,14,2,14,33,5,Yes,30 minute,Neighbors,Neighbors,,No,0,0,Sniffing,1,0,114,Socializing,No
+5/29/2017 14:32,5/29/2017 14:33,31,5/29/2017 14:33,2:33:00 PM,14,33,15,1,5,Yes,30 minute,Neighbors,Neighbors,,No,0,0,Sniffing,1,1,142,Socializing,No
+5/29/2017 15:00,5/29/2017 15:01,15,5/29/2017 15:01,3:01:00 PM,15,1,15,37,5,Yes,30 minute,Neighbors,Neighbors,,Yes,0,0,Playing with dog,0,1,36,Socializing,No
+5/29/2017 15:35,5/29/2017 15:37,89,5/29/2017 15:37,3:37:00 PM,15,37,15,41,5,Yes,30 minute,Bathroom,Bathroom,,Yes,0,0,Alert focusing on human,0,1,4,Bathing/Getting Ready,No
+5/29/2017 15:40,5/29/2017 15:41,72,5/29/2017 15:41,3:41:00 PM,15,41,16,0,5,Yes,Phase change,Family Room,Bathroom,1,No,19,1,Unknown,0,0,19,Bathing/Getting Ready,No
+5/29/2017 15:59,5/29/2017 16:00,57,5/29/2017 16:00,4:00:00 PM,16,0,16,33,5,Yes,30 minute,Crate,Family Room,,No,33,2,Unknown,0,0,33,Bathing/Getting Ready,No
+5/29/2017 16:32,5/29/2017 16:33,48,5/29/2017 16:33,4:33:00 PM,16,33,17,1,5,Yes,30 minute,Crate,Neighbors,,No,61,2,Unknown,1,0,61,Socializing,No
+5/29/2017 17:00,5/29/2017 17:01,31,5/29/2017 17:01,5:01:00 PM,17,1,17,32,5,Yes,30 minute,Crate,Neighbors,,No,92,2,Unknown,1,0,92,Socializing,No
+5/29/2017 17:31,5/29/2017 17:32,106,5/29/2017 17:32,5:32:00 PM,17,32,18,1,5,Yes,30 minute,Crate,Neighbors,,No,121,2,Unknown,1,0,121,Socializing,No
+5/29/2017 18:00,5/29/2017 18:01,27,5/29/2017 18:01,6:01:00 PM,18,1,18,32,5,Yes,30 minute,Crate,Neighbors,,No,152,2,Unknown,1,0,152,Socializing,No
+5/29/2017 18:31,5/29/2017 18:32,35,5/29/2017 18:32,6:32:00 PM,18,32,19,1,5,Yes,30 minute,Crate,Neighbors,,No,181,2,Unknown,1,0,181,Socializing,No
+5/29/2017 19:00,5/29/2017 19:01,51,5/29/2017 19:01,7:01:00 PM,19,1,19,31,5,Yes,30 minute,Crate,Neighbors,,No,211,2,Unknown,1,0,211,Socializing,No
+5/29/2017 19:30,5/29/2017 19:31,35,5/29/2017 19:31,7:31:00 PM,19,31,19,39,5,Yes,30 minute,Crate,Neighbors,,No,219,2,Unknown,1,0,219,Socializing,No
+5/29/2017 19:36,5/29/2017 19:39,195,5/29/2017 19:39,7:39:00 PM,19,39,19,50,5,Yes,30 minute,Crate,Neighbors,,No,230,2,Unknown,1,1,230,Socializing,No
+5/29/2017 19:49,5/29/2017 19:50,24,5/29/2017 19:50,7:50:00 PM,19,50,19,51,5,Yes,Phase change,Bathroom,Bathroom,,Yes,0,0,Alert focusing on human,0,1,1,Bathing/Getting Ready,No
+5/29/2017 19:50,5/29/2017 19:51,42,5/29/2017 19:51,7:51:00 PM,19,51,20,0,5,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,9,Playing,Yes
+5/29/2017 20:00,5/29/2017 20:00,21,5/29/2017 20:00,8:00:00 PM,20,0,20,17,5,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Playing with human,0,1,17,Playing,No
+5/29/2017 20:17,5/29/2017 20:17,22,5/29/2017 20:17,8:17:00 PM,20,17,20,31,5,Yes,Phase change,Kitchen,Kitchen,,Yes,0,0,Playing with dog,0,1,14,Eating,No
+5/29/2017 20:31,5/29/2017 20:31,13,5/29/2017 20:31,8:31:00 PM,20,31,21,8,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Training,0,1,37,Training,Yes
+5/29/2017 21:08,5/29/2017 21:08,22,5/29/2017 21:08,9:08:00 PM,21,8,21,31,5,Yes,30 minute,Crate,Car,,No,23,2,Unknown,0,0,23,Travelling,No
+5/29/2017 21:31,5/29/2017 21:31,29,5/29/2017 21:31,9:31:00 PM,21,31,22,23,5,Yes,30 minute,Crate,Neighbors,,No,75,2,Unknown,1,0,75,Socializing,No
+5/29/2017 22:23,5/29/2017 22:23,23,5/29/2017 22:23,10:23:00 PM,22,23,22,33,5,Yes,30 minute,Crate,Neighbors,,No,85,2,Unknown,1,1,85,Socializing,No
+5/29/2017 22:32,5/29/2017 22:32,45,5/29/2017 22:33,10:33:00 PM,22,33,23,2,5,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,29,Playing,Yes
+5/29/2017 23:01,5/29/2017 23:02,19,5/29/2017 23:02,11:02:00 PM,23,2,23,18,5,Yes,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,0,0,16,Bathing/Getting Ready,No
+5/29/2017 23:18,5/29/2017 23:18,16,5/29/2017 23:18,11:18:00 PM,23,18,23,59,5,Yes,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,102,Sleeping,Yes
+5/29/2017 0:00,5/29/2017 0:00,16,5/30/2017 0:00,12:00:00 AM,0,0,7,32,6,Yes,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,452,Sleeping,Yes
+5/30/2017 7:31,5/30/2017 7:32,51,5/30/2017 7:32,7:32:00 AM,7,32,7,47,6,Yes,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,0,1,15,Sleeping,No
+5/30/2017 7:47,5/30/2017 7:47,40,5/30/2017 7:47,7:47:00 AM,7,47,7,52,6,Yes,Phase change,Bedroom,Bathroom,1,Yes,5,1,Alert focusing on human,0,1,5,Bathing/Getting Ready,No
+5/30/2017 7:50,5/30/2017 7:52,125,5/30/2017 7:52,7:52:00 AM,7,52,8,1,6,Yes,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,9,Socializing,No
+5/30/2017 8:00,5/30/2017 8:01,56,5/30/2017 8:01,8:01:00 AM,8,1,8,20,6,Yes,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,1,19,Training,Yes
+5/30/2017 8:20,5/30/2017 8:20,28,5/30/2017 8:20,8:20:00 AM,8,20,8,24,6,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,4,Bathing/Getting Ready,No
+5/30/2017 8:23,5/30/2017 8:24,39,5/30/2017 8:24,8:24:00 AM,8,24,8,35,6,Yes,Phase change,Unknown,Front Yard,,No,11,2,Unknown,0,1,11,Exercising,No
+5/30/2017 8:34,5/30/2017 8:35,31,5/30/2017 8:35,8:35:00 AM,8,35,8,50,6,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,15,Eating,No
+5/30/2017 8:49,5/30/2017 8:50,32,5/30/2017 8:50,8:50:00 AM,8,50,9,1,6,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,0,0,11,Socializing,No
+5/30/2017 9:00,5/30/2017 9:01,33,5/30/2017 9:01,9:01:00 AM,9,1,9,16,6,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,1,1,26,Socializing,No
+5/30/2017 9:15,5/30/2017 9:16,65,5/30/2017 9:16,9:16:00 AM,9,16,9,49,6,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,33,Socializing,No
+5/30/2017 9:47,5/30/2017 9:49,93,5/30/2017 9:49,9:49:00 AM,9,49,9,58,6,Yes,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,42,Socializing,No
+5/30/2017 9:58,5/30/2017 9:58,19,5/30/2017 9:58,9:58:00 AM,9,58,10,0,6,Yes,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,2,Socializing,No
+5/30/2017 10:00,5/30/2017 10:00,16,5/30/2017 10:00,10:00:00 AM,10,0,10,2,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,2,Socializing,No
+5/30/2017 10:01,5/30/2017 10:02,17,5/30/2017 10:02,10:02:00 AM,10,2,10,3,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,1,Playing,No
+5/30/2017 10:03,5/30/2017 10:03,20,5/30/2017 10:03,10:03:00 AM,10,3,10,31,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,28,Socializing,No
+5/30/2017 10:30,5/30/2017 10:31,49,5/30/2017 10:31,10:31:00 AM,10,31,11,1,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,58,Socializing,No
+5/30/2017 11:01,5/30/2017 11:01,12,5/30/2017 11:01,11:01:00 AM,11,1,11,31,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,88,Socializing,No
+5/30/2017 11:31,5/30/2017 11:31,22,5/30/2017 11:31,11:31:00 AM,11,31,12,2,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,119,Working,No
+5/30/2017 12:02,5/30/2017 12:02,28,5/30/2017 12:02,12:02:00 PM,12,2,12,32,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,149,Working,No
+5/30/2017 12:32,5/30/2017 12:32,12,5/30/2017 12:32,12:32:00 PM,12,32,12,53,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,170,Working,No
+5/30/2017 12:53,5/30/2017 12:53,22,5/30/2017 12:53,12:53:00 PM,12,53,13,1,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,8,Working,No
+5/30/2017 13:01,5/30/2017 13:01,24,5/30/2017 13:01,1:01:00 PM,13,1,13,16,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,15,Working,No
+5/30/2017 13:15,5/30/2017 13:16,23,5/30/2017 13:16,1:16:00 PM,13,16,13,23,6,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,7,Socializing,No
+5/30/2017 13:23,5/30/2017 13:23,21,5/30/2017 13:23,1:23:00 PM,13,23,13,28,6,No,Phase change,Back Yard,Kitchen,,No,5,2,Sleeping,0,1,5,Cooking,No
+5/30/2017 13:27,5/30/2017 13:28,32,5/30/2017 13:28,1:28:00 PM,13,28,13,30,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,0,2,Eating,No
+5/30/2017 13:30,5/30/2017 13:30,20,5/30/2017 13:30,1:30:00 PM,13,30,14,28,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,60,Eating,No
+5/30/2017 14:28,5/30/2017 14:28,45,5/30/2017 14:28,2:28:00 PM,14,28,14,45,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,17,Socializing,No
+5/30/2017 14:34,5/30/2017 14:45,694,5/30/2017 14:45,2:45:00 PM,14,45,14,48,6,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,1,3,Training,Yes
+5/30/2017 14:46,5/30/2017 14:48,114,5/30/2017 14:48,2:48:00 PM,14,48,15,1,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,13,Socializing,No
+5/30/2017 15:01,5/30/2017 15:01,20,5/30/2017 15:01,3:01:00 PM,15,1,15,31,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,30,Working,No
+5/30/2017 15:30,5/30/2017 15:31,14,5/30/2017 15:31,3:31:00 PM,15,31,16,1,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,60,Working,No
+5/30/2017 16:01,5/30/2017 16:01,16,5/30/2017 16:01,4:01:00 PM,16,1,16,31,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,90,Working,No
+5/30/2017 16:30,5/30/2017 16:31,36,5/30/2017 16:31,4:31:00 PM,16,31,16,37,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,96,Working,No
+5/30/2017 16:36,5/30/2017 16:37,28,5/30/2017 16:37,4:37:00 PM,16,37,16,44,6,No,Phase change,Gym,Family Room,1,No,7,0,Alert looking out the window,0,0,7,Working,No
+5/30/2017 16:43,5/30/2017 16:44,76,5/30/2017 16:44,4:44:00 PM,16,44,17,1,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,1,1,24,Working,No
+5/30/2017 17:00,5/30/2017 17:01,18,5/30/2017 17:01,5:01:00 PM,17,1,17,6,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,5,Working,No
+5/30/2017 17:06,5/30/2017 17:06,14,5/30/2017 17:06,5:06:00 PM,17,6,17,22,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,16,Working,No
+5/30/2017 17:22,5/30/2017 17:22,25,5/30/2017 17:22,5:22:00 PM,17,22,17,26,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,4,Working,No
+5/30/2017 17:26,5/30/2017 17:26,14,5/30/2017 17:26,5:26:00 PM,17,26,17,31,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,5,Working,No
+5/30/2017 17:31,5/30/2017 17:31,29,5/30/2017 17:31,5:31:00 PM,17,31,17,35,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,4,Working,No
+5/30/2017 17:34,5/30/2017 17:35,35,5/30/2017 17:35,5:35:00 PM,17,35,17,38,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,3,Working,No
+5/30/2017 17:37,5/30/2017 17:38,12,5/30/2017 17:38,5:38:00 PM,17,38,18,0,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,22,Working,No
+5/30/2017 17:58,5/30/2017 18:00,70,5/30/2017 18:00,6:00:00 PM,18,0,18,5,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,0,5,Working,No
+5/30/2017 18:04,5/30/2017 18:05,49,5/30/2017 18:05,6:05:00 PM,18,5,18,7,6,No,Phase change,Gym,Family Room,1,No,2,0,Alert looking out the window,1,1,7,Working,No
+5/30/2017 18:07,5/30/2017 18:07,15,5/30/2017 18:07,6:07:00 PM,18,7,18,13,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,6,Working,No
+5/30/2017 18:13,5/30/2017 18:13,18,5/30/2017 18:13,6:13:00 PM,18,13,18,40,6,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Playing with human,0,1,27,Playing,Yes
+5/30/2017 18:40,5/30/2017 18:40,21,5/30/2017 18:40,6:40:00 PM,18,40,18,44,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,4,Socializing,No
+5/30/2017 18:44,5/30/2017 18:44,25,5/30/2017 18:44,6:44:00 PM,18,44,18,49,6,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,0,5,Cleaning,No
+5/30/2017 18:47,5/30/2017 18:49,115,5/30/2017 18:49,6:49:00 PM,18,49,19,0,6,No,Phase change,Bedroom,Bedroom,,No,0,0,Sleeping,1,0,16,Cleaning,No
+5/30/2017 18:59,5/30/2017 18:59,15,5/30/2017 19:00,7:00:00 PM,19,0,19,9,6,No,30 minute,Family Room,Kitchen,1,No,9,1,Sleeping,1,0,25,Cleaning,No
+5/30/2017 19:08,5/30/2017 19:09,70,5/30/2017 19:09,7:09:00 PM,19,9,19,17,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,33,Socializing,No
+5/30/2017 19:16,5/30/2017 19:17,20,5/30/2017 19:17,7:17:00 PM,19,17,19,18,6,No,Phase change,Gym,Family Room,1,No,1,0,Alert looking out the window,0,1,1,Socializing,No
+5/30/2017 19:18,5/30/2017 19:18,18,5/30/2017 19:18,7:18:00 PM,19,18,19,31,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,13,Socializing,No
+5/30/2017 19:30,5/30/2017 19:31,18,5/30/2017 19:31,7:31:00 PM,19,31,19,31,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,13,Socializing,No
+5/30/2017 19:31,5/30/2017 19:31,14,5/30/2017 19:31,7:31:00 PM,19,31,19,33,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,2,Socializing,No
+5/30/2017 19:33,5/30/2017 19:33,16,5/30/2017 19:33,7:33:00 PM,19,33,19,58,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,25,Socializing,No
+5/30/2017 19:57,5/30/2017 19:58,19,5/30/2017 19:58,7:58:00 PM,19,58,20,1,6,No,Phase change,Gym,Family Room,1,No,3,0,Alert looking out the window,0,1,3,Socializing,No
+5/30/2017 20:01,5/30/2017 20:01,18,5/30/2017 20:01,8:01:00 PM,20,1,20,11,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Training,0,1,10,Training,Yes
+5/30/2017 20:10,5/30/2017 20:11,62,5/30/2017 20:11,8:11:00 PM,20,11,20,13,6,No,Phase change,Back Yard,Family Room,,No,2,2,Sniffing,0,1,2,Eating,No
+5/30/2017 20:13,5/30/2017 20:13,24,5/30/2017 20:13,8:13:00 PM,20,13,20,17,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,4,Eating,No
+5/30/2017 20:16,5/30/2017 20:17,24,5/30/2017 20:17,8:17:00 PM,20,17,20,27,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,10,Eating,No
+5/30/2017 20:26,5/30/2017 20:27,17,5/30/2017 20:27,8:27:00 PM,20,27,20,31,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,0,4,Playing,Yes
+5/30/2017 20:30,5/30/2017 20:31,30,5/30/2017 20:31,8:31:00 PM,20,31,20,40,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Playing with human,1,1,13,Playing,Yes
+5/30/2017 20:39,5/30/2017 20:40,46,5/30/2017 20:40,8:40:00 PM,20,40,20,52,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,12,Petting gauss,Yes
+5/30/2017 20:52,5/30/2017 20:52,17,5/30/2017 20:52,8:52:00 PM,20,52,21,1,6,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,9,Working,No
+5/30/2017 21:01,5/30/2017 21:01,18,5/30/2017 21:01,9:01:00 PM,21,1,21,34,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,42,Working,No
+5/30/2017 21:33,5/30/2017 21:34,15,5/30/2017 21:34,9:34:00 PM,21,34,22,20,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,88,Working,No
+5/30/2017 22:19,5/30/2017 22:20,20,5/30/2017 22:20,10:20:00 PM,22,20,22,38,6,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,106,Socializing,No
+5/30/2017 22:37,5/30/2017 22:38,47,5/30/2017 22:38,10:38:00 PM,22,38,22,39,6,No,30 minute,Back Yard,Back Yard,,Yes,0,0,Eating/Drinking,0,1,1,Socializing,No
+5/30/2017 22:39,5/30/2017 22:39,17,5/30/2017 22:39,10:39:00 PM,22,39,22,45,6,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,6,Socializing,No
+5/30/2017 22:45,5/30/2017 22:45,55,5/30/2017 22:45,10:45:00 PM,22,45,22,48,6,No,Phase change,Family Room,Bedroom,1,No,3,0,Sleeping,0,0,3,Bathing/Getting Ready,No
+5/30/2017 22:46,5/30/2017 22:48,93,5/30/2017 22:48,10:48:00 PM,22,48,23,5,6,No,Phase change,Bedroom,Bathroom,,No,17,1,Sleeping,1,0,20,Bathing/Getting Ready,No
+5/30/2017 23:04,5/30/2017 23:05,62,5/30/2017 23:05,11:05:00 PM,23,5,23,5,6,No,30 minute,Crate,Bathroom,,No,17,1,Sleeping,1,0,20,Bathing/Getting Ready,No
+5/30/2017 23:05,5/30/2017 23:05,15,5/30/2017 23:05,11:05:00 PM,23,5,23,13,6,No,Phase change,Bedroom,Bathroom,1,No,25,1,Sleeping,1,0,28,Bathing/Getting Ready,No
+5/30/2017 23:13,5/30/2017 23:13,15,5/30/2017 23:13,11:13:00 PM,23,13,23,59,6,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,107,Sleeping,Yes
+5/30/2017 0:00,5/31/2017 0:00,15,5/31/2017 0:00,12:00:00 AM,0,0,7,52,7,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,472,Sleeping,Yes
+5/31/2017 7:51,5/31/2017 7:52,22,5/31/2017 7:52,7:52:00 AM,7,52,7,56,7,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Playing with human,0,1,4,Petting gauss,Yes
+5/31/2017 7:56,5/31/2017 7:56,39,5/31/2017 7:56,7:56:00 AM,7,56,8,0,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,4,Bathing/Getting Ready,No
+5/31/2017 7:59,5/31/2017 7:59,20,5/31/2017 8:00,8:00:00 AM,8,0,8,26,7,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Training,0,1,26,Training,Yes
+5/31/2017 8:25,5/31/2017 8:26,23,5/31/2017 8:26,8:26:00 AM,8,26,8,28,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,2,Training,Yes
+5/31/2017 8:27,5/31/2017 8:28,70,5/31/2017 8:28,8:28:00 AM,8,28,8,31,7,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,3,Cooking,No
+5/31/2017 8:30,5/31/2017 8:31,40,5/31/2017 8:31,8:31:00 AM,8,31,8,36,7,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,0,5,Cooking,No
+5/31/2017 8:35,5/31/2017 8:36,19,5/31/2017 8:36,8:36:00 AM,8,36,8,50,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,19,Eating,No
+5/31/2017 8:50,5/31/2017 8:50,21,5/31/2017 8:50,8:50:00 AM,8,50,8,52,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,0,2,Eating,No
+5/31/2017 8:52,5/31/2017 8:52,29,5/31/2017 8:52,8:52:00 AM,8,52,8,56,7,No,Phase change,Gym,Family Room,1,No,4,0,Alert looking out the window,1,0,6,Eating,No
+5/31/2017 8:56,5/31/2017 8:56,32,5/31/2017 8:56,8:56:00 AM,8,56,8,58,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,1,1,8,Socializing,No
+5/31/2017 8:58,5/31/2017 8:58,36,5/31/2017 8:58,8:58:00 AM,8,58,9,1,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,3,Socializing,No
+5/31/2017 9:00,5/31/2017 9:01,27,5/31/2017 9:01,9:01:00 AM,9,1,9,31,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,33,Socializing,No
+5/31/2017 9:31,5/31/2017 9:31,18,5/31/2017 9:31,9:31:00 AM,9,31,10,4,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,66,Socializing,No
+5/31/2017 10:03,5/31/2017 10:04,23,5/31/2017 10:04,10:04:00 AM,10,4,10,11,7,No,30 minute,Back Yard,Back Yard,,No,0,0,Sniffing,0,1,7,Bathing/Getting Ready,No
+5/31/2017 10:10,5/31/2017 10:11,43,5/31/2017 10:11,10:11:00 AM,10,11,10,23,7,No,Phase change,Crate,Bedroom,,Yes,0,0,Alert focusing on human,0,1,12,Training,Yes
+5/31/2017 10:22,5/31/2017 10:23,69,5/31/2017 10:23,10:23:00 AM,10,23,10,31,7,No,Phase change,Crate,Car,,No,8,2,Unknown,0,0,8,Travelling,No
+5/31/2017 10:31,5/31/2017 10:31,32,5/31/2017 10:31,10:31:00 AM,10,31,11,4,7,No,30 minute,Crate,Car,,No,41,2,Unknown,1,0,41,Travelling,No
+5/31/2017 11:02,5/31/2017 11:04,92,5/31/2017 11:04,11:04:00 AM,11,4,11,32,7,No,30 minute,Crate,Work,,No,69,2,Unknown,1,0,69,Working,No
+5/31/2017 11:31,5/31/2017 11:32,62,5/31/2017 11:32,11:32:00 AM,11,32,12,4,7,No,30 minute,Crate,Work,,No,101,2,Unknown,1,0,101,Working,No
+5/31/2017 12:03,5/31/2017 12:04,49,5/31/2017 12:04,12:04:00 PM,12,4,12,36,7,No,30 minute,Crate,Work,,No,133,2,Unknown,1,0,133,Working,No
+5/31/2017 12:35,5/31/2017 12:36,29,5/31/2017 12:36,12:36:00 PM,12,36,13,5,7,No,30 minute,Crate,Out,,No,162,2,Unknown,1,0,162,Errands,No
+5/31/2017 13:04,5/31/2017 13:05,23,5/31/2017 13:05,1:05:00 PM,13,5,13,27,7,No,30 minute,Crate,Car,,No,184,2,Unknown,1,1,184,Errands,No
+5/31/2017 13:26,5/31/2017 13:26,27,5/31/2017 13:27,1:27:00 PM,13,27,13,31,7,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,0,4,Socializing,No
+5/31/2017 13:30,5/31/2017 13:31,15,5/31/2017 13:31,1:31:00 PM,13,31,14,3,7,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sniffing,1,1,36,Socializing,No
+5/31/2017 14:03,5/31/2017 14:03,15,5/31/2017 14:03,2:03:00 PM,14,3,14,31,7,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sleeping,0,1,28,Working,No
+5/31/2017 14:31,5/31/2017 14:31,17,5/31/2017 14:31,2:31:00 PM,14,31,14,41,7,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Alert focusing on human,0,0,10,Working,No
+5/31/2017 14:41,5/31/2017 14:41,31,5/31/2017 14:41,2:41:00 PM,14,41,14,50,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,19,Working,No
+5/31/2017 14:50,5/31/2017 14:50,12,5/31/2017 14:50,2:50:00 PM,14,50,15,2,7,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,12,Working,No
+5/31/2017 15:01,5/31/2017 15:02,39,5/31/2017 15:02,3:02:00 PM,15,2,15,31,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,41,Socializing,No
+5/31/2017 15:31,5/31/2017 15:31,17,5/31/2017 15:31,3:31:00 PM,15,31,16,11,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,81,Sleeping,No
+5/31/2017 16:10,5/31/2017 16:11,14,5/31/2017 16:11,4:11:00 PM,16,11,16,33,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,103,Sleeping,No
+5/31/2017 16:31,5/31/2017 16:33,153,5/31/2017 16:33,4:33:00 PM,16,33,17,2,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,29,Socializing,No
+5/31/2017 17:01,5/31/2017 17:02,90,5/31/2017 17:02,5:02:00 PM,17,2,17,29,7,No,30 minute,Family Room,Bedroom,1,No,27,1,Unknown,0,1,27,Bathing/Getting Ready,No
+5/31/2017 17:29,5/31/2017 17:29,15,5/31/2017 17:29,5:29:00 PM,17,29,17,52,7,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,23,Socializing,No
+5/31/2017 17:52,5/31/2017 17:52,15,5/31/2017 17:52,5:52:00 PM,17,52,18,6,7,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Training,0,1,14,Training,Yes
+5/31/2017 18:06,5/31/2017 18:06,14,5/31/2017 18:06,6:06:00 PM,18,6,20,41,7,No,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,0,1,155,Travelling,No
+5/31/2017 20:39,5/31/2017 20:41,122,5/31/2017 20:41,8:41:00 PM,20,41,22,19,7,No,30 minute,Stadium,Stadium,,Yes,0,0,Training,0,1,98,Training,Yes
+5/31/2017 20:39,5/31/2017 20:41,122,5/31/2017 22:41,10:41:00 PM,22,19,23,59,7,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,161,Sleeping,Yes
+5/31/2017 0:00,6/1/2017 0:00,122,6/1/2017 0:00,12:00:00 AM,0,0,8,46,8,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,526,Sleeping,Yes
+6/1/2017 8:46,6/1/2017 8:46,22,6/1/2017 8:46,8:46:00 AM,8,46,8,54,8,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Alert focusing on human,0,1,8,Bathing/Getting Ready,No
+6/1/2017 8:54,6/1/2017 8:54,13,6/1/2017 8:54,8:54:00 AM,8,54,9,0,8,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,6,Training,Yes
+6/1/2017 9:00,6/1/2017 9:00,27,6/1/2017 9:00,9:00:00 AM,9,0,9,11,8,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,17,Training,Yes
+6/1/2017 9:10,6/1/2017 9:11,22,6/1/2017 9:11,9:11:00 AM,9,11,9,14,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,3,Training,Yes
+6/1/2017 9:13,6/1/2017 9:14,17,6/1/2017 9:14,9:14:00 AM,9,14,9,18,8,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,4,Cooking,No
+6/1/2017 9:18,6/1/2017 9:18,19,6/1/2017 9:18,9:18:00 AM,9,18,9,30,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,12,Eating,No
+6/1/2017 9:30,6/1/2017 9:30,14,6/1/2017 9:30,9:30:00 AM,9,30,10,1,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,43,Working,No
+6/1/2017 10:00,6/1/2017 10:01,35,6/1/2017 10:01,10:01:00 AM,10,1,10,2,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,44,Working,No
+6/1/2017 10:01,6/1/2017 10:02,16,6/1/2017 10:02,10:02:00 AM,10,2,10,11,8,No,Phase change,Family Room,Bathroom,1,No,9,1,Sleeping,1,0,53,Bathing/Getting Ready,No
+6/1/2017 10:08,6/1/2017 10:11,192,6/1/2017 10:11,10:11:00 AM,10,11,10,16,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,58,Socializing,No
+6/1/2017 10:15,6/1/2017 10:16,15,6/1/2017 10:16,10:16:00 AM,10,16,10,33,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,17,Playing,Yes
+6/1/2017 10:33,6/1/2017 10:33,16,6/1/2017 10:33,10:33:00 AM,10,33,11,3,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,30,Working,No
+6/1/2017 11:02,6/1/2017 11:03,37,6/1/2017 11:03,11:03:00 AM,11,3,11,32,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,59,Working,No
+6/1/2017 11:31,6/1/2017 11:32,23,6/1/2017 11:32,11:32:00 AM,11,32,11,51,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,19,Petting gauss,Yes
+6/1/2017 11:51,6/1/2017 11:51,34,6/1/2017 11:51,11:51:00 AM,11,51,12,1,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Training,0,1,10,Training,Yes
+6/1/2017 12:01,6/1/2017 12:01,20,6/1/2017 12:01,12:01:00 PM,12,1,12,40,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,39,Petting gauss,Yes
+6/1/2017 12:40,6/1/2017 12:40,15,6/1/2017 12:40,12:40:00 PM,12,40,13,10,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,69,Petting gauss,Yes
+6/1/2017 13:10,6/1/2017 13:10,18,6/1/2017 13:10,1:10:00 PM,13,10,13,30,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,89,Socializing,Yes
+6/1/2017 13:30,6/1/2017 13:30,38,6/1/2017 13:30,1:30:00 PM,13,30,13,51,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,110,Petting gauss,Yes
+6/1/2017 13:50,6/1/2017 13:51,22,6/1/2017 13:51,1:51:00 PM,13,51,13,58,8,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Sleeping,1,0,117,Cooking,No
+6/1/2017 13:57,6/1/2017 13:58,47,6/1/2017 13:58,1:58:00 PM,13,58,14,0,8,No,Phase change,Back Yard,Kitchen,,No,2,2,Sleeping,1,0,119,Cooking,No
+6/1/2017 14:00,6/1/2017 14:00,15,6/1/2017 14:00,2:00:00 PM,14,0,14,56,8,No,30 minute,Back Yard,Kitchen,,No,58,2,Sleeping,1,1,175,Cooking,No
+6/1/2017 14:55,6/1/2017 14:56,36,6/1/2017 14:56,2:56:00 PM,14,56,15,2,8,No,30 minute,Neighbors,Neighbors,,Yes,0,0,Sniffing,0,0,6,Socializing,No
+6/1/2017 15:01,6/1/2017 15:02,68,6/1/2017 15:02,3:02:00 PM,15,2,15,19,8,No,30 minute,Neighbors,Neighbors,,Yes,0,0,Sniffing,1,1,23,Socializing,No
+6/1/2017 15:19,6/1/2017 15:19,42,6/1/2017 15:19,3:19:00 PM,15,19,15,30,8,No,Phase change,Neighbors,Neighbors,,Yes,0,0,Sleeping,0,1,11,Socializing,No
+6/1/2017 15:30,6/1/2017 15:30,15,6/1/2017 15:30,3:30:00 PM,15,30,15,41,8,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,0,11,Cooking,No
+6/1/2017 15:41,6/1/2017 15:41,17,6/1/2017 15:41,3:41:00 PM,15,41,15,41,8,No,Phase change,Family Room,Kitchen,,No,0,0,Alert focusing on human,1,1,11,Cooking,No
+6/1/2017 15:41,6/1/2017 15:41,12,6/1/2017 15:41,3:41:00 PM,15,41,15,48,8,No,Phase change,Family Room,Kitchen,1,No,7,0,Sleeping,0,1,7,Cooking,No
+6/1/2017 15:48,6/1/2017 15:48,17,6/1/2017 15:48,3:48:00 PM,15,48,15,54,8,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,6,Cooking,No
+6/1/2017 15:53,6/1/2017 15:54,59,6/1/2017 15:54,3:54:00 PM,15,54,16,0,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,6,Working,No
+6/1/2017 16:00,6/1/2017 16:00,17,6/1/2017 16:00,4:00:00 PM,16,0,16,31,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,37,Working,No
+6/1/2017 16:30,6/1/2017 16:31,17,6/1/2017 16:31,4:31:00 PM,16,31,16,36,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,42,Working,No
+6/1/2017 16:35,6/1/2017 16:35,20,6/1/2017 16:36,4:36:00 PM,16,36,17,10,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,0,34,Working,No
+6/1/2017 17:08,6/1/2017 17:10,94,6/1/2017 17:10,5:10:00 PM,17,10,17,34,8,No,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,1,1,58,Travelling,Yes
+6/1/2017 17:33,6/1/2017 17:34,67,6/1/2017 17:34,5:34:00 PM,17,34,18,2,8,No,30 minute,Forest,Forest,,Yes,0,0,Training,0,1,28,Training,Yes
+6/1/2017 18:02,6/1/2017 18:02,49,6/1/2017 18:02,6:02:00 PM,18,2,18,41,8,No,30 minute,Forest,Forest,,Yes,0,0,Sniffing,0,1,39,Socializing,Yes
+6/1/2017 18:40,6/1/2017 18:41,22,6/1/2017 18:41,6:41:00 PM,18,41,18,50,8,No,30 minute,Forest,Forest,,Yes,0,0,Walking/Excersing,0,1,9,Training,Yes
+6/1/2017 18:50,6/1/2017 18:50,24,6/1/2017 18:50,6:50:00 PM,18,50,19,0,8,No,Phase change,Family Room,Bathroom,,No,10,1,Eating/Drinking,0,1,10,Bathing/Getting Ready,No
+6/1/2017 19:00,6/1/2017 19:00,18,6/1/2017 19:00,7:00:00 PM,19,0,19,6,8,No,30 minute,Crate,Bathroom,1,No,16,1,Sleeping,0,0,6,Bathing/Getting Ready,No
+6/1/2017 19:05,6/1/2017 19:06,32,6/1/2017 19:06,7:06:00 PM,19,6,19,31,8,No,Phase change,Crate,Car,,No,25,2,Sleeping,1,1,31,Travelling,No
+6/1/2017 19:30,6/1/2017 19:31,34,6/1/2017 19:31,7:31:00 PM,19,31,20,3,8,No,30 minute,Crate,Neighbors,,No,26,2,Unknown,0,0,32,Socializing,No
+6/1/2017 20:03,6/1/2017 20:03,30,6/1/2017 20:03,8:03:00 PM,20,3,21,29,8,No,30 minute,Crate,Neighbors,,No,112,2,Unknown,1,0,118,Socializing,No
+6/1/2017 21:28,6/1/2017 21:29,77,6/1/2017 21:29,9:29:00 PM,21,29,21,55,8,No,30 minute,Crate,Neighbors,,No,138,2,Unknown,1,1,144,Socializing,No
+6/1/2017 21:51,6/1/2017 21:55,230,6/1/2017 21:55,9:55:00 PM,21,55,21,57,8,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,0,2,Socializing,No
+6/1/2017 21:56,6/1/2017 21:57,32,6/1/2017 21:57,9:57:00 PM,21,57,21,59,8,No,Phase change,Bathroom,Bathroom,,Yes,0,0,Sniffing,1,1,4,Bathing/Getting Ready,No
+6/1/2017 21:59,6/1/2017 21:59,15,6/1/2017 21:59,9:59:00 PM,21,59,22,3,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,4,Playing,Yes
+6/1/2017 22:03,6/1/2017 22:03,15,6/1/2017 22:03,10:03:00 PM,22,3,22,14,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,11,Working,No
+6/1/2017 22:14,6/1/2017 22:14,22,6/1/2017 22:14,10:14:00 PM,22,14,22,21,8,No,Phase change,Gym,Family Room,1,No,7,0,Alert looking out the window,0,1,7,Working,No
+6/1/2017 22:21,6/1/2017 22:21,11,6/1/2017 22:21,10:21:00 PM,22,21,22,30,8,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,9,Working,No
+6/1/2017 22:30,6/1/2017 22:30,14,6/1/2017 22:30,10:30:00 PM,22,30,22,52,8,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,31,Working,No
+6/1/2017 22:52,6/1/2017 22:52,29,6/1/2017 22:52,10:52:00 PM,22,52,23,0,8,No,Phase change,Landing,Family Room,1,No,8,1,Sleeping,1,1,39,Working,No
+6/1/2017 23:00,6/1/2017 23:00,42,6/1/2017 23:00,11:00:00 PM,23,0,23,2,8,No,30 minute,Bedroom,Kitchen,1,No,2,0,Unknown,0,1,2,Cleaning,No
+6/1/2017 23:01,6/1/2017 23:02,16,6/1/2017 23:02,11:02:00 PM,23,2,23,39,8,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,37,Cleaning,No
+6/1/2017 23:39,6/1/2017 23:39,16,6/1/2017 23:39,11:39:00 PM,23,39,23,59,8,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,81,Sleeping,Yes
+6/1/2017 0:00,6/1/2017 0:00,16,6/2/2017 0:00,12:00:00 AM,0,0,8,7,9,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,487,Sleeping,Yes
+6/2/2017 8:00,6/2/2017 8:07,412,6/2/2017 8:07,8:07:00 AM,8,7,8,19,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,12,Bathing/Getting Ready,No
+6/2/2017 8:19,6/2/2017 8:19,15,6/2/2017 8:19,8:19:00 AM,8,19,8,38,9,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,19,Training,Yes
+6/2/2017 8:37,6/2/2017 8:38,26,6/2/2017 8:38,8:38:00 AM,8,38,8,50,9,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,1,12,Training,Yes
+6/2/2017 8:50,6/2/2017 8:50,25,6/2/2017 8:50,8:50:00 AM,8,50,8,56,9,No,Phase change,Family Room,Kitchen,1,No,6,1,Eating/Drinking,0,1,6,Cleaning,No
+6/2/2017 8:55,6/2/2017 8:56,30,6/2/2017 8:56,8:56:00 AM,8,56,9,3,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,7,Socializing,No
+6/2/2017 9:02,6/2/2017 9:03,29,6/2/2017 9:03,9:03:00 AM,9,3,9,33,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,37,Eating,No
+6/2/2017 9:33,6/2/2017 9:33,22,6/2/2017 9:33,9:33:00 AM,9,33,10,2,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,66,Working,No
+6/2/2017 10:01,6/2/2017 10:02,23,6/2/2017 10:02,10:02:00 AM,10,2,10,10,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,74,Working,No
+6/2/2017 10:09,6/2/2017 10:10,30,6/2/2017 10:10,10:10:00 AM,10,10,10,19,9,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,9,Socializing,No
+6/2/2017 10:18,6/2/2017 10:19,27,6/2/2017 10:19,10:19:00 AM,10,19,10,31,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,12,Working,No
+6/2/2017 10:31,6/2/2017 10:31,11,6/2/2017 10:31,10:31:00 AM,10,31,11,1,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,42,Working,No
+6/2/2017 11:01,6/2/2017 11:01,14,6/2/2017 11:01,11:01:00 AM,11,1,11,36,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,77,Working,No
+6/2/2017 11:36,6/2/2017 11:36,11,6/2/2017 11:36,11:36:00 AM,11,36,11,39,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,80,Working,No
+6/2/2017 11:38,6/2/2017 11:39,16,6/2/2017 11:39,11:39:00 AM,11,39,12,6,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert looking out the window,0,1,27,Working,No
+6/2/2017 12:05,6/2/2017 12:06,13,6/2/2017 12:06,12:06:00 PM,12,6,12,31,9,No,30 minute,Back Yard,Family Room,,No,25,2,Sniffing,0,1,25,Working,No
+6/2/2017 12:30,6/2/2017 12:31,45,6/2/2017 12:31,12:31:00 PM,12,31,12,33,9,No,30 minute,Back Yard,Family Room,,No,27,2,Alert focusing on human,0,0,2,Working,No
+6/2/2017 12:33,6/2/2017 12:33,27,6/2/2017 12:33,12:33:00 PM,12,33,13,0,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,29,Working,No
+6/2/2017 13:00,6/2/2017 13:00,12,6/2/2017 13:00,1:00:00 PM,13,0,13,32,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,32,Working,No
+6/2/2017 13:31,6/2/2017 13:32,43,6/2/2017 13:32,1:32:00 PM,13,32,14,0,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,60,Working,No
+6/2/2017 14:00,6/2/2017 14:00,17,6/2/2017 14:00,2:00:00 PM,14,0,14,30,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,90,Working,No
+6/2/2017 14:30,6/2/2017 14:30,12,6/2/2017 14:30,2:30:00 PM,14,30,15,0,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,120,Working,No
+6/2/2017 15:00,6/2/2017 15:00,13,6/2/2017 15:00,3:00:00 PM,15,0,15,3,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,123,Working,No
+6/2/2017 15:03,6/2/2017 15:03,19,6/2/2017 15:03,3:03:00 PM,15,3,15,30,9,No,Phase change,Back Yard,Family Room,,No,27,2,Sniffing,0,1,27,Working,No
+6/2/2017 15:30,6/2/2017 15:30,28,6/2/2017 15:30,3:30:00 PM,15,30,15,44,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,14,Working,No
+6/2/2017 15:44,6/2/2017 15:44,12,6/2/2017 15:44,3:44:00 PM,15,44,16,1,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,17,Working,No
+6/2/2017 16:01,6/2/2017 16:01,11,6/2/2017 16:01,4:01:00 PM,16,1,16,13,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,29,Working,No
+6/2/2017 16:13,6/2/2017 16:13,19,6/2/2017 16:13,4:13:00 PM,16,13,16,17,9,No,Phase change,Bathroom,Bathroom,,Yes,0,0,Alert focusing on human,0,0,4,Bathing/Getting Ready,No
+6/2/2017 16:17,6/2/2017 16:17,18,6/2/2017 16:17,4:17:00 PM,16,17,16,18,9,No,Phase change,Kitchen,Bedroom,1,No,1,0,Alert focusing on human,1,0,5,Bathing/Getting Ready,No
+6/2/2017 16:18,6/2/2017 16:18,22,6/2/2017 16:18,4:18:00 PM,16,18,16,25,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,1,12,Petting gauss,Yes
+6/2/2017 16:25,6/2/2017 16:25,11,6/2/2017 16:25,4:25:00 PM,16,25,16,30,9,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Training,0,0,5,Training,Yes
+6/2/2017 16:30,6/2/2017 16:30,12,6/2/2017 16:30,4:30:00 PM,16,30,17,4,9,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Training,1,1,39,Training,Yes
+6/2/2017 17:03,6/2/2017 17:04,43,6/2/2017 17:04,5:04:00 PM,17,4,17,8,9,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,4,Socializing,No
+6/2/2017 17:08,6/2/2017 17:08,13,6/2/2017 17:08,5:08:00 PM,17,8,17,31,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,23,Working,No
+6/2/2017 17:30,6/2/2017 17:31,12,6/2/2017 17:31,5:31:00 PM,17,31,17,44,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,13,Working,No
+6/2/2017 17:44,6/2/2017 17:44,18,6/2/2017 17:44,5:44:00 PM,17,44,17,46,9,No,Phase change,Family Room,Bathroom,,No,2,0,Sleeping,0,0,2,Bathing/Getting Ready,No
+6/2/2017 17:46,6/2/2017 17:46,27,6/2/2017 17:46,5:46:00 PM,17,46,17,53,9,No,Phase change,Bedroom,Bathroom,1,No,9,0,Sleeping,1,0,9,Bathing/Getting Ready,No
+6/2/2017 17:53,6/2/2017 17:53,14,6/2/2017 17:53,5:53:00 PM,17,53,18,1,9,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,17,Bathing/Getting Ready,No
+6/2/2017 18:01,6/2/2017 18:01,16,6/2/2017 18:01,6:01:00 PM,18,1,18,33,9,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,32,Bathing/Getting Ready,No
+6/2/2017 18:30,6/2/2017 18:33,145,6/2/2017 18:33,6:33:00 PM,18,33,19,32,9,No,30 minute,Neighbors,Neighbors,,No,0,0,Sniffing,0,1,59,Socializing,No
+6/2/2017 19:32,6/2/2017 19:32,15,6/2/2017 19:32,7:32:00 PM,19,32,19,44,9,No,30 minute,Neighbors,Neighbors,,No,0,0,Alert focusing on human,0,1,12,Socializing,No
+6/2/2017 19:44,6/2/2017 19:44,12,6/2/2017 19:44,7:44:00 PM,19,44,20,1,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,17,Working,No
+6/2/2017 20:00,6/2/2017 20:01,30,6/2/2017 20:01,8:01:00 PM,20,1,20,16,9,No,30 minute,Crate,Bedroom,,Yes,15,2,Training,0,1,15,Training,Yes
+6/2/2017 20:15,6/2/2017 20:16,53,6/2/2017 20:16,8:16:00 PM,20,16,20,31,9,No,Phase change,Crate,Neighbors,,No,15,2,Unknown,0,0,15,Cleaning,No
+6/2/2017 20:31,6/2/2017 20:31,17,6/2/2017 20:31,8:31:00 PM,20,31,21,0,9,No,30 minute,Crate,Neighbors,,No,44,2,Unknown,1,0,44,Working,No
+6/2/2017 21:00,6/2/2017 21:00,19,6/2/2017 21:00,9:00:00 PM,21,0,21,37,9,No,30 minute,Crate,Neighbors,,No,81,2,Unknown,1,0,81,Working,No
+6/2/2017 21:36,6/2/2017 21:37,56,6/2/2017 21:37,9:37:00 PM,21,37,21,46,9,No,30 minute,Crate,Car,,No,90,2,Unknown,1,1,90,Travelling,No
+6/2/2017 21:45,6/2/2017 21:46,15,6/2/2017 21:46,9:46:00 PM,21,46,21,56,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,10,Playing,Yes
+6/2/2017 21:55,6/2/2017 21:56,36,6/2/2017 21:56,9:56:00 PM,21,56,22,1,9,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with dog,0,1,5,Socializing,No
+6/2/2017 22:00,6/2/2017 22:01,14,6/2/2017 22:01,10:01:00 PM,22,1,22,42,9,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,41,Socializing,No
+6/2/2017 22:41,6/2/2017 22:42,17,6/2/2017 22:42,10:42:00 PM,22,42,22,45,9,No,30 minute,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,3,Socializing,No
+6/2/2017 22:43,6/2/2017 22:45,115,6/2/2017 22:45,10:45:00 PM,22,45,22,50,9,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,0,0,5,Bathing/Getting Ready,No
+6/2/2017 22:49,6/2/2017 22:50,15,6/2/2017 22:50,10:50:00 PM,22,50,23,59,9,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,130,Sleeping,Yes
+6/2/2017 0:00,6/2/2017 0:00,15,6/3/2017 0:00,12:00:00 AM,0,0,8,20,10,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,500,Sleeping,Yes
+6/3/2017 8:18,6/3/2017 8:20,119,6/3/2017 8:20,8:20:00 AM,8,20,8,22,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,2,Bathing/Getting Ready,No
+6/3/2017 8:21,6/3/2017 8:22,59,6/3/2017 8:22,8:22:00 AM,8,22,8,24,10,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,2,Training,Yes
+6/3/2017 8:22,6/3/2017 8:24,90,6/3/2017 8:24,8:24:00 AM,8,24,8,31,10,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,0,7,Training,Yes
+6/3/2017 8:30,6/3/2017 8:31,14,6/3/2017 8:31,8:31:00 AM,8,31,8,40,10,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,1,1,16,Training,Yes
+6/3/2017 8:38,6/3/2017 8:40,65,6/3/2017 8:40,8:40:00 AM,8,40,8,43,10,No,Phase change,Family Room,Kitchen,1,Yes,3,1,Eating/Drinking,0,1,3,Cooking,No
+6/3/2017 8:42,6/3/2017 8:43,68,6/3/2017 8:43,8:43:00 AM,8,43,9,1,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,18,Eating,No
+6/3/2017 9:01,6/3/2017 9:01,20,6/3/2017 9:01,9:01:00 AM,9,1,9,31,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,48,Eating,No
+6/3/2017 9:30,6/3/2017 9:31,68,6/3/2017 9:31,9:31:00 AM,9,31,9,51,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,68,Socializing,No
+6/3/2017 9:50,6/3/2017 9:51,54,6/3/2017 9:51,9:51:00 AM,9,51,10,1,10,No,Phase change,Back Yard,Family Room,,Yes,10,2,Sniffing,0,1,10,Socializing,No
+6/3/2017 10:01,6/3/2017 10:01,41,6/3/2017 10:01,10:01:00 AM,10,1,10,8,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Playing with human,0,1,7,Playing,Yes
+6/3/2017 10:08,6/3/2017 10:08,14,6/3/2017 10:08,10:08:00 AM,10,8,10,32,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,24,Socializing,No
+6/3/2017 10:31,6/3/2017 10:32,49,6/3/2017 10:32,10:32:00 AM,10,32,11,2,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,54,Socializing,No
+6/3/2017 11:01,6/3/2017 11:02,42,6/3/2017 11:02,11:02:00 AM,11,2,11,23,10,No,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,0,1,21,Travelling,Yes
+6/3/2017 11:21,6/3/2017 11:23,74,6/3/2017 11:23,11:23:00 AM,11,23,11,31,10,No,Phase change,Forest,Forest,,Yes,0,0,Walking/Excersing,0,0,8,Training,Yes
+6/3/2017 11:31,6/3/2017 11:31,32,6/3/2017 11:31,11:31:00 AM,11,31,12,3,10,No,30 minute,Forest,Forest,,Yes,0,0,Walking/Excersing,1,1,40,Training,Yes
+6/3/2017 12:02,6/3/2017 12:03,38,6/3/2017 12:03,12:03:00 PM,12,3,12,35,10,No,30 minute,Forest,Forest,,Yes,0,0,Playing with human,0,1,32,Playing,Yes
+6/3/2017 12:34,6/3/2017 12:35,20,6/3/2017 12:35,12:35:00 PM,12,35,13,2,10,No,30 minute,Forest,Forest,,Yes,0,0,Sniffing,0,1,27,Training,Yes
+6/3/2017 13:01,6/3/2017 13:02,62,6/3/2017 13:02,1:02:00 PM,13,2,13,22,10,No,30 minute,Neighbors,Neighbors,,Yes,0,0,Playing with human,0,1,20,Playing,Yes
+6/3/2017 13:22,6/3/2017 13:22,21,6/3/2017 13:22,1:22:00 PM,13,22,13,31,10,No,Phase change,Car,Car,,Yes,0,0,Sleeping,0,0,9,Travelling,Yes
+6/3/2017 13:31,6/3/2017 13:31,13,6/3/2017 13:31,1:31:00 PM,13,31,13,43,10,No,30 minute,Car,Car,,Yes,0,0,Sleeping,1,1,21,Travelling,Yes
+6/3/2017 13:43,6/3/2017 13:43,33,6/3/2017 13:43,1:43:00 PM,13,43,14,2,10,No,Phase change,Neighbors,Neighbors,,No,0,0,Sniffing,0,1,19,Socializing,No
+6/3/2017 14:02,6/3/2017 14:02,28,6/3/2017 14:02,2:02:00 PM,14,2,14,6,10,No,30 minute,Neighbors,Neighbors,,No,0,0,Alert focusing on human,0,1,4,Socializing,No
+6/3/2017 14:05,6/3/2017 14:06,30,6/3/2017 14:06,2:06:00 PM,14,6,14,31,10,No,Phase change,Car,Car,,Yes,0,0,Sleeping,0,1,25,Travelling,Yes
+6/3/2017 14:30,6/3/2017 14:31,23,6/3/2017 14:31,2:31:00 PM,14,31,14,43,10,No,30 minute,Car,Car,,Yes,0,0,Alert looking out the window,0,1,12,Travelling,Yes
+6/3/2017 14:42,6/3/2017 14:43,22,6/3/2017 14:43,2:43:00 PM,14,43,15,1,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,18,Eating,No
+6/3/2017 15:00,6/3/2017 15:01,17,6/3/2017 15:01,3:01:00 PM,15,1,15,58,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,57,Socializing,No
+6/3/2017 15:57,6/3/2017 15:58,18,6/3/2017 15:58,3:58:00 PM,15,58,16,2,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,61,Sleeping,No
+6/3/2017 16:01,6/3/2017 16:02,67,6/3/2017 16:02,4:02:00 PM,16,2,16,23,10,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,21,Working,No
+6/3/2017 16:23,6/3/2017 16:23,15,6/3/2017 16:23,4:23:00 PM,16,23,16,37,10,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,14,Working,No
+6/3/2017 16:37,6/3/2017 16:37,19,6/3/2017 16:37,4:37:00 PM,16,37,17,0,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,37,Socializing,No
+6/3/2017 17:00,6/3/2017 17:00,13,6/3/2017 17:00,5:00:00 PM,17,0,17,36,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,73,Working,No
+6/3/2017 17:36,6/3/2017 17:36,50,6/3/2017 17:36,5:36:00 PM,17,36,18,3,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,100,Working,No
+6/3/2017 18:02,6/3/2017 18:03,33,6/3/2017 18:03,6:03:00 PM,18,3,18,30,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,127,Working,No
+6/3/2017 18:30,6/3/2017 18:30,12,6/3/2017 18:30,6:30:00 PM,18,30,18,42,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Training,0,1,12,Training,Yes
+6/3/2017 18:41,6/3/2017 18:42,37,6/3/2017 18:42,6:42:00 PM,18,42,18,44,10,No,Phase change,Family Room,Bathroom,,No,2,1,Eating/Drinking,0,1,2,Bathing/Getting Ready,No
+6/3/2017 18:43,6/3/2017 18:44,31,6/3/2017 18:44,6:44:00 PM,18,44,19,2,10,No,Phase change,Landing,Bathroom,1,No,20,1,Sleeping,0,1,18,Bathing/Getting Ready,No
+6/3/2017 19:01,6/3/2017 19:02,18,6/3/2017 19:02,7:02:00 PM,19,2,19,24,10,No,30 minute,Crate,Bedroom,,Yes,22,2,Alert focusing on human,0,1,22,Bathing/Getting Ready,No
+6/3/2017 19:24,6/3/2017 19:24,29,6/3/2017 19:24,7:24:00 PM,19,24,19,36,10,No,Phase change,Crate,Car,,No,34,2,Unknown,0,0,12,Socializing,No
+6/3/2017 19:31,6/3/2017 19:36,302,6/3/2017 19:36,7:36:00 PM,19,36,22,53,10,No,30 minute,Crate,Car,,No,51,2,Unknown,1,1,209,Socializing,No
+6/3/2017 22:53,6/3/2017 22:53,45,6/3/2017 22:53,10:53:00 PM,22,53,23,1,10,No,Phase change,Back Yard,Back Yard,,Yes,0,0,Sniffing,0,1,8,Socializing,No
+6/3/2017 23:01,6/3/2017 23:01,17,6/3/2017 23:01,11:01:00 PM,23,1,23,10,10,No,30 minute,Family Room,Family Room,,Yes,0,0,Eating/Drinking,0,1,9,Cleaning,No
+6/3/2017 23:09,6/3/2017 23:10,42,6/3/2017 23:10,11:10:00 PM,23,10,23,59,10,No,Phase change,Bedroom,Family Room,1,No,20,1,Unknown,0,1,80,Working,No
+6/4/2017 0:30,6/4/2017 0:30,18,6/4/2017 0:30,12:30:00 AM,0,30,7,52,11,No,Phase change,Bedroom,Bedroom,,Yes,0,0,Sleeping,0,1,442,Sleeping,Yes
+6/4/2017 7:52,6/4/2017 7:52,20,6/4/2017 7:52,7:52:00 AM,7,52,7,55,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,3,Bathing/Getting Ready,No
+6/4/2017 7:55,6/4/2017 7:55,30,6/4/2017 7:55,7:55:00 AM,7,55,8,19,11,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,24,Training,Yes
+6/4/2017 8:19,6/4/2017 8:19,11,6/4/2017 8:19,8:19:00 AM,8,19,8,58,11,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Training,0,0,39,Training,Yes
+6/4/2017 8:58,6/4/2017 8:58,42,6/4/2017 8:58,8:58:00 AM,8,58,9,2,11,No,30 minute,Neighbors,Neighbors,,Yes,0,0,Training,1,1,43,Training,Yes
+6/4/2017 9:02,6/4/2017 9:02,20,6/4/2017 9:02,9:02:00 AM,9,2,9,4,11,No,Phase change,Family Room,Kitchen,1,No,2,0,Eating/Drinking,0,1,2,Cooking,No
+6/4/2017 9:04,6/4/2017 9:04,12,6/4/2017 9:04,9:04:00 AM,9,4,9,12,11,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,0,1,8,Cooking,No
+6/4/2017 9:12,6/4/2017 9:12,24,6/4/2017 9:12,9:12:00 AM,9,12,9,35,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,23,Eating,No
+6/4/2017 9:35,6/4/2017 9:35,14,6/4/2017 9:35,9:35:00 AM,9,35,10,0,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,48,Cleaning,No
+6/4/2017 10:00,6/4/2017 10:00,19,6/4/2017 10:00,10:00:00 AM,10,0,10,1,11,No,30 minute,Landing,Family Room,1,No,1,0,Alert looking out the window,0,1,1,Cleaning,No
+6/4/2017 10:00,6/4/2017 10:01,47,6/4/2017 10:01,10:01:00 AM,10,1,10,8,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,0,1,7,Cleaning,No
+6/4/2017 10:08,6/4/2017 10:08,17,6/4/2017 10:08,10:08:00 AM,10,8,10,13,11,No,Phase change,Family Room,Kitchen,1,No,5,0,Alert focusing on human,0,1,5,Cleaning,No
+6/4/2017 10:13,6/4/2017 10:13,13,6/4/2017 10:13,10:13:00 AM,10,13,10,23,11,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Sleeping,0,0,10,Cleaning,No
+6/4/2017 10:23,6/4/2017 10:23,31,6/4/2017 10:23,10:23:00 AM,10,23,10,33,11,No,Phase change,Landing,Kitchen,,No,10,1,Sleeping,1,0,20,Cleaning,No
+6/4/2017 10:32,6/4/2017 10:33,18,6/4/2017 10:33,10:33:00 AM,10,33,10,47,11,No,30 minute,Landing,Kitchen,1,No,24,1,Sleeping,1,1,34,Cleaning,No
+6/4/2017 10:46,6/4/2017 10:47,37,6/4/2017 10:47,10:47:00 AM,10,47,10,48,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,1,Cleaning,No
+6/4/2017 10:48,6/4/2017 10:48,19,6/4/2017 10:48,10:48:00 AM,10,48,11,2,11,No,Phase change,Back Yard,Family Room,,No,14,2,Sniffing,0,0,14,Cleaning,No
+6/4/2017 11:01,6/4/2017 11:02,24,6/4/2017 11:02,11:02:00 AM,11,2,11,37,11,No,30 minute,Back Yard,Family Room,,No,49,2,Sniffing,1,0,49,Cleaning,No
+6/4/2017 11:37,6/4/2017 11:37,16,6/4/2017 11:37,11:37:00 AM,11,37,11,52,11,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Sniffing,1,1,64,Working,No
+6/4/2017 11:52,6/4/2017 11:52,17,6/4/2017 11:52,11:52:00 AM,11,52,11,59,11,No,Phase change,Car,Car,,Yes,0,0,Alert looking out the window,0,1,7,Travelling,Yes
+6/4/2017 11:58,6/4/2017 11:59,21,6/4/2017 11:59,11:59:00 AM,11,59,12,5,11,No,Phase change,Home Depot,Home Depot,,Yes,0,0,Training,0,0,6,Training,Yes
+6/4/2017 12:05,6/4/2017 12:05,15,6/4/2017 12:05,12:05:00 PM,12,5,12,22,11,No,30 minute,Home Depot,Home Depot,,Yes,0,0,Training,1,1,23,Training,Yes
+6/4/2017 12:22,6/4/2017 12:22,19,6/4/2017 12:22,12:22:00 PM,12,22,12,31,11,No,Phase change,Car,Car,,Yes,0,0,Alert focusing on human,0,0,9,Travelling,Yes
+6/4/2017 12:30,6/4/2017 12:31,44,6/4/2017 12:31,12:31:00 PM,12,31,12,33,11,No,30 minute,Car,Car,,Yes,0,0,Alert focusing on human,1,1,11,Travelling,Yes
+6/4/2017 12:33,6/4/2017 12:33,14,6/4/2017 12:33,12:33:00 PM,12,33,13,11,11,No,Phase change,Front Yard,Front Yard,,Yes,0,0,Sniffing,0,1,38,Working,No
+6/4/2017 13:11,6/4/2017 13:11,23,6/4/2017 13:11,1:11:00 PM,13,11,13,41,11,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Alert focusing on human,0,1,30,Working,No
+6/4/2017 13:41,6/4/2017 13:41,16,6/4/2017 13:41,1:41:00 PM,13,41,13,50,11,No,30 minute,Back Yard,Back Yard,,Yes,0,0,Eating/Drinking,0,1,9,Training,Yes
+6/4/2017 13:48,6/4/2017 13:49,69,6/4/2017 13:50,1:50:00 PM,13,50,14,1,11,No,Phase change,Back Yard,Family Room,,No,11,2,Alert focusing on human,0,1,11,Cleaning,No
+6/4/2017 14:00,6/4/2017 14:01,56,6/4/2017 14:01,2:01:00 PM,14,1,14,14,11,No,30 minute,Back Yard,Kitchen,,No,13,2,Sleeping,0,0,13,Eating,No
+6/4/2017 14:13,6/4/2017 14:14,19,6/4/2017 14:14,2:14:00 PM,14,14,14,31,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,30,Cleaning,No
+6/4/2017 14:30,6/4/2017 14:31,15,6/4/2017 14:31,2:31:00 PM,14,31,15,35,11,No,30 minute,Family Room,Bedroom,,No,4,0,Sleeping,1,0,94,Cleaning,No
+6/4/2017 15:34,6/4/2017 15:35,18,6/4/2017 15:35,3:35:00 PM,15,35,15,53,11,No,30 minute,Family Room,Bedroom,1,No,22,0,Sleeping,1,1,112,Sleeping,No
+6/4/2017 15:53,6/4/2017 15:53,17,6/4/2017 15:53,3:53:00 PM,15,53,16,1,11,No,Phase change,Crate,Bedroom,,Yes,0,0,Alert focusing on human,0,0,8,Cleaning,No
+6/4/2017 16:00,6/4/2017 16:01,34,6/4/2017 16:01,4:01:00 PM,16,1,16,20,11,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Alert focusing on human,1,1,27,Cleaning,No
+6/4/2017 16:20,6/4/2017 16:20,15,6/4/2017 16:20,4:20:00 PM,16,20,16,29,11,No,Phase change,Back Yard,Bedroom,,No,9,2,Sniffing,0,1,9,Cleaning,No
+6/4/2017 16:29,6/4/2017 16:29,22,6/4/2017 16:29,4:29:00 PM,16,29,16,31,11,No,Phase change,Family Room,Bedroom,,No,2,1,Alert looking out the window,0,1,2,Cleaning,No
+6/4/2017 16:31,6/4/2017 16:31,14,6/4/2017 16:31,4:31:00 PM,16,31,17,1,11,No,30 minute,Family Room,Bedroom,1,No,30,1,Unknown,0,1,30,Cleaning,No
+6/4/2017 17:01,6/4/2017 17:01,22,6/4/2017 17:01,5:01:00 PM,17,1,17,36,11,No,30 minute,Family Room,Bathroom,1,No,35,1,Sleeping,0,0,35,Cleaning,No
+6/4/2017 17:35,6/4/2017 17:36,35,6/4/2017 17:36,5:36:00 PM,17,36,18,3,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,1,62,Socializing,No
+6/4/2017 18:02,6/4/2017 18:03,24,6/4/2017 18:03,6:03:00 PM,18,3,18,12,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,1,9,Socializing,No
+6/4/2017 18:12,6/4/2017 18:12,29,6/4/2017 18:12,6:12:00 PM,18,12,18,22,11,No,Phase change,Family Room,Kitchen,1,No,10,1,Playing with dog,0,1,10,Cleaning,No
+6/4/2017 18:22,6/4/2017 18:22,18,6/4/2017 18:22,6:22:00 PM,18,22,18,31,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Alert focusing on human,0,0,9,Eating,No
+6/4/2017 18:31,6/4/2017 18:31,26,6/4/2017 18:31,6:31:00 PM,18,31,19,3,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,0,41,Eating,No
+6/4/2017 19:02,6/4/2017 19:03,81,6/4/2017 19:03,7:03:00 PM,19,3,19,24,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Alert focusing on human,1,0,62,Cleaning,No
+6/4/2017 19:24,6/4/2017 19:24,12,6/4/2017 19:24,7:24:00 PM,19,24,19,35,11,No,Phase change,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,0,73,Cleaning,No
+6/4/2017 19:35,6/4/2017 19:35,15,6/4/2017 19:35,7:35:00 PM,19,35,20,1,11,No,30 minute,Kitchen,Kitchen,,Yes,0,0,Alert focusing on human,1,1,99,Cleaning,No
+6/4/2017 20:00,6/4/2017 20:01,16,6/4/2017 20:01,8:01:00 PM,20,1,20,19,11,No,30 minute,Front Yard,Front Yard,,Yes,0,0,Walking/Excersing,0,1,18,Training,Yes
+6/4/2017 20:18,6/4/2017 20:19,15,6/4/2017 20:19,8:19:00 PM,20,19,20,31,11,No,Phase change,Family Room,Family Room,,Yes,0,0,Sleeping,0,0,12,Working,No
+6/4/2017 20:31,6/4/2017 20:31,14,6/4/2017 20:31,8:31:00 PM,20,31,21,2,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,43,Working,No
+6/4/2017 21:01,6/4/2017 21:02,41,6/4/2017 21:02,9:02:00 PM,21,2,21,30,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,71,Working,No
+6/4/2017 21:30,6/4/2017 21:30,19,6/4/2017 21:30,9:30:00 PM,21,30,22,7,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,108,Working,No
+6/4/2017 22:07,6/4/2017 22:07,13,6/4/2017 22:07,10:07:00 PM,22,7,22,36,11,No,30 minute,Family Room,Family Room,,Yes,0,0,Sleeping,1,0,137,Working,No
+6/4/2017 22:36,6/4/2017 22:36,16,6/4/2017 22:36,10:36:00 PM,22,36,22,52,11,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,0,153,Sleeping,No
+6/4/2017 22:52,6/4/2017 22:52,16,6/4/2017 22:52,10:52:00 PM,22,52,23,59,11,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,128,Sleeping,Yes
+6/5/2017 7:00,6/5/2017 7:00,16,6/5/2017 7:00,7:00:00 AM,0,0,7,0,12,No,30 minute,Bedroom,Bedroom,,Yes,0,0,Sleeping,1,1,420,Sleeping,Yes

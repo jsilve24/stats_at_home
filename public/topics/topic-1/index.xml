@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sun, 13 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/topics/topic-1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Does Gauss Love Me More in the Kitchen?</title>
+      <link>/2017/08/27/does-gauss-love-me-more-in-the-kitchen/</link>
+      <pubDate>Sun, 27 Aug 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/08/27/does-gauss-love-me-more-in-the-kitchen/</guid>
+      <description>The Idea First things first, Gauss is our dog.
+Since I am able to work from home, my dog Gauss and I spend a lot of time together. As a result, I like to think I know why he does what he does. But of course I will never really know - though, it’s nice to think that I do. Both of us being a creatures of habit, we have fallen into a nice routine during the day - one where he sleeps the day away and comes to get me around 4pm for some outdoor training/playing.</description>
+    </item>
     
     <item>
       <title>A New(?) Regression Clustering Algorithm</title>
