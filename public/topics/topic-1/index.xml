@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sun, 27 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/topics/topic-1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Visualizing the Multinomial in the Simplex</title>
+      <link>/2017/09/14/visualizing-the-multinomial-in-the-simplex/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/09/14/visualizing-the-multinomial-in-the-simplex/</guid>
+      <description>Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more).</description>
+    </item>
     
     <item>
       <title>Does Gauss Love Me More in the Kitchen?</title>

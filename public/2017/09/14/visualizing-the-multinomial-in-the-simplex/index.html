@@ -12,9 +12,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more)." />
+<meta name="description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from microbiome surveys, RNA-seq, and more)." />
 
-<meta name="keywords" content="R, ">
+<meta name="keywords" content="key, words, ">
 
 
 <meta property="og:title" content="Visualizing the Multinomial in the Simplex  &middot; Statistics @ Home ">
@@ -24,13 +24,15 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more)."/>
+<meta property="og:description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from microbiome surveys, RNA-seq, and more)."/>
 <meta property="og:article:published_time" content="2017-09-14T00:00:00Z" />
 <meta property="og:article:modified_time" content="2017-09-14T00:00:00Z" />
 
   
     
-<meta property="og:article:tag" content="R">
+<meta property="og:article:tag" content="key">
+    
+<meta property="og:article:tag" content="words">
     
   
 
@@ -39,7 +41,7 @@
 <meta name="twitter:site" content="@inschool4life" />
 <meta name="twitter:creator" content="@inschool4life" />
 <meta name="twitter:title" content="Visualizing the Multinomial in the Simplex" />
-<meta name="twitter:description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more)." />
+<meta name="twitter:description" content="Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from microbiome surveys, RNA-seq, and more)." />
 <meta name="twitter:url" content="/2017/09/14/visualizing-the-multinomial-in-the-simplex/" />
 <meta name="twitter:domain" content="/">
   
@@ -54,8 +56,8 @@
       "name": "http://profiles.google.com/+?rel=author"
     },
     "datePublished": "2017-09-14",
-    "description": "Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more).",
-    "wordCount": 1297
+    "description": "Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from microbiome surveys, RNA-seq, and more).",
+    "wordCount": 1303
   }
 </script>
 
@@ -197,7 +199,7 @@ MathJax.Hub.Config({
     &middot; by Justin Silverman
   
   &middot; Read in about 7 min
-  &middot; (1297 Words)
+  &middot; (1303 Words)
   <br>
   
 <a class="label" href="/tags/r">R</a>
@@ -244,16 +246,18 @@ plot_ternary_multinomial_density &lt;- function(n, prob){
 <h2>A Discritization of the Simplex</h2>
 <p>The Multinomial has a continuous parameter space, that is the vector <span class="math inline">\(p\)</span> contains elements that are continuous and not discrete. However, Multinomial counting processes results in a discretization continuous parameter space.</p>
 <pre class="r"><code>prob &lt;- miniclo(c(.37, .37, .3))
+d &lt;- setNames(as.data.frame(prob), c(&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;))
 plot_ternary_multinomial_density(10, prob) +
-  geom_point(data=setNames(as.data.frame(prob), c(&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;)), color=&quot;red&quot;, size=2, fill=&quot;red&quot;)</code></pre>
+  geom_point(data=d, color=&quot;red&quot;, size=2, fill=&quot;red&quot;)</code></pre>
 <p><img src="/post/2017-09-14-visualizing-the-multinomial-in-the-simplex_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Given a finite sample (e.g., non-infinite <span class="math inline">\(n\)</span>) we can only obtain a finite set of possible parameter values. If this does not make sense yet think about flipping a coin twice, there are 4 possible outcomes <span class="math inline">\(\{(H,H), (H, T), (T, H), (T, T)\}\)</span> leading to 3 possible estimates for the underlying proportions <span class="math inline">\(\{(1, 0), (.5, .5), (0, 1)\}\)</span>. In this coin flipping example we cannot get a maximum likelihood estimate of <span class="math inline">\((0.3, 0.7)\)</span>. In the above visualization I have highlighted the true proportion that this Multinomial distribution is based on in red; note that with a sample of size 10 there is no way to perfectly estimate this “true” proportion. This discretization of the proportions is important to take into account when estimating proportions from count data as it introduces uncertainty into the resulting estimates.</p>
 </div>
 <div id="effect-of-changing-n-counting-as-a-random-process" class="section level2">
 <h2>Effect of changing <span class="math inline">\(n\)</span> (counting as a random process)</h2>
 <p>Uncertainty in the Multinomial parameters is not simply due to the discretization of the parameter space. Uncertainty in these estimates also arises because we are modeling counting as a random process. Note that as we draw more and more balls out of the urn the Multinomial distribution concentrates around the true value. This is because drawing more balls is like having more replicates in an experiment, eventually (in the absence of bias) our estimates will start concentrating around the true value.</p>
-<pre class="r"><code>plot_ternary_multinomial_density(100, prob) +
-  geom_point(data=setNames(as.data.frame(prob), c(&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;)), color=&quot;red&quot;, size=2, fill=&quot;red&quot;)</code></pre>
+<pre class="r"><code>d &lt;- setNames(as.data.frame(prob), c(&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;))
+plot_ternary_multinomial_density(100, prob) +
+  geom_point(data=d, color=&quot;red&quot;, size=2, fill=&quot;red&quot;)</code></pre>
 <p><img src="/post/2017-09-14-visualizing-the-multinomial-in-the-simplex_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 </div>

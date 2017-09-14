@@ -3,12 +3,17 @@ title: Visualizing the Multinomial in the Simplex
 author: Justin Silverman
 date: '2017-09-14'
 slug: visualizing-the-multinomial-in-the-simplex
-description: Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more).
+description: Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from microbiome surveys, RNA-seq, and more).
 categories: []
 tags:
   - R
+draft: no
+keywords:
+  - key
+  - words
+topics: topic 1
+type: post
 ---
-
 
 Lately I have been working on figures for a manuscript. In this process I created a few visualizations that I thought might help others visualize the Multinomial distribution. I will focus on describing how counting processes introduce uncertainty into estimates of relative abundances and I will end with a discussion of how understanding the Multinomial has impacted my view of analyses of sequence count data (e.g., data from 16s studies of the microbiome, RNA-seq, and more). Here I have chosen to focus on the Multinomial distribution, however, much of what I discuss also relates to the [Multivariate Hypergeometric Distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution#Multivariate_hypergeometric_distribution) as well. 
 
@@ -54,8 +59,9 @@ The Multinomial has a continuous parameter space, that is the vector $p$ contain
 
 ```{r}
 prob <- miniclo(c(.37, .37, .3))
+d <- setNames(as.data.frame(prob), c("v1", "v2", "v3"))
 plot_ternary_multinomial_density(10, prob) +
-  geom_point(data=setNames(as.data.frame(prob), c("v1", "v2", "v3")), color="red", size=2, fill="red")
+  geom_point(data=d, color="red", size=2, fill="red")
 ```
 
 Given a finite sample (e.g., non-infinite $n$) we can only obtain a finite set of possible parameter values. If this does not make sense yet think about flipping a coin twice, there are 4 possible outcomes $\{(H,H), (H, T), (T, H), (T, T)\}$ leading to 3 possible estimates for the underlying proportions $\{(1, 0), (.5, .5), (0, 1)\}$. In this coin flipping example we cannot get a maximum likelihood estimate of $(0.3, 0.7)$. In the above visualization I have highlighted the true proportion that this Multinomial distribution is based on in red; note that with a sample of size 10 there is no way to perfectly estimate this "true" proportion. This discretization of the proportions is important to take into account when estimating proportions from count data as it introduces uncertainty into the resulting estimates. 
@@ -64,10 +70,10 @@ Given a finite sample (e.g., non-infinite $n$) we can only obtain a finite set o
 Uncertainty in the Multinomial parameters is not simply due to the discretization of the parameter space. Uncertainty in these estimates also arises because we are modeling counting as a random process. Note that as we draw more and more balls out of the urn the Multinomial distribution concentrates around the true value. This is because drawing more balls is like having more replicates in an experiment, eventually (in the absence of bias) our estimates will start concentrating around the true value.  
 
 ```{r}
+d <- setNames(as.data.frame(prob), c("v1", "v2", "v3"))
 plot_ternary_multinomial_density(100, prob) +
-  geom_point(data=setNames(as.data.frame(prob), c("v1", "v2", "v3")), color="red", size=2, fill="red")
+  geom_point(data=d, color="red", size=2, fill="red")
 ```
-
 
 # Effect of changing $\mathbf{p}$ (focus on boundaries)
 Based on the above figures, it may seem simple to estimate proportions from count data, just collect at least 100 or so counts and you have a pretty good covering over the simplex. But this is often not the case in real world problems! In reality we are often confronted with situations in which some of the relative abundances are very small compared to some others (e.g., one color of balls is much more rare than another color). In addition, the difference between a zero proportion and a non-zero but small proportion is often very important (think about the difference between estimating that one type of ball is completely absent from an urn versus estimating that it is present but at much lower proportion than the other types of balls). In this situation it can become quite difficult to obtain enough samples to accurately estimate a non-zero proportion for the rare type of ball. 
