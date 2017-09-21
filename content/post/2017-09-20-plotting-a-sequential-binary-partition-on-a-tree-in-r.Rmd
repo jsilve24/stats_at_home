@@ -15,7 +15,7 @@ library(ape)
 library(ggtree)
 library(philr)
 tr <- named_rtree(8)
-set.seed(4)
+set.seed(7)
 ```
 
 
