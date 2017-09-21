@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 10 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/compositional-data-analysis/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Plotting a Sequential Binary Partition on a Tree in R</title>
+      <link>/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/</guid>
+      <description>For users of PhILR (Paper, R Package), and also for users of the ILR transform that wan to make use of the awesome plotting functions in R. I wanted to share a function for plotting a sequential binary partition on a tree using the ggtree package. I recently wrote this for a manuscript but figured it might be of more general use to others as well.
+In its simplest form a sequential binary partition can be represented as a binary tree.</description>
+    </item>
     
     <item>
       <title>Building the ILR from the ALR Transform</title>

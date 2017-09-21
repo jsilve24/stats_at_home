@@ -6,21 +6,22 @@
     <description>Recent content in Philr on Statistics @ Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
-    <managingEditor>jsilve24@gmail.com (Justin and Rachel Silverman)</managingEditor>
-    <webMaster>jsilve24@gmail.com (Justin and Rachel Silverman)</webMaster>
+    <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
+    <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Sun, 16 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/philr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Compositional Time Series Analysis with PhILR and Dynamic Linear Models</title>
-      <link>/2017/04/16/philr_dlm_demo/</link>
-      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
-      <author>jsilve24@gmail.com (Justin and Rachel Silverman)</author>
-      <guid>/2017/04/16/philr_dlm_demo/</guid>
-      <description>We are going to simulate a compositional time-series of a 3 species population and we will view the dynamics in terms of the phylogenetic tree using the PhILR coordinates system. Specifically we are going to model a community that is undergoing a mean-reverting stochastic process and being acted on by an external force which itself is undergoing a random walk. On top of this we will simulate observational noise which obscures our measurements of the true community state at any given time.</description>
+      <title>Plotting a Sequential Binary Partition on a Tree in R</title>
+      <link>/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/</guid>
+      <description>For users of PhILR (Paper, R Package), and also for users of the ILR transform that wan to make use of the awesome plotting functions in R. I wanted to share a function for plotting a sequential binary partition on a tree using the ggtree package. I recently wrote this for a manuscript but figured it might be of more general use to others as well.
+In its simplest form a sequential binary partition can be represented as a binary tree.</description>
     </item>
     
   </channel>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Plotting a Sequential Binary Partition on a Tree in R  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="Compositional Data Analysis, R, PhILR, ">
+
+
+<meta property="og:title" content="Plotting a Sequential Binary Partition on a Tree in R  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2017-09-20T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-09-20T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="Compositional Data Analysis">
+    
+<meta property="og:article:tag" content="R">
+    
+<meta property="og:article:tag" content="PhILR">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="Plotting a Sequential Binary Partition on a Tree in R" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Plotting a Sequential Binary Partition on a Tree in R",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-09-20",
+    "description": "",
+    "wordCount": 610
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.26" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Plotting a Sequential Binary Partition on a Tree in R
+</h1>
+
+  <div class="metas">
+<time datetime="2017-09-20">20 Sep, 2017</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 3 min
+  &middot; (610 Words)
+  <br>
+  
+<a class="label" href="/tags/compositional-data-analysis">Compositional Data Analysis</a>
+
+<a class="label" href="/tags/r">R</a>
+
+<a class="label" href="/tags/philr">PhILR</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>For users of PhILR (<a href="https://elifesciences.org/articles/21887">Paper</a>, <a href="https://bioconductor.org/packages/release/bioc/html/philr.html">R Package</a>), and also for users of the ILR transform that wan to make use of the awesome plotting functions in R. I wanted to share a function for plotting a sequential binary partition on a tree using the <a href="https://bioconductor.org/packages/release/bioc/html/ggtree.html">ggtree package</a>. I recently wrote this for a manuscript but figured it might be of more general use to others as well.</p>
+<p>In its simplest form a sequential binary partition can be represented as a binary tree.</p>
+<pre class="r"><code>ggtree(tr)+
+  geom_label2(aes(label = label))</code></pre>
+<p><img src="2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>However, as in the case of the ILR (or PhILR) transforms, we may have specific orientation information distinguishing between the top/bottom or left/right descendant of an internal node. In this case a sequential binary partition can be represented in sign matrix form in which 1 represents an “up” (or, for PhILR, a tip in the numerator of a balance), a -1 represents a “down” (or a tip something in the denominator), and a 0 represents a tip not downstream of that partition (or a tip not part of that balance). I will generate a sequential binary partition by using the function <em>phylo2sbp</em> in the <a href="https://bioconductor.org/packages/release/bioc/html/philr.html"><em>philr</em> R package</a>.</p>
+<pre class="r"><code>(V &lt;- phylo2sbp(tr))</code></pre>
+<pre><code>##    n1 n2 n3 n4 n5 n6 n7
+## t1  1  0  0  0  0  0  0
+## t8 -1  1  1  1  0  0  0
+## t6 -1  1  1 -1  0  0  0
+## t7 -1  1 -1  0  1  0  0
+## t2 -1  1 -1  0 -1  0  0
+## t4 -1 -1  0  0  0  1  0
+## t5 -1 -1  0  0  0 -1  1
+## t3 -1 -1  0  0  0 -1 -1</code></pre>
+<p>Here is a simple function that will augment the labels from a ggtree object with the information in the sign-matrix. The only reason this is semi-non-trivial is that ggtree has its own internal mechanisms for orienting branches by default. This function takes a ggtree object (which if not specified it will also create) and correctly labels the internal nodes in accordance with the ggtree object.</p>
+<pre class="r"><code># - Assumes tree&#39;s internal nodes and tips are named
+# - can pass smaller contrast matrix to subset which are annotated
+# - A prebuilt ggtree object with corresponding tip/node names can be passed as
+#     argument p
+# - Currently designs for trees in vertical layout (see example below)
+annotate_sbp &lt;- function(tr, V, p=NULL){
+  sep &lt;- &quot;\n&quot; 
+  if (!setequal(tr$tip.label, rownames(V))) stop(&quot;mismatch between tip.label of tree and rownames of V&quot;)
+  if (!setequal(tr$node.label, colnames(V))) stop(&quot;mismatch between node.label of tree and colnames of V&quot;)
+  if (is.null(p)) {
+    p &lt;- ggtree(tr)
+    need.annotation &lt;- TRUE
+  }
+  d &lt;- p$data
+  n.tip &lt;- ape::Ntip(tr)
+  n.node &lt;- ape::Nnode(tr)
+  n.numbers &lt;- (n.tip+1):(n.node+n.tip)
+  children &lt;- phangorn::Children(tr, n.numbers)
+  children &lt;- lapply(children, function(x) x[order(c(d[x,&quot;y&quot;]),decreasing=TRUE)])
+  names(children) &lt;- tr$node.label
+  V.sign &lt;- sign(V)
+  tips &lt;- phangorn::Descendants(tr, 1:nrow(d), type=&quot;tips&quot;)
+  tips &lt;- lapply(tips, function(x) tr$tip.label[x])
+
+  l &lt;- list()
+  for (n in names(children)){
+    signs &lt;- sapply(children[[n]], function(x) unique(sign(V[tips[[x]], n])))
+    signs &lt;- ifelse(signs==1, &quot;+&quot;, &quot;-&quot;)
+    l[[n]] &lt;- paste(signs[1], n, signs[2], sep=sep)
+  }
+  l &lt;- unlist(l)
+  d.order &lt;- d$label[d$label %in% names(l)]
+  d$label[d$label %in% names(l)] &lt;- l[d.order]
+  p$data &lt;- d
+  p + geom_label2(aes(label=label))
+}</code></pre>
+<p>Here is an example of the output</p>
+<pre class="r"><code>annotate_sbp(tr, V)</code></pre>
+<p><img src="2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Hopefully this is a pretty self-explanatory graphic. The (+) and (-) denote which of the two sub-trees contains the +1’s and -1’s in the sign-matrix form. In the language of PhILR/ILR the (+) points to the tips in the numerator of the balance and the (-) points to the denominator of the balance. If people like this function and if I have time to make it integrate more seamlessly with different tree geometries (e.g., radial fan layouts) I will add it to the <a href="https://bioconductor.org/packages/release/bioc/html/philr.html"><em>philr</em> R package</a>.</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2017/09/14/visualizing-the-multinomial-in-the-simplex/" title="Visualizing the Multinomial in the Simplex">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+
