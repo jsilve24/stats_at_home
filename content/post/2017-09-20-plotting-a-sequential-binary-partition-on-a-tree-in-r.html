@@ -16,18 +16,18 @@ tags:
 <p>In its simplest form a sequential binary partition can be represented as a binary tree.</p>
 <pre class="r"><code>ggtree(tr)+
   geom_label2(aes(label = label))</code></pre>
-<p><img src="2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>However, as in the case of the ILR (or PhILR) transforms, we may have specific orientation information distinguishing between the top/bottom or left/right descendant of an internal node. In this case a sequential binary partition can be represented in sign matrix form in which 1 represents an “up” (or, for PhILR, a tip in the numerator of a balance), a -1 represents a “down” (or a tip something in the denominator), and a 0 represents a tip not downstream of that partition (or a tip not part of that balance). I will generate a sequential binary partition by using the function <em>phylo2sbp</em> in the <a href="https://bioconductor.org/packages/release/bioc/html/philr.html"><em>philr</em> R package</a>.</p>
 <pre class="r"><code>(V &lt;- phylo2sbp(tr))</code></pre>
 <pre><code>##    n1 n2 n3 n4 n5 n6 n7
-## t1  1  0  0  0  0  0  0
-## t8 -1  1  1  1  0  0  0
-## t6 -1  1  1 -1  0  0  0
-## t7 -1  1 -1  0  1  0  0
-## t2 -1  1 -1  0 -1  0  0
-## t4 -1 -1  0  0  0  1  0
-## t5 -1 -1  0  0  0 -1  1
-## t3 -1 -1  0  0  0 -1 -1</code></pre>
+## t8  1  1  1  1  0  0  0
+## t7  1  1  1 -1  0  0  0
+## t6  1  1 -1  0  1  0  0
+## t4  1  1 -1  0 -1  0  0
+## t2  1 -1  0  0  0  0  0
+## t5 -1  0  0  0  0  1  0
+## t1 -1  0  0  0  0 -1  1
+## t3 -1  0  0  0  0 -1 -1</code></pre>
 <p>Here is a simple function that will augment the labels from a ggtree object with the information in the sign-matrix. The only reason this is semi-non-trivial is that ggtree has its own internal mechanisms for orienting branches by default. This function takes a ggtree object (which if not specified it will also create) and correctly labels the internal nodes in accordance with the ggtree object.</p>
 <pre class="r"><code># - Assumes tree&#39;s internal nodes and tips are named
 # - can pass smaller contrast matrix to subset which are annotated
@@ -63,9 +63,10 @@ annotate_sbp &lt;- function(tr, V, p=NULL){
   d.order &lt;- d$label[d$label %in% names(l)]
   d$label[d$label %in% names(l)] &lt;- l[d.order]
   p$data &lt;- d
-  p + geom_label2(aes(label=label))
+  if (need.annotation) return(p + geom_label2(aes(label=label)))
+  p
 }</code></pre>
 <p>Here is an example of the output</p>
 <pre class="r"><code>annotate_sbp(tr, V)</code></pre>
-<p><img src="2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2017-09-20-plotting-a-sequential-binary-partition-on-a-tree-in-r_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Hopefully this is a pretty self-explanatory graphic. The (+) and (-) denote which of the two sub-trees contains the +1’s and -1’s in the sign-matrix form. In the language of PhILR/ILR the (+) points to the tips in the numerator of the balance and the (-) points to the denominator of the balance. If people like this function and if I have time to make it integrate more seamlessly with different tree geometries (e.g., radial fan layouts) I will add it to the <a href="https://bioconductor.org/packages/release/bioc/html/philr.html"><em>philr</em> R package</a>.</p>

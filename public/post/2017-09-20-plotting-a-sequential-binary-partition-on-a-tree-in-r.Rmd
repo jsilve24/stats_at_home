@@ -71,7 +71,8 @@ annotate_sbp <- function(tr, V, p=NULL){
   d.order <- d$label[d$label %in% names(l)]
   d$label[d$label %in% names(l)] <- l[d.order]
   p$data <- d
-  p + geom_label2(aes(label=label))
+  if (need.annotation) return(p + geom_label2(aes(label=label)))
+  p
 }
 ```
 
