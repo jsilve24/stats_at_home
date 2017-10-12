@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2017/10/12/bayesian-decision-theory-made-ridiculously-simple/</loc>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/09/20/plotting-a-sequential-binary-partition-on-a-tree-in-r/</loc>
     <lastmod>2017-09-20T00:00:00+00:00</lastmod>
   </url>
@@ -95,7 +100,7 @@
   
   <url>
     <loc>/tags/made-ridiculously-simple/</loc>
-    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -107,25 +112,25 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/stan/</loc>
-    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

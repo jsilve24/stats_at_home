@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bayesian Decision Theory Made Ridiculously Simple</title>
+      <link>/2017/10/12/bayesian-decision-theory-made-ridiculously-simple/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/10/12/bayesian-decision-theory-made-ridiculously-simple/</guid>
+      <description>Framing the decision space Examples: Part 1  The other information that helps us make a decision Examples: Part 2  The Loss Function Examples: Part 3  Uncertainty Fully Worked Example: What price should I sell my used phone for? Next steps   Bayesian Decision Theory is a wonderfully useful tool that provides a formalism for decision making under uncertainty. It is used in a diverse range of applications including but definitely not limited to finance for guiding investment strategies or in engineering for designing control systems.</description>
+    </item>
     
     <item>
       <title>Plotting a Sequential Binary Partition on a Tree in R</title>
