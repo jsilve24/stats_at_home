@@ -109,11 +109,11 @@ Lets fit a very simple Bayesian Logistic Regression model to this data. Here is 
 $$\begin{align}
 y_{\text{sold}, i} &\sim \text{Bernoulli}(\pi_i) \\
 \pi_i &= \text{Logit}^{-1}(\eta_i) \\
-\eta_i &\sim \text{Normal}(\beta_0 + \beta_\text{1}x_{\text{scratched}} + \beta_\text{2}x_{\text{year}} + 
-\beta_\text{3}x_{\text{price}}, \sigma^2)
+\eta_i &= \beta_0 + \beta_\text{1}x_{\text{scratched},i} + \beta_\text{2}x_{\text{year},i} + 
+\beta_\text{3}x_{\text{price},i}
 \end{align}$$
 
-We will use a default uniform prior on $\beta_0$ and we will place informative priors on the other coefficients. For example, since I believe that having a scratch would likely decrease the probability that a phone sold I will use the following prior $\beta_1 \sim \text{Normal}(-1, 1)$. I also use the default flat LKJ prior for the variance term $\sigma^2$. 
+We will use a default uniform prior on $\beta_0$ and we will place informative priors on the other coefficients. For example, since I believe that having a scratch would likely decrease the probability that a phone sold I will use the following prior $\beta_1 \sim \text{Normal}(-1, 1)$.
 
 ```{r, message=FALSE, warning=FALSE}
 fit <- brm(sold ~ scratched + year + price, data = d, family = bernoulli(link = "logit"), 

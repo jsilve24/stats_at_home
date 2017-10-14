@@ -312,7 +312,7 @@ dat.log <- cbind(log(dat[,1]), log(dat[,2]/100))
 best.g <- func_cluster(dat.log, K=10, n.iter=200)
 par(mfrow=c(1,2))
 plot_groupings(dat.log, best.g, main="Log Transformed Results")
-plot_groupings(dat, best.g, main="Reesults on Original Scale")
+plot_groupings(dat, best.g, main="Results on Original Scale")
 ```
 
 Its not perfect (again, it actually improves with more iterations) but it is definitely doing a ton better than regular K-Means we tried originally. 

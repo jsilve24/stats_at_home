@@ -120,10 +120,10 @@ d</code></pre>
 <p><span class="math display">\[\begin{align}
 y_{\text{sold}, i} &amp;\sim \text{Bernoulli}(\pi_i) \\
 \pi_i &amp;= \text{Logit}^{-1}(\eta_i) \\
-\eta_i &amp;\sim \text{Normal}(\beta_0 + \beta_\text{1}x_{\text{scratched}} + \beta_\text{2}x_{\text{year}} + 
-\beta_\text{3}x_{\text{price}}, \sigma^2)
+\eta_i &amp;= \beta_0 + \beta_\text{1}x_{\text{scratched},i} + \beta_\text{2}x_{\text{year},i} + 
+\beta_\text{3}x_{\text{price},i}
 \end{align}\]</span></p>
-<p>We will use a default uniform prior on <span class="math inline">\(\beta_0\)</span> and we will place informative priors on the other coefficients. For example, since I believe that having a scratch would likely decrease the probability that a phone sold I will use the following prior <span class="math inline">\(\beta_1 \sim \text{Normal}(-1, 1)\)</span>. I also use the default flat LKJ prior for the variance term <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>We will use a default uniform prior on <span class="math inline">\(\beta_0\)</span> and we will place informative priors on the other coefficients. For example, since I believe that having a scratch would likely decrease the probability that a phone sold I will use the following prior <span class="math inline">\(\beta_1 \sim \text{Normal}(-1, 1)\)</span>.</p>
 <pre class="r"><code>fit &lt;- brm(sold ~ scratched + year + price, data = d, family = bernoulli(link = &quot;logit&quot;), 
            prior = c(set_prior(&quot;normal(-1,1)&quot;, class=&quot;b&quot;, coef=&quot;scratched&quot;), 
                      set_prior(&quot;normal(1, 1)&quot;, class=&quot;b&quot;, coef=&quot;year&quot;), 
@@ -131,48 +131,48 @@ y_{\text{sold}, i} &amp;\sim \text{Bernoulli}(\pi_i) \\
            silent=TRUE, 
            refresh = -1)</code></pre>
 <pre><code>## 
-## Gradient evaluation took 2.7e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
+## Gradient evaluation took 2.5e-05 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.25 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.0576 seconds (Warm-up)
-##                0.03462 seconds (Sampling)
-##                0.09222 seconds (Total)
+##  Elapsed Time: 0.057924 seconds (Warm-up)
+##                0.037759 seconds (Sampling)
+##                0.095683 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 1.1e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.11 seconds.
+## Gradient evaluation took 7e-06 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.05731 seconds (Warm-up)
-##                0.031047 seconds (Sampling)
-##                0.088357 seconds (Total)
+##  Elapsed Time: 0.056495 seconds (Warm-up)
+##                0.030013 seconds (Sampling)
+##                0.086508 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 6e-06 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+## Gradient evaluation took 7e-06 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.060692 seconds (Warm-up)
-##                0.032758 seconds (Sampling)
-##                0.09345 seconds (Total)
+##  Elapsed Time: 0.0599 seconds (Warm-up)
+##                0.033375 seconds (Sampling)
+##                0.093275 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 6e-06 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+## Gradient evaluation took 1.7e-05 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.17 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.059643 seconds (Warm-up)
-##                0.033017 seconds (Sampling)
-##                0.09266 seconds (Total)</code></pre>
+##  Elapsed Time: 0.057762 seconds (Warm-up)
+##                0.033319 seconds (Sampling)
+##                0.091081 seconds (Total)</code></pre>
 <pre class="r"><code>summary(fit)</code></pre>
 <pre><code>##  Family: bernoulli(logit) 
 ## Formula: sold ~ scratched + year + price 
