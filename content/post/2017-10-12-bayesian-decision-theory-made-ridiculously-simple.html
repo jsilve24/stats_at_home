@@ -87,7 +87,7 @@ output:
 </div>
 <div id="uncertainty" class="section level1">
 <h1>Uncertainty</h1>
-<p>I have written before on how crucial it can be to <a href="http://www.statsathome.com/2017/07/21/error-analysis-made-ridiculously-simple/">quantify our uncertinaty in analyses or estimates</a>. In short, it is one thing to estimate a quantity, but it can be far more powerful to not only estimate a quantity but actually quantify our uncertainty about an estimate as a distribution over possible values.</p>
+<p>I have written before on how crucial it can be to <a href="http://www.statsathome.com/2017/07/21/error-analysis-made-ridiculously-simple/">quantify our uncertainty in analyses or estimates</a>. In short, it is one thing to estimate a quantity, but it can be far more powerful to not only estimate a quantity but actually quantify our uncertainty about an estimate as a distribution over possible values.</p>
 <p>Rather than just dealing with a single known value for <span class="math inline">\(\theta\in \Theta\)</span> we now work with a probability distribution representing our belief in the “true” value of <span class="math inline">\(\theta\)</span> which I will denote by <span class="math inline">\(p(\theta)\)</span>. To connect this to Bayesian statistics, we may have a posterior distribution over <span class="math inline">\(\theta\)</span> conditioned on some observed data <span class="math inline">\(x\)</span>. It is because Bayesian statistics is often about calculating these posterior distributions that most Bayesian texts on decision theory discuss this uncertainty of information as <span class="math inline">\(p(\theta|x)\)</span>. However, any probability distribution over our information space can be used here. For example, we could obtain a distribution over <span class="math inline">\(\theta\)</span> through error propagation of another measured or guessed quantity as I discussed in a <a href="http://www.statsathome.com/2017/07/21/error-analysis-made-ridiculously-simple/">previous post</a>.</p>
 <p><em>So how do we figure out the loss associated with individual decisions when we don’t even know the information we want to use to make a decision?</em> The answer is that we turn to probability theory and instead calculate the “Expected Loss” we would feel if we choose a given action given our beliefs (our probability distribution) about <span class="math inline">\(\theta\)</span>. We calculate this “Expected” loss just like we would calculate the expectation of any other function of a random variable.</p>
 <p><span class="math display">\[\text{Expected Loss}(a) = \int_\Theta\mathcal{L}(\theta, a)p(\theta)d\theta\]</span> Essentially the expected loss sums up the loss we would feel for a given decision <span class="math inline">\(a\)</span> over all possible values of our information <span class="math inline">\(\theta\)</span> but weighted by the probability of <span class="math inline">\(\theta\)</span>. So why should we care about this? In this form the Expected Loss does some pretty remarkable things in terms of decision making. In particular, the Expected Loss balances between how probable each value of <span class="math inline">\(\theta\)</span> is and the loss associated with each value of <span class="math inline">\(\theta\)</span> for a given <span class="math inline">\(a\)</span>.</p>
@@ -131,48 +131,48 @@ y_{\text{sold}, i} &amp;\sim \text{Bernoulli}(\pi_i) \\
            silent=TRUE, 
            refresh = -1)</code></pre>
 <pre><code>## 
-## Gradient evaluation took 2.5e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.25 seconds.
+## Gradient evaluation took 3.9e-05 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.057924 seconds (Warm-up)
-##                0.037759 seconds (Sampling)
-##                0.095683 seconds (Total)
+##  Elapsed Time: 0.056959 seconds (Warm-up)
+##                0.035268 seconds (Sampling)
+##                0.092227 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 7e-06 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Gradient evaluation took 6e-06 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.056495 seconds (Warm-up)
-##                0.030013 seconds (Sampling)
-##                0.086508 seconds (Total)
+##  Elapsed Time: 0.059337 seconds (Warm-up)
+##                0.02873 seconds (Sampling)
+##                0.088067 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 7e-06 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Gradient evaluation took 6e-06 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.0599 seconds (Warm-up)
-##                0.033375 seconds (Sampling)
-##                0.093275 seconds (Total)
+##  Elapsed Time: 0.060765 seconds (Warm-up)
+##                0.033488 seconds (Sampling)
+##                0.094253 seconds (Total)
 ## 
 ## 
-## Gradient evaluation took 1.7e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.17 seconds.
+## Gradient evaluation took 6e-06 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
 ## 
-##  Elapsed Time: 0.057762 seconds (Warm-up)
-##                0.033319 seconds (Sampling)
-##                0.091081 seconds (Total)</code></pre>
+##  Elapsed Time: 0.056948 seconds (Warm-up)
+##                0.03405 seconds (Sampling)
+##                0.090998 seconds (Total)</code></pre>
 <pre class="r"><code>summary(fit)</code></pre>
 <pre><code>##  Family: bernoulli(logit) 
 ## Formula: sold ~ scratched + year + price 
