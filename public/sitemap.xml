@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/01/18/the-bridge-gods/</loc>
+    <lastmod>2018-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/10/12/bayesian-decision-theory-made-ridiculously-simple/</loc>
     <lastmod>2017-10-12T00:00:00+00:00</lastmod>
   </url>
@@ -112,7 +117,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -130,7 +135,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

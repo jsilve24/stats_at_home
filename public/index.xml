@@ -9,10 +9,19 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 12 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Bridge Gods</title>
+      <link>/2018/01/18/the-bridge-gods/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2018/01/18/the-bridge-gods/</guid>
+      <description>The Problem My parents like to play Bridge. It’s a great card game and totally worth the time it takes to learn all the rules. And there are many. My parents play on opposing teams since my mom has the opinion that one should never partner up with his/her actual partner, for the sake of the marriage. Which is saying something about being Bridge teammates since by being on opposite teams, when you lose, your partner wins.</description>
+    </item>
     
     <item>
       <title>Bayesian Decision Theory Made Ridiculously Simple</title>
