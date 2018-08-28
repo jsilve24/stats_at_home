@@ -70,7 +70,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
 <link href="/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.39" />
 
   
 <!--[if lt IE 9]>
@@ -225,14 +225,14 @@ MathJax.Hub.Config({
 <p>However, as in the case of the ILR (or PhILR) transforms, we may have specific orientation information distinguishing between the top/bottom or left/right descendant of an internal node. In this case a sequential binary partition can be represented in sign matrix form in which 1 represents an “up” (or, for PhILR, a tip in the numerator of a balance), a -1 represents a “down” (or a tip something in the denominator), and a 0 represents a tip not downstream of that partition (or a tip not part of that balance). I will generate a sequential binary partition by using the function <em>phylo2sbp</em> in the <a href="https://bioconductor.org/packages/release/bioc/html/philr.html"><em>philr</em> R package</a>.</p>
 <pre class="r"><code>(V &lt;- phylo2sbp(tr))</code></pre>
 <pre><code>##    n1 n2 n3 n4 n5 n6 n7
-## t8  1  0  0  0  0  0  0
-## t5 -1  1  0  0  0  0  0
-## t1 -1 -1  1  1  0  0  0
-## t6 -1 -1  1 -1  1  0  0
-## t7 -1 -1  1 -1 -1  0  0
-## t4 -1 -1 -1  0  0  1  1
-## t2 -1 -1 -1  0  0  1 -1
-## t3 -1 -1 -1  0  0 -1  0</code></pre>
+## t1  1  1  0  0  0  0  0
+## t4  1 -1  0  0  0  0  0
+## t6 -1  0  1  1  1  0  0
+## t7 -1  0  1  1 -1  0  0
+## t8 -1  0  1 -1  0  0  0
+## t3 -1  0 -1  0  0  1  1
+## t2 -1  0 -1  0  0  1 -1
+## t5 -1  0 -1  0  0 -1  0</code></pre>
 <p>Here is a simple function that will augment the labels from a ggtree object with the information in the sign-matrix. The only reason this is semi-non-trivial is that ggtree has its own internal mechanisms for orienting branches by default. This function takes a ggtree object (which if not specified it will also create) and correctly labels the internal nodes in accordance with the ggtree object.</p>
 <pre class="r"><code># - Assumes tree&#39;s internal nodes and tips are named
 # - can pass smaller contrast matrix to subset which are annotated
@@ -252,7 +252,7 @@ annotate_sbp &lt;- function(tr, V, p=NULL){
   n.node &lt;- ape::Nnode(tr)
   n.numbers &lt;- (n.tip+1):(n.node+n.tip)
   children &lt;- phangorn::Children(tr, n.numbers)
-  children &lt;- lapply(children, function(x) x[order(c(d[x,&quot;y&quot;]),decreasing=TRUE)])
+  children &lt;- lapply(children, function(x) x[order(c(d[x,&quot;y&quot;]$y),decreasing=TRUE)])
   names(children) &lt;- tr$node.label
   V.sign &lt;- sign(V)
   tips &lt;- phangorn::Descendants(tr, 1:nrow(d), type=&quot;tips&quot;)

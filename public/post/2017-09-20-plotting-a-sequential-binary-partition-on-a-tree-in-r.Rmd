@@ -55,7 +55,7 @@ annotate_sbp <- function(tr, V, p=NULL){
   n.node <- ape::Nnode(tr)
   n.numbers <- (n.tip+1):(n.node+n.tip)
   children <- phangorn::Children(tr, n.numbers)
-  children <- lapply(children, function(x) x[order(c(d[x,"y"]),decreasing=TRUE)])
+  children <- lapply(children, function(x) x[order(c(d[x,"y"]$y),decreasing=TRUE)])
   names(children) <- tr$node.label
   V.sign <- sign(V)
   tips <- phangorn::Descendants(tr, 1:nrow(d), type="tips")
