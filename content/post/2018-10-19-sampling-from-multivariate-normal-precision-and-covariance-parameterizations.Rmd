@@ -17,13 +17,13 @@ Two things are motivating this quick post. First, I have seen a lot of R code
 that is slower than it should be due to unoptimized sampling from a 
 multivariate normal. Second, yesterday I spend a frustrating few hours 
 tracking down a bug that ultimately was due to a slight subtlety in sampling
-from the multivariate normal paramterized by a precision matrix (the inverse
+from the multivariate normal parameterized by a precision matrix (the inverse
 of a covariance matrix).
 
 **Key Idea:** It is easy to draw univariate standard (e.g., zero mean and unit variance) 
 normal random variables. In fact most programming languages provide efficient vectorized (e.g., parallelized)
 algorithms for doing this. In contrast, it is challenging to draw 
-multivariate random variables directly. Motivated by this fact, the appraoch 
+multivariate random variables directly. Motivated by this fact, the approach 
 I discuss below transform samples from standard normal random variables into samples from
 the desired multivariate normal random variable^[It turns out that
 computationally it is also difficult to draw standard normal random variables as well
@@ -33,7 +33,7 @@ that even the standard normal involves the same type of trick where it is
 transformed from a uniform random variable]. 
 
 *If you are familiar with the idea of non-centered parameterizations and 
-the cholesky decomposition just skip down to section "Sampling from the Multivariate Normal".*
+the Cholesky decomposition just skip down to section "Sampling from the Multivariate Normal".*
 
 
 # Background 1: Non-centered Parameterization of Univariate Normal
@@ -63,7 +63,7 @@ to think a little more carefully about what that square root or inverse square r
 # Background 2: The Cholesky Decomposition
 
 For a symmetric positive-definite matrix $\Sigma$^[Note that both the covariance 
-and the precision of a multivariat3e normal are symetric positive-definite.] the 
+and the precision of a multivariate normal are symmetric positive-definite.] the 
 matrix square root is defined as a matrix $\Sigma^{\frac{1}{2}}$ satisfying
 $$\Sigma = \Sigma^{\frac{1}{2}} \left(\Sigma^{\frac{1}{2}}\right) ^T.$$
 

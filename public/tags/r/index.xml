@@ -20,7 +20,7 @@
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
       <guid>/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/</guid>
-      <description>Two things are motivating this quick post. First, I have seen a lot of R code that is slower than it should be due to unoptimized sampling from a multivariate normal. Second, yesterday I spend a frustrating few hours tracking down a bug that ultimately was due to a slight subtlety in sampling from the multivariate normal paramterized by a precision matrix (the inverse of a covariance matrix).
+      <description>Two things are motivating this quick post. First, I have seen a lot of R code that is slower than it should be due to unoptimized sampling from a multivariate normal. Second, yesterday I spend a frustrating few hours tracking down a bug that ultimately was due to a slight subtlety in sampling from the multivariate normal parameterized by a precision matrix (the inverse of a covariance matrix).
 Key Idea: It is easy to draw univariate standard (e.</description>
     </item>
     
