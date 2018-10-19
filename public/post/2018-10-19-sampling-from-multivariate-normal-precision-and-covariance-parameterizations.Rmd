@@ -1,0 +1,171 @@
+---
+title: Sampling from Multivariate Normal (precision and covariance parameterizations)
+author: Justin Silverman
+date: '2018-10-19'
+slug: sampling-from-multivariate-normal-precision-and-covariance-parameterizations
+categories: []
+tags:
+  - R
+type: post
+description: A quick note on sampling from both the precision and covariance parameterizations of the multivariate normal. This post was written to highlihgt a error that is easy to make. 
+keywords:
+  - sampling
+  - multivariate normal
+---
+
+Two things are motivating this quick post. First, I have seen a lot of R code
+that is slower than it should be due to unoptimized sampling from a 
+multivariate normal. Second, yesterday I spend a frustrating few hours 
+tracking down a bug that ultimately was due to a slight subtlety in sampling
+from the multivariate normal paramterized by a precision matrix (the inverse
+of a covariance matrix).
+
+**Key Idea:** It is easy to draw univariate standard (e.g., zero mean and unit variance) 
+normal random variables. In fact most programming languages provide efficient vectorized (e.g., parallelized)
+algorithms for doing this. In contrast, it is challenging to draw 
+multivariate random variables directly. Motivated by this fact, the appraoch 
+I discuss below transform samples from standard normal random variables into samples from
+the desired multivariate normal random variable^[It turns out that
+computationally it is also difficult to draw standard normal random variables as well
+and in fact pretty much all pseudo-random number generation on your computer
+involves transforming uniform random variables into other variables. That is to say
+that even the standard normal involves the same type of trick where it is 
+transformed from a uniform random variable]. 
+
+*If you are familiar with the idea of non-centered parameterizations and 
+the cholesky decomposition just skip down to section "Sampling from the Multivariate Normal".*
+
+
+# Background 1: Non-centered Parameterization of Univariate Normal
+
+We can parameterize a univariate normal random variable $x$ in two common ways:
+Either as $x \sim N(\mu, \sigma)$ (variance parameterization) or as $x \sim N(\mu, \omega)$
+(precision parameterization) where $\sigma$ is the variance (not the standard deviation) 
+and $\omega$ is the precision (i.e., $\omega = 1/\sigma$). 
+
+**Key Idea:** Rather than sampling $x$ directly, we could instead sample $z \sim N(0,1)$ and 
+transform samples of $z$ into samples of $x$. This may sound complicated but 
+it can be done simply as $x = \mu + \sigma^{\frac{1}{2}}z$ (variance parameterization)
+or $x = \mu + \omega^{-\frac{1}{2}}z$ (precision parameterization). Both of 
+these are related to the "non-centered parameterization" of a normal random variable. 
+
+Before you move on, make sure you convince yourself that the above relationships make sense. 
+All we are saying is that you can turn a standard normal random variable $z$
+into an normal random variable with mean $\mu$ and variance $\sigma$ by 
+first scaling by the square root of the variance (i.e., 
+the standard deviation) and then moving the result to have the correct mean (adding $\mu$). 
+
+The same idea holds in the multivariate case but instead of having a scalar 
+value for the variance we have a matrix (the covariance matrix) and we need
+to think a little more carefully about what that square root or inverse square root should be. 
+
+
+# Background 2: The Cholesky Decomposition
+
+For a symmetric positive-definite matrix $\Sigma$^[Note that both the covariance 
+and the precision of a multivariat3e normal are symetric positive-definite.] the 
+matrix square root is defined as a matrix $\Sigma^{\frac{1}{2}}$ satisfying
+$$\Sigma = \Sigma^{\frac{1}{2}} \left(\Sigma^{\frac{1}{2}}\right) ^T.$$
+
+It turns out there are multiple matrix square roots^[i.e., $\Sigma^{\frac{1}{2}}$
+is not unique. The square root given by the eigen decomposition is especially useful
+for dealing with singular normals and when you may have some numerical errors 
+in the precision matrix leading to non-positive definiteness] and any of them 
+can be used for sampling from the multivariate normal. The most common and often 
+efficient method is given by the Cholesky decompostion (sometimes also called the 
+LLT decomposition). The Cholesky decomposition of a matrix $\Sigma$ is defined by 
+$$\Sigma = L_\Sigma \left(L_\Sigma\right)^T = \left(U_\Sigma\right)^TU_\Sigma$$
+where $L$ is a lower triangular and $U$ and upper triangular matrix.
+
+A quick note, nearly every programming language or linear algebra library 
+has an implementation of the Cholesky decomposition. This is not something
+you have to calculate by hand or program yourself. 
+
+# Sampling from the Multivariate Normal
+
+Generalizing the univariate standard normal above, let us now introduce the vector
+$Z$ with elements $Z_i \sim N(0,1)$^[i.e., $Z \sim N(0, I)$]. 
+
+## Covariance Parameterization
+To sample from $X \sim N(\mu, \Sigma)$ we can use the following multivariate
+version of the non-centered parameterization
+$$X = \mu + L_\Sigma Z.$$
+
+## Precision Paramterization
+To sample from $X \sim N(\mu, \Omega)$ where $\Omega=\Sigma^{-1}$ (i.e., the precision matrix)
+we can use 
+$$X = \mu + (U_\Omega)^{-1} Z$$
+
+**Key Idea:** Note that for the precision parameterization we need
+to use the inverse of the upper Cholesky factor ($U_\Omega$) not the inverse of 
+the lower Cholesky factor ($L_\Omega$)! This was my error and it is one key 
+way in which the multivariate is slightly more complicated than the univariate version. 
+
+You might be wondering why I didn't just write $X = \mu +L_{\Omega^{-1}}Z$ for the
+precision parameterization where $L_{\Omega^{-1}}$ refers to the lower Cholesky 
+factor of the inverse of $\Omega$ (which would have been correct and not required
+the special note about the upper/lower Cholesky forms). It turns out that
+inverting a triangular matrix (e.g., the Cholesky form) is more numerically stable
+and efficient than inverting the original symmetric positive-definite matrix $\Omega$. 
+*In fact we can do even better (both in terms of speed and numerical stability)* 
+by not inverting it at all but using backsubstitution as I show below. 
+
+
+# Code
+Below I demonstrate code designed to sample from the multivariate normal 
+in either parameterization. 
+```{r}
+
+#' Covariance parameterization
+#' @param n number of samples to draw
+#' @param mu p-vector mean
+#' @param Sigma covariance matrix (p x p)
+#' @return matrix of dimension p x n of samples
+rMVNormC <- function(n, mu, Sigma){
+  p <- length(mu)
+  Z <- matrix(rnorm(p*n), p, n)
+  L <- t(chol(Sigma)) # By default R's chol fxn returns upper cholesky factor
+  X <- L%*%Z
+  X <- sweep(X, 1, mu, FUN=`+`)
+  return(X)
+}
+
+#' Precision parameterization
+#' @param n number of samples to draw
+#' @param mu p-vector mean
+#' @param Omega precision matrix (p x p)
+#' @return matrix of dimension p x n of samples
+rMVNormP <- function(n, mu, Sigma){
+  p <- length(mu)
+  Z <- matrix(rnorm(p*n), p, n)
+  U <- chol(Omega) # By default R's chol fxn returns upper cholesky factor
+  X <- backsolve(U, Z) # more efficient and stable than acctually inverting
+  X <- sweep(X, 1, mu, FUN=`+`)
+  return(X)
+}
+```
+
+Now just we just check that the mean and covariance of each function
+matches what it should be. 
+
+```{r}
+set.seed(153)
+
+n <- 10000
+mu <- 1:4
+Sigma <- rWishart(1, 10, diag(4))[,,1] # random covariance matrix
+Omega <- solve(Sigma)
+x1 <- rMVNormC(n, mu, Sigma)
+x2 <- rMVNormP(n, mu, Omega)
+
+# Create function that tests for equality with high tolerance due to 
+# random number generation
+weak_equal <- function(x, y) all.equal(x, y, tolerance=.1)
+
+# check row means match up with mu and agree with eachother
+weak_equal(rowMeans(x1), mu) & weak_equal(rowMeans(x2), mu)
+
+# check covariance matches up with Sigma and agree with eachother
+weak_equal(var(t(x1)), Sigma) & weak_equal(var(t(x2)), Sigma)
+```
+

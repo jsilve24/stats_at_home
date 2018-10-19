@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Thu, 12 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sampling from Multivariate Normal (precision and covariance parameterizations)</title>
+      <link>/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/</guid>
+      <description>Two things are motivating this quick post. First, I have seen a lot of R code that is slower than it should be due to unoptimized sampling from a multivariate normal. Second, yesterday I spend a frustrating few hours tracking down a bug that ultimately was due to a slight subtlety in sampling from the multivariate normal paramterized by a precision matrix (the inverse of a covariance matrix).
+Key Idea: It is easy to draw univariate standard (e.</description>
+    </item>
     
     <item>
       <title>Bayesian Decision Theory Made Ridiculously Simple</title>
