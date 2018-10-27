@@ -10,7 +10,7 @@ tags:
 type: post
 description: A follow up to post on sampling from multivariate normal 
   describing the case when the covariance or precision matricies are singular 
-  (not positive definite). In these cases the eigen decomposition provides a means
+  (not positive definite). In these cases the Eigen decomposition provides a means
   of calculating the matrix square root. 
 ---
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -51,11 +51,11 @@ inverse is not well defined.
 safely(solve)(Sigma)
 ```
 
-One solution to this problem is given by the eigen decomposition which will not only
+One solution to this problem is given by the Eigen decomposition which will not only
 allow us to sample from such a singular covariance matrix but it will also 
 allow us to detect when a covariance matrix is singular.
 
-**A Key Point:** The Cholesky decomposition is typically much faster than the eigen
+**A Key Point:** The Cholesky decomposition is typically much faster than the Eigen
 decomposition. Therefore, if you know your covariance / precision matrix is not 
 singular the Cholesky decomposition is typically a better choice. I described the 
 use of the Cholesky distribution for this purpose in detailed [here](http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/). 
@@ -64,42 +64,42 @@ use of the Cholesky distribution for this purpose in detailed [here](http://www.
 Any square matrix with real elements $\Sigma$^[Note this is more general than for just 
 symmetric positive definite matrices as in the definition of the Cholesky decomposition [introduced previously](http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/)] can be decomposed as 
 $$\Sigma = V_\Sigma D_\Sigma V_\Sigma^T$$
-where $V$ is a matrix of orthonormal column vectors (called the eigenvectors) and 
-$D$ is a diagonal matrix with diagonal elements called eigenvalues that are
+where $V$ is a matrix of orthonormal column vectors (called the Eigenvectors) and 
+$D$ is a diagonal matrix with diagonal elements called Eigenvalues that are
 decreasing (that is $D_{ii} \geq D_{(i+1)(i+1)}$). 
 
-Lots of [great stuff has been written about the eigen decomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix),
+Lots of [great stuff has been written about the Eigen decomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix),
 rather than rehash these topics here I will instead just point out that 
-the eigen decomposition can be used to find a matrix square root (just like the Cholesky). 
+the Eigen decomposition can be used to find a matrix square root (just like the Cholesky). 
 Remember that the square root of a matrix $\Sigma$ is defined by the relation 
-$\Sigma = \Sigma^{\frac{1}{2}}\left(\Sigma^{\frac{1}{2}}\right)^T$. For the eigen
+$\Sigma = \Sigma^{\frac{1}{2}}\left(\Sigma^{\frac{1}{2}}\right)^T$. For the Eigen
 decomposition we can write 
 $$\Sigma = V_\Sigma D_\Sigma^{\frac{1}{2}}\left(V_\Sigma D_\Sigma^{\frac{1}{2}}\right)^T$$ 
 where $D^{\frac{1}{2}}$ is essentially the same and $D$ but where the diagonal
-is given by the square root of the eigenvalues (rather than by the eigenvalues). 
+is given by the square root of the Eigenvalues (rather than by the Eigenvalues). 
 This shows that $VD^{\frac{1}{2}}$ is a matrix square root and suggests
 we can use this in place of the Cholesky factor in sampling from the multivariate
 normal. 
 
-The eigen decomposition is also rank revealing (it will tell you if your covariance/precision
+The Eigen decomposition is also rank revealing (it will tell you if your covariance/precision
 matrix is singular and if so how singular it is). Cutting to the chase, 
-a symmetric positive definite matrix $X$ is a symmetric matrix where all the eigenvalues
-are positive. If all the eigenvalues are negative its symmetric negative-definite. 
-If a $p\times p$ symmetric matrix $X$ has $k < p$ positive eigenvalues and $p-k$ 
-zero eigenvalues then we say $X$ is symmetric positive *semi*-definite (*e.g.*, singular and of 
-rank $k$). If some eigenvalues are positive and some are negative and you expected
+a symmetric positive definite matrix $X$ is a symmetric matrix where all the Eigenvalues
+are positive. If all the Eigenvalues are negative its symmetric negative-definite. 
+If a $p\times p$ symmetric matrix $X$ has $k < p$ positive Eigenvalues and $p-k$ 
+zero Eigenvalues then we say $X$ is symmetric positive *semi*-definite (*e.g.*, singular and of 
+rank $k$). If some Eigenvalues are positive and some are negative and you expected
 $X$ to be a covariance / precision matrix... something has gone very wrong^[I only 
 really see this when using Laplace approximations and when the optimization ended
 at a saddle point rather than at the *Maximum a Posteriori* estimate.].
 
-So lets take a look at the eigen decomposition of the matrix `Sigma` that 
+So lets take a look at the Eigen decomposition of the matrix `Sigma` that 
 was giving us trouble above. 
 ```{r}
 (es <- eigen(Sigma))
 ```
-Note that only one of the eigenvalues is positive and the other two are zero^[any slight non-zero 
-number in either of the last two eigenvalues is just due to numerical errors in the calculation 
-of the eigen decomposition]; this
+Note that only one of the Eigenvalues is positive and the other two are zero^[any slight non-zero 
+number in either of the last two Eigenvalues is just due to numerical errors in the calculation 
+of the Eigen decomposition]; this
 means that `Sigma` is positive-semidefinite (singular of rank 1). 
 
 # Sampling from the Singular Normal
@@ -140,7 +140,7 @@ non-centered distribution for the singular normal case.
 
 Also notice that these functions can be used to sample from non-singular multivariate
 normal distributions as well. In this way these functions are more general than
-[those given previously](http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/) but they are typically slower because they use the eigen decomposition
+[those given previously](http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/) but they are typically slower because they use the Eigen decomposition
 rather than the Cholesky. 
 
 ```{r}
@@ -148,7 +148,7 @@ rather than the Cholesky.
 #' Truncated Eigen Square Root (or inverse square root) 
 #'
 #' Designed for Covaraice or Precision matricies - throws error if 
-#' there is any large negative eigenvalues. 
+#' there is any large negative Eigenvalues. 
 #'
 #' @param Sigma p x p matrix to compute truncated matrix square root
 #' @param inv (boolean) whether to compute inverse of square root
@@ -173,7 +173,7 @@ trunc_eigen_sqrt <- function(Sigma, inv){
   return(L[,1:k, drop=F])
 }
 
-#' Covariance parameterization (eigen decomposition)
+#' Covariance parameterization (Eigen decomposition)
 #' @param n number of samples to draw
 #' @param mu p-vector mean
 #' @param Sigma covariance matrix (p x p)
@@ -187,7 +187,7 @@ rMVNormC_eigen <- function(n, mu, Sigma){
   X <- sweep(X, 1, mu, FUN=`+`)
 }
 
-#' Precision parameterization (eigen decomposition)
+#' Precision parameterization (Eigen decomposition)
 #' @param n number of samples to draw
 #' @param mu p-vector mean
 #' @param Sigma precision matrix (p x p)
