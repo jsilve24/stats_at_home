@@ -9,10 +9,20 @@
     <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
     <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
     <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
-    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sampling from the Singular Normal</title>
+      <link>/2018/10/27/sampling-from-the-singular-normal/</link>
+      <pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2018/10/27/sampling-from-the-singular-normal/</guid>
+      <description>Following up the previous post on sampling from the multivariate normal, I decided to describe in more detail the situation where the covariance matrix or precision matrix is singular (e.g., it is not positive definite). A normal distribution with such a singular covariance/precision matrix is referred to as a singular normal distribution. Here is 100 samples from a two dimensional example:
+Notice that a singular normal essentially has less dimensions (in this case 1 dimension) than the dimension of the random variable (in this case 2 dimensions).</description>
+    </item>
     
     <item>
       <title>Sampling from Multivariate Normal (precision and covariance parameterizations)</title>

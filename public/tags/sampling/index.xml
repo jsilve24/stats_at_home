@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sampling on Statistics @ Home</title>
+    <link>/tags/sampling/</link>
+    <description>Recent content in Sampling on Statistics @ Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>stats.at.home@gmail.com (Justin and Rachel Silverman)</managingEditor>
+    <webMaster>stats.at.home@gmail.com (Justin and Rachel Silverman)</webMaster>
+    <copyright>(c) 2017 Justin and Rachel Silverman</copyright>
+    <lastBuildDate>Sat, 27 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sampling/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sampling from the Singular Normal</title>
+      <link>/2018/10/27/sampling-from-the-singular-normal/</link>
+      <pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2018/10/27/sampling-from-the-singular-normal/</guid>
+      <description>Following up the previous post on sampling from the multivariate normal, I decided to describe in more detail the situation where the covariance matrix or precision matrix is singular (e.g., it is not positive definite). A normal distribution with such a singular covariance/precision matrix is referred to as a singular normal distribution. Here is 100 samples from a two dimensional example:
+Notice that a singular normal essentially has less dimensions (in this case 1 dimension) than the dimension of the random variable (in this case 2 dimensions).</description>
+    </item>
+    
+    <item>
+      <title>Sampling from Multivariate Normal (precision and covariance parameterizations)</title>
+      <link>/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/</guid>
+      <description>Two things are motivating this quick post. First, I have seen a lot of R code that is slower than it should be due to unoptimized sampling from a multivariate normal. Second, yesterday I spend a frustrating few hours tracking down a bug that ultimately was due to a slight subtlety in sampling from the multivariate normal parameterized by a precision matrix (the inverse of a covariance matrix).
+Key Idea: It is easy to draw univariate standard (e.</description>
+    </item>
+    
+    <item>
+      <title>Sampling Covariance Matricies with Fixed Total Variance</title>
+      <link>/2017/06/01/sampling-covariance-matricies-with-fixed-total-variance/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <author>stats.at.home@gmail.com (Justin and Rachel Silverman)</author>
+      <guid>/2017/06/01/sampling-covariance-matricies-with-fixed-total-variance/</guid>
+      <description>Introduction I have been thinking a lot about the concept of Total Variance recently. Total variance (which can be defined as the trace of a covariance matrix) is a measure of global dispersion that has been particularly useful for me when building multivariate models. However, for some reason, I have yet to see this concept discussed much outside of compositional data analysis (see pg. 35 of Lecture Notes on Compositional Data Analysis) or Principle Component Analysis.</description>
+    </item>
+    
+  </channel>
+</rss>

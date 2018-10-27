@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Sampling from the Singular Normal  &middot; Statistics @ Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="A follow up to post on sampling from multivariate normal describing the case when the covariance or precision matricies are singular (not positive definite). In these cases the eigen decomposition provides a means of calculating the matrix square root." />
+
+<meta name="keywords" content="R, Sampling, ">
+
+
+<meta property="og:title" content="Sampling from the Singular Normal  &middot; Statistics @ Home ">
+<meta property="og:site_name" content="Statistics @ Home"/>
+<meta property="og:url" content="/2018/10/27/sampling-from-the-singular-normal/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A follow up to post on sampling from multivariate normal describing the case when the covariance or precision matricies are singular (not positive definite). In these cases the eigen decomposition provides a means of calculating the matrix square root."/>
+<meta property="og:article:published_time" content="2018-10-27T00:00:00Z" />
+<meta property="og:article:modified_time" content="2018-10-27T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="R">
+    
+<meta property="og:article:tag" content="Sampling">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@inschool4life" />
+<meta name="twitter:creator" content="@inschool4life" />
+<meta name="twitter:title" content="Sampling from the Singular Normal" />
+<meta name="twitter:description" content="A follow up to post on sampling from multivariate normal describing the case when the covariance or precision matricies are singular (not positive definite). In these cases the eigen decomposition provides a means of calculating the matrix square root." />
+<meta name="twitter:url" content="/2018/10/27/sampling-from-the-singular-normal/" />
+<meta name="twitter:domain" content="/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Sampling from the Singular Normal",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2018-10-27",
+    "description": "A follow up to post on sampling from multivariate normal describing the case when the covariance or precision matricies are singular (not positive definite). In these cases the eigen decomposition provides a means of calculating the matrix square root.",
+    "wordCount": 1500
+  }
+</script>
+
+
+
+<link rel="canonical" href="/2018/10/27/sampling-from-the-singular-normal/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link href="/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.39" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-102259122-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="/">
+  Statistics @ Home
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  statistics from the home of two statisticians
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="/">home</a>
+
+
+  
+<a href="/about">about</a>
+
+<a href="/post" title="Show list of posts">posts</a>
+
+<a href="/tags" title="Show list of tags">tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:stats.at.home@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/jsilve24">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/inschool4life">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Sampling from the Singular Normal
+</h1>
+
+  <div class="metas">
+<time datetime="2018-10-27">27 Oct, 2018</time>
+
+
+  
+    &middot; by Justin Silverman
+  
+  &middot; Read in about 8 min
+  &middot; (1500 Words)
+  <br>
+  
+<a class="label" href="/tags/r">R</a>
+
+<a class="label" href="/tags/sampling">Sampling</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>Following up the previous post on <a href="http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/">sampling from the multivariate normal</a>, I decided to describe in more detail the situation where the covariance matrix or precision matrix is singular (e.g., it is not positive definite). A normal distribution with such a singular covariance/precision matrix is referred to as a singular normal distribution. Here is 100 samples from a two dimensional example:</p>
+<p><img src="/post/2018-10-27-sampling-from-the-singular-normal_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /> Notice that a singular normal essentially has less dimensions (in this case 1 dimension) than the dimension of the random variable (in this case 2 dimensions).</p>
+<p>When working with singular normals lots of problems can arise, the most common is issues relating to sampling from these distributions. In these situations the Cholesky decomposition of the covariance / precision matrix will fail. If you are using R you may end up with an error like the following:</p>
+<pre class="r"><code># Create singular covariance matrix
+(Sigma &lt;- crossprod(matrix(rnorm(3),1,3)))</code></pre>
+<pre><code>##           [,1]       [,2]       [,3]
+## [1,]  1.932865  1.2123852 -1.5026330
+## [2,]  1.212385  0.7604659 -0.9425232
+## [3,] -1.502633 -0.9425232  1.1681654</code></pre>
+<pre class="r"><code># This should cause an error - use safely (from purrr) so that site still renders
+safely(chol)(Sigma)</code></pre>
+<pre><code>## $result
+## NULL
+## 
+## $error
+## &lt;simpleError in chol.default(...): the leading minor of order 2 is not positive definite&gt;</code></pre>
+<p>In fact even inverting this covariance matrix will run into issues as the inverse is not well defined.</p>
+<pre class="r"><code>safely(solve)(Sigma)</code></pre>
+<pre><code>## $result
+## NULL
+## 
+## $error
+## &lt;simpleError in solve.default(...): system is computationally singular: reciprocal condition number = 6.86973e-18&gt;</code></pre>
+<p>One solution to this problem is given by the eigen decomposition which will not only allow us to sample from such a singular covariance matrix but it will also allow us to detect when a covariance matrix is singular.</p>
+<p><strong>A Key Point:</strong> The Cholesky decomposition is typically much faster than the eigen decomposition. Therefore, if you know your covariance / precision matrix is not singular the Cholesky decomposition is typically a better choice. I described the use of the Cholesky distribution for this purpose in detailed <a href="http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/">here</a>.</p>
+<div id="background-the-eigen-decomposition" class="section level1">
+<h1>Background: The Eigen Decomposition</h1>
+<p>Any square matrix with real elements <span class="math inline">\(\Sigma\)</span><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> can be decomposed as <span class="math display">\[\Sigma = V_\Sigma D_\Sigma V_\Sigma^T\]</span> where <span class="math inline">\(V\)</span> is a matrix of orthonormal column vectors (called the eigenvectors) and <span class="math inline">\(D\)</span> is a diagonal matrix with diagonal elements called eigenvalues that are decreasing (that is <span class="math inline">\(D_{ii} \geq D_{(i+1)(i+1)}\)</span>).</p>
+<p>Lots of <a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">great stuff has been written about the eigen decomposition</a>, rather than rehash these topics here I will instead just point out that the eigen decomposition can be used to find a matrix square root (just like the Cholesky). Remember that the square root of a matrix <span class="math inline">\(\Sigma\)</span> is defined by the relation <span class="math inline">\(\Sigma = \Sigma^{\frac{1}{2}}\left(\Sigma^{\frac{1}{2}}\right)^T\)</span>. For the eigen decomposition we can write <span class="math display">\[\Sigma = V_\Sigma D_\Sigma^{\frac{1}{2}}\left(V_\Sigma D_\Sigma^{\frac{1}{2}}\right)^T\]</span> where <span class="math inline">\(D^{\frac{1}{2}}\)</span> is essentially the same and <span class="math inline">\(D\)</span> but where the diagonal is given by the square root of the eigenvalues (rather than by the eigenvalues). This shows that <span class="math inline">\(VD^{\frac{1}{2}}\)</span> is a matrix square root and suggests we can use this in place of the Cholesky factor in sampling from the multivariate normal.</p>
+<p>The eigen decomposition is also rank revealing (it will tell you if your covariance/precision matrix is singular and if so how singular it is). Cutting to the chase, a symmetric positive definite matrix <span class="math inline">\(X\)</span> is a symmetric matrix where all the eigenvalues are positive. If all the eigenvalues are negative its symmetric negative-definite. If a <span class="math inline">\(p\times p\)</span> symmetric matrix <span class="math inline">\(X\)</span> has <span class="math inline">\(k &lt; p\)</span> positive eigenvalues and <span class="math inline">\(p-k\)</span> zero eigenvalues then we say <span class="math inline">\(X\)</span> is symmetric positive <em>semi</em>-definite (<em>e.g.</em>, singular and of rank <span class="math inline">\(k\)</span>). If some eigenvalues are positive and some are negative and you expected <span class="math inline">\(X\)</span> to be a covariance / precision matrix… something has gone very wrong<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>So lets take a look at the eigen decomposition of the matrix <code>Sigma</code> that was giving us trouble above.</p>
+<pre class="r"><code>(es &lt;- eigen(Sigma))</code></pre>
+<pre><code>## eigen() decomposition
+## $values
+## [1] 3.861496e+00 2.220446e-15 0.000000e+00
+## 
+## $vectors
+##            [,1]       [,2]      [,3]
+## [1,] -0.7074943  0.7067191 0.0000000
+## [2,] -0.4437742 -0.4442610 0.7782651
+## [3,]  0.5500148  0.5506181 0.6279358</code></pre>
+<p>Note that only one of the eigenvalues is positive and the other two are zero<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>; this means that <code>Sigma</code> is positive-semidefinite (singular of rank 1).</p>
+</div>
+<div id="sampling-from-the-singular-normal" class="section level1">
+<h1>Sampling from the Singular Normal</h1>
+<p>Just as I introduced regarding <a href="http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/">sampling from the non-singular multivariate normal</a>, here we are going to use the non-centered parameterization to generate singular normal random variables from univariate standard normal (mean zero variance 1) draws. To sample <span class="math inline">\(n\)</span> draws form a <span class="math inline">\(p\)</span> dimensional singular normal distribution let us introduce the <span class="math inline">\(p \times n\)</span> matrix <span class="math inline">\(Z\)</span> with elements <span class="math inline">\(Z_{ij} \sim N(0, 1)\)</span>.</p>
+</div>
+<div id="covariance-parameterization" class="section level1">
+<h1>Covariance Parameterization</h1>
+<p>To sample <span class="math inline">\(X \sim N(\mu, \Sigma)\)</span> where <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(p\times p\)</span> potentially singular covariance matrix, we have the following non-centered relationship <span class="math display">\[X = \mu + V_\Sigma D^{\frac{1}{2}}_\Sigma Z\]</span></p>
+<p>Note that if <span class="math inline">\(\Sigma\)</span> is of rank <span class="math inline">\(k&lt; p\)</span>, there is some redundancy here: <span class="math inline">\(Z\)</span> can actually be of dimension <span class="math inline">\(k \times n\)</span> and we can simply take the first <span class="math inline">\(k\)</span> columns of <span class="math inline">\(V_\Sigma\)</span> and <span class="math inline">\(D^{\frac{1}{2}}_\Sigma\)</span> and we will still get the same answer.</p>
+</div>
+<div id="precision-parameterization" class="section level1">
+<h1>Precision Parameterization</h1>
+<p>To sample <span class="math inline">\(X \sim N(\mu, \Omega)\)</span> where <span class="math inline">\(\Omega\)</span> is a <span class="math inline">\(p\times p\)</span> potentially singular precision matrix, we have the following non-centered relationship <span class="math display">\[X = \mu + V_\Omega D^{-\frac{1}{2}}_\Omega Z\]</span> Here the only difference compared to the covariance parameterization is that the elements of <span class="math inline">\(D^{-\frac{1}{2}}_\Omega\)</span> are given by <span class="math inline">\(1/\sqrt{D_{ii}}\)</span>.</p>
+<p>Again, note that if <span class="math inline">\(\Omega\)</span> is of rank <span class="math inline">\(k&lt; p\)</span>, there is some redundancy here: <span class="math inline">\(Z\)</span> can actually be of dimension <span class="math inline">\(k \times n\)</span> and we can simply take the first <span class="math inline">\(k\)</span> columns of <span class="math inline">\(V_\Omega\)</span> and <span class="math inline">\(D^{\frac{1}{2}}_\Omega\)</span> and we will still get the same answer.</p>
+</div>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<p>Below I demonstrate code designed to sample from the singular multivariate normal in either parameterization. In particular, note that these functions make use of the truncation I mentioned above that reduces the redundancy in the non-centered distribution for the singular normal case.</p>
+<p>Also notice that these functions can be used to sample from non-singular multivariate normal distributions as well. In this way these functions are more general than <a href="http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/">those given previously</a> but they are typically slower because they use the eigen decomposition rather than the Cholesky.</p>
+<pre class="r"><code>#&#39; Truncated Eigen Square Root (or inverse square root) 
+#&#39;
+#&#39; Designed for Covaraice or Precision matricies - throws error if 
+#&#39; there is any large negative eigenvalues. 
+#&#39;
+#&#39; @param Sigma p x p matrix to compute truncated matrix square root
+#&#39; @param inv (boolean) whether to compute inverse of square root
+#&#39; @return p x k matrix (where k is rank of Sigma) 
+trunc_eigen_sqrt &lt;- function(Sigma, inv){
+  es &lt;- eigen(Sigma)
+  
+  # Small negative eigenvalues can occur just due to numerical error and should
+  # be set back to zero. 
+  es$values[(es$values &lt; 1e-12) &amp; (es$values &gt; -1e-12)] &lt;- 0
+  
+  # If any eigen values are large negative throw error (something wrong)
+  if (any(es$values &lt; -1e-12)) stop(&quot;Non-trivial negative eigenvalues present&quot;)
+  
+  # calculate square root and reveal rank (k)
+  k &lt;- sum(es$values &gt; 0)
+  if (!inv){
+    L &lt;- es$vectors %*% diag(sqrt(es$values))  
+  } else if (inv) {
+     L &lt;- es$vectors %*% diag(1/sqrt(es$values))  
+  }
+  return(L[,1:k, drop=F])
+}
+
+#&#39; Covariance parameterization (eigen decomposition)
+#&#39; @param n number of samples to draw
+#&#39; @param mu p-vector mean
+#&#39; @param Sigma covariance matrix (p x p)
+#&#39; @return matrix of dimension p x n of samples
+rMVNormC_eigen &lt;- function(n, mu, Sigma){
+  p &lt;- length(mu)
+  L &lt;- trunc_eigen_sqrt(Sigma, inv=FALSE)
+  k &lt;- ncol(L)
+  Z &lt;- matrix(rnorm(k*n), k, n)
+  X &lt;- L%*%Z
+  X &lt;- sweep(X, 1, mu, FUN=`+`)
+}
+
+#&#39; Precision parameterization (eigen decomposition)
+#&#39; @param n number of samples to draw
+#&#39; @param mu p-vector mean
+#&#39; @param Sigma precision matrix (p x p)
+#&#39; @return matrix of dimension p x n of samples
+rMVNormP_eigen &lt;- function(n, mu, Sigma){
+  p &lt;- length(mu)
+  L &lt;- trunc_eigen_sqrt(Sigma, inv=TRUE) # only difference vs. cov parameterization
+  k &lt;- ncol(L)
+  Z &lt;- matrix(rnorm(k*n), k, n)
+  X &lt;- L%*%Z
+  X &lt;- sweep(X, 1, mu, FUN=`+`)
+}</code></pre>
+<p>Now we just check that the mean and covariance of each function matches what it should be (using the same <code>Sigma</code> we defined above).</p>
+<pre class="r"><code>n &lt;- 10000
+mu &lt;- 1:3
+Omega &lt;- MASS::ginv(Sigma) # use pseudoinverse 
+x1 &lt;- rMVNormC_eigen(n, mu, Sigma)
+x2 &lt;- rMVNormP_eigen(n, mu, Omega)
+
+# Create function that tests for equality with high tolerance due to 
+# random number generation
+weak_equal &lt;- function(x, y) all.equal(x, y, tolerance=.05)
+
+# check row means match up with mu and agree with eachother
+weak_equal(rowMeans(x1), mu) &amp; weak_equal(rowMeans(x2), mu)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># check empirical covariances agree
+weak_equal(var(t(x1)), var(t(x2)))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Note that we used the pseudo-inverse of <code>Sigma</code> above to create a rank-deficient precision matrix (<code>Omega</code>) that should correspond to the same distribution as <code>Sigma</code>.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Note this is more general than for just symmetric positive definite matrices as in the definition of the Cholesky decomposition <a href="http://www.statsathome.com/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/">introduced previously</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>I only really see this when using Laplace approximations and when the optimization ended at a saddle point rather than at the <em>Maximum a Posteriori</em> estimate.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>any slight non-zero number in either of the last two eigenvalues is just due to numerical errors in the calculation of the eigen decomposition<a href="#fnref3">↩</a></p></li>
+</ol>
+</div>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="/2018/10/19/sampling-from-multivariate-normal-precision-and-covariance-parameterizations/" title="Sampling from Multivariate Normal (precision and covariance parameterizations)">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2017 Justin and Rachel Silverman
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//statistics-home.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+

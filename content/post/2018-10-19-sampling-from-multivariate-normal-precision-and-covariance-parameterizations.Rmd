@@ -6,6 +6,7 @@ slug: sampling-from-multivariate-normal-precision-and-covariance-parameterizatio
 categories: []
 tags:
   - R
+  - Sampling
 type: post
 description: A quick note on sampling from both the precision and covariance parameterizations of the multivariate normal. This post was written to highlihgt a error that is easy to make. 
 keywords:
